@@ -16,5 +16,8 @@
 # project.greenfoot
 Copy the `project.greenfoot.md` file and rename it to `project.greenfoot`
 
+# Project Idea
+- Bullet Hell game inspired by Touhou
+
 # Learn Markdown Basics
 [Markdown basics](https://www.markdownguide.org/getting-started/)
