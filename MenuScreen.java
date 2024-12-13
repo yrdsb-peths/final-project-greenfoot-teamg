@@ -1,27 +1,27 @@
 import greenfoot.*;
 
 public class MenuScreen extends World {
-    private SettingButton settingsButton;
-    private SettingsSubscreen settingsSubScreen;
+    private MenuButton menuButton;
+    private MenuSubscreen menuSubscreen;
     private boolean isSettingsVisible = false;
 
     public MenuScreen() {
         super(500, 700, 1);
         
+        // Create the MenuSubscreen
+        menuSubscreen = new MenuSubscreen(this);
+        
         // Create settings button in right corner
-        settingsButton = new SettingButton(this);
-        addObject(settingsButton, getWidth() - 50, 50);
-
-        // Create settings sub-screen (initially not visible)
-        settingsSubScreen = new SettingsSubscreen(this);
+        menuButton = new MenuButton(this);
+        addObject(menuButton, getWidth() - 50, 50);
     }
 
     public void toggleSettings() {
         if (!isSettingsVisible) {
-            addObject(settingsSubScreen, 400, 400);
+            addObject(menuSubscreen, 450, 300);
             isSettingsVisible = true;
         } else {
-            removeObject(settingsSubScreen);
+            removeObject(menuSubscreen);
             isSettingsVisible = false;
         }
     }
