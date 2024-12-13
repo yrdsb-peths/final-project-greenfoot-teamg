@@ -10,7 +10,6 @@ public class MenuScreen extends World {
         
         // Create the MenuSubscreen
         menuSubscreen = new MenuSubscreen(this);
-
         
         // Create settings button in right corner
         menuButton = new MenuButton(this);

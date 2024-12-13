@@ -9,8 +9,8 @@ public class MenuSubscreen extends Actor {
   private Button settingButton;
 
   public MenuSubscreen(MenuScreen menuscreen) {
-    screenHeight = menuscreen.getHeight(); 
     screenWidth = menuscreen.getWidth();
+    screenHeight = menuscreen.getHeight();
 
     // Create a new image for 1/3 of the screen width
     GreenfootImage settingsImage = new GreenfootImage(screenWidth / 3, screenHeight);
