@@ -10,7 +10,7 @@ public class TestCharacter extends Actor
 
     public void act()
     {
-        // Can move with WASD
+        // Can move with WASD 
         if(Greenfoot.isKeyDown("W")) {
             setLocation(getX(), getY() - 3);
         }
