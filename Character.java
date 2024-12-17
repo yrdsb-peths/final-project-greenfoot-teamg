@@ -4,7 +4,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Represents a playable character in the game with movement functionality.
  */
 public class Character extends Actor {
-    private int speed = 4; // Normal movement speed
+    private int speed = 6; // Normal movement speed
+    private int shootDelay = 10; // Delay between consecutive shots (in frames)
+    private int shootCooldown = 0; // Countdown for the next allowed shot
 
     /**
      * Constructor to set the character's initial image.
@@ -22,6 +24,7 @@ public class Character extends Actor {
      */
     public void act() {
         handleMovement();
+        handleShooting();
     }
 
     /**
@@ -49,4 +52,32 @@ public class Character extends Actor {
             setLocation(getX() + currentSpeed, getY()); // Move right
         }
     }
+    
+    /**
+     * Handle shooting when the space bar is held down.
+     */
+    private void handleShooting() {
+        if (shootCooldown > 0) {
+            shootCooldown--; // Decrease the cooldown timer
+        }
+
+        // Shoot when space is pressed and cooldown is 0
+        if (Greenfoot.isKeyDown("space") && shootCooldown == 0) {
+            shoot();
+            shootCooldown = shootDelay; // Reset cooldown
+        }
+    }
+
+    /**
+     * Shoot a projectile from the character's position.
+     */
+    private void shoot() {
+        // Create a new projectile and add it to the world
+        Projectile projectile = new Projectile();
+        getWorld().addObject(projectile, getX(), getY() - getImage().getHeight() / 2);
+
+        // Optional: Add a sound effect
+        Greenfoot.playSound("Star Wars Blaster Sound Effect.mp3");
+    }
+    
 }
