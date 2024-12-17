@@ -6,6 +6,9 @@ public class MenuScreen extends World {
 
     public MenuScreen() {
         super(500, 750, 1);
+        GreenfootImage background = new GreenfootImage("CharacterSelection.jpg");
+        background.scale(getWidth(), getHeight()); // Adjust to world size (500x700)
+        setBackground(background);
 
         checker = true;
         

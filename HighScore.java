@@ -7,7 +7,9 @@ public class HighScore extends World {
 
   public HighScore(MenuScreen menuScreen) {
     super(500, 750, 1);
-    //setBackground(new GreenfootImage("Background.jpg"));
+    GreenfootImage background = new GreenfootImage("CharacterSelection.jpg");
+    background.scale(getWidth(), getHeight()); // Adjust to world size (500x700)
+    setBackground(background);
 
     this.menuScreen = menuScreen;
 
