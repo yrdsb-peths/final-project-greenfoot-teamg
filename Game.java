@@ -12,7 +12,7 @@ public class Game extends World {
      */
     public Game(GreenfootImage selectedCharacterImage) {
         // Create a new world with 600x400 cells.
-        super(600, 400, 1);
+        super(500, 700, 1);
 
         // Instantiate the selected character based on the passed image
         selectedCharacter = new Character(selectedCharacterImage);

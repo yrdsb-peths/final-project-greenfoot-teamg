@@ -16,7 +16,9 @@ public class CharacterSelection extends World {
      */
     public CharacterSelection() {
         super(500, 700, 1); // Create a new world with specified dimensions
-        setBackground(new GreenfootImage("Background1.png"));
+        GreenfootImage background = new GreenfootImage("CharacterSelection.jpg");
+        background.scale(getWidth(), getHeight()); // Adjust to world size (500x700)
+        setBackground(background);
 
         // Load character images
         characters = new GreenfootImage[] {
@@ -25,13 +27,13 @@ public class CharacterSelection extends World {
             new GreenfootImage("Spaceship3.png")
         };
         for (int i = 0; i < characters.length; i++) {
-            characters[i].scale(100, 100); // Resize to 100x100 pixels (adjust size as needed)
+            characters[i].scale(150, 200); // Resize to 100x100 pixels (adjust size as needed)
             characters[i].rotate(-90);
         }
 
         // Initialize the character display with the first character
         characterDisplay = new CharacterDisplay(characters[indexShips]);
-        addObject(characterDisplay, 250, 500);
+        addObject(characterDisplay, 250, 350);
 
         // Add navigation buttons
         addObject(new Button(this::nextCharacter, "Next"), 350, 600);
