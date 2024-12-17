@@ -1,28 +1,42 @@
 import greenfoot.*;
 
 public class MenuScreen extends World {
-    private MenuButton menuButton;
-    private MenuSubscreen menuSubscreen;
-    private boolean isSettingsVisible = false;
+    private Button pauseButton;
+    boolean checker;
 
     public MenuScreen() {
-        super(500, 700, 1);
+        super(500, 750, 1);
+
+        checker = true;
         
-        // Create the MenuSubscreen
-        menuSubscreen = new MenuSubscreen(this);
-        
-        // Create settings button in right corner
-        menuButton = new MenuButton(this);
-        addObject(menuButton, getWidth() - 50, 50);
+        setupButtons();
+        addLabels();
     }
 
-    public void toggleSettings() {
-        if (!isSettingsVisible) {
-            addObject(menuSubscreen, 450, 300);
-            isSettingsVisible = true;
-        } else {
-            removeObject(menuSubscreen);
-            isSettingsVisible = false;
+    public void act() {
+        handleEscapeKey();
+    }
+
+    private void setupButtons() {
+        pauseButton = new Button(this::gopauseScreen, "");
+        addObject(pauseButton, 450, 30);
+    }
+
+    private void addLabels() {
+        addObject(new Label("Title", 100), getWidth() / 2, 100);
+    }
+
+    private void handleEscapeKey() {
+        // Continuously check for "escape" key press to return to the menu screen
+        if (Greenfoot.isKeyDown("escape") && checker != true) {
+            checker = true;
+            gopauseScreen();
+        } else if (!Greenfoot.isKeyDown("escape")) {
+            checker = false;
         }
+    }
+
+    private void gopauseScreen() {
+        Greenfoot.setWorld(new pauseScreen(this));
     }
 }
