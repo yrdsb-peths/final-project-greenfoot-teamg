@@ -9,7 +9,6 @@ public class CharacterSelection extends World {
     private CharacterDisplay characterDisplay; // Actor to display the current character
     private GreenfootSound menuMusic; // Music for the menu
 
-
     /**
      * Constructor for CharacterSelection.
      * Sets up the character selection screen.
@@ -26,20 +25,27 @@ public class CharacterSelection extends World {
             new GreenfootImage("Spaceship2.png"),
             new GreenfootImage("Spaceship3.png")
         };
+
+        // Rotate the images to fit your required orientation
         for (int i = 0; i < characters.length; i++) {
-            characters[i].scale(150, 200); // Resize to 100x100 pixels (adjust size as needed)
-            characters[i].rotate(-90);
+            characters[i].rotate(-90); // Rotate them to match your desired orientation
         }
+
+        // Scale the characters to the correct size without cutting off the top
+        characters[0].scale(270, 420); 
+        characters[1].scale(285, 330); 
+        characters[2].scale(300, 255);
 
         // Initialize the character display with the first character
         characterDisplay = new CharacterDisplay(characters[indexShips]);
-        addObject(characterDisplay, 250, 350);
+        addObject(characterDisplay, 250, 350); // Position it at the center of the screen
 
-        // Add navigation buttons
+        // Add navigation buttons for selecting characters
         addObject(new Button(this::nextCharacter, "Next"), 350, 600);
         addObject(new Button(this::previousCharacter, "Previous"), 150, 600);
         addObject(new Button(this::selectCharacter, "Select"), 250, 650);
-        
+
+        // Play the background music
         menuMusic = new GreenfootSound("Menu.mp3");
         menuMusic.playLoop();
     }
@@ -75,10 +81,16 @@ public class CharacterSelection extends World {
      * Handle character selection and return to the game screen.
      */
     public void selectCharacter() {
-        for (int i = 0; i < characters.length; i++) {
-            characters[i].scale(100, 150); // Resize to 100x100 pixels (adjust size as needed)
-        }
-        // Pass the selected image directly to Game
-        Greenfoot.setWorld(new Game(characters[indexShips]));
+        menuMusic.stop(); // Stop the menu music
+        // Scale the images properly for the game world
+        characters[0].scale(90, 140);
+        characters[1].scale(95, 110);
+        characters[2].scale(100, 85);
+
+        // Get the selected spaceship image
+        GreenfootImage selectedShip = new GreenfootImage(characters[indexShips]); // Use the selected character image
+        
+        // Pass the scaled image to the Game world
+        Greenfoot.setWorld(new Game(selectedShip));
     }
 }
