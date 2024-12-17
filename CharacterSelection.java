@@ -75,6 +75,9 @@ public class CharacterSelection extends World {
      * Handle character selection and return to the game screen.
      */
     public void selectCharacter() {
+        for (int i = 0; i < characters.length; i++) {
+            characters[i].scale(100, 150); // Resize to 100x100 pixels (adjust size as needed)
+        }
         // Pass the selected image directly to Game
         Greenfoot.setWorld(new Game(characters[indexShips]));
     }
