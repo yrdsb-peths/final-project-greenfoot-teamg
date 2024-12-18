@@ -1,7 +1,11 @@
+import javax.xml.stream.events.Characters;
+
 import greenfoot.*;
 
 public class MenuScreen extends World {
     private Button pauseButton;
+    private CharacterSelection characterSelection;
+    private pauseScreen pauseScreen;
     boolean checker;
 
     public MenuScreen() {
@@ -17,7 +21,11 @@ public class MenuScreen extends World {
     }
 
     public void act() {
-        handleEscapeKey();
+        if (pauseScreen == null) {
+            pauseScreen = new pauseScreen(this);
+        }
+        Util.handleEscapeKey(this, pauseScreen);
+        handleEnterKey();
     }
 
     private void setupButtons() {
@@ -27,19 +35,22 @@ public class MenuScreen extends World {
 
     private void addLabels() {
         addObject(new Label("Title", 100), getWidth() / 2, 100);
+
+        addObject(new Label("Press Enter to Start", 50), getWidth()/ 2, getHeight() / 2);
     }
 
-    private void handleEscapeKey() {
-        // Continuously check for "escape" key press to return to the menu screen
-        if (Greenfoot.isKeyDown("escape") && checker != true) {
-            checker = true;
-            gopauseScreen();
-        } else if (!Greenfoot.isKeyDown("escape")) {
-            checker = false;
+    private void handleEnterKey() {
+        if (Greenfoot.isKeyDown("enter")) {
+            gocharacterselection();
         }
     }
 
     private void gopauseScreen() {
         Greenfoot.setWorld(new pauseScreen(this));
+    }
+
+    private void gocharacterselection() {
+        Greenfoot.setWorld(new CharacterSelection(this));
+
     }
 }

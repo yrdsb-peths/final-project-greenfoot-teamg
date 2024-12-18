@@ -31,10 +31,10 @@ public class pauseScreen extends World {
   }
 
   public void act() {
-    handleEscapeKey();
+    Util.handleEscapeKey(this, menuScreen);
   }
 
-  private void handleEscapeKey() {
+  /*private void handleEscapeKey() {
     // Continuously check for "escape" key press to return to the menu screen
     if (Greenfoot.isKeyDown("escape") && checker != true) {
       checker = true;
@@ -42,7 +42,7 @@ public class pauseScreen extends World {
     } else if (!Greenfoot.isKeyDown("escape")) {
       checker = false;
     }
-  }
+  }*/
 
   private void goSettingsScreen() {
     Greenfoot.setWorld(new Settings(menuScreen));
