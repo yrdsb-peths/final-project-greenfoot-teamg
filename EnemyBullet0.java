@@ -12,4 +12,8 @@ public class EnemyBullet0 extends Actor
     {
         move(1);
     }
+
+    public void turnBullet(int x) {
+        this.setRotation(x);
+    }
 }
