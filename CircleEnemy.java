@@ -25,12 +25,10 @@ public class CircleEnemy extends Actor
 
     public void makeBullet() {
         if(timer.millisElapsed() > 100) {
-            EnemyBullet0 bullet = new EnemyBullet0();
+            EnemyBullet0 bullet = new EnemyBullet0(rotate);
             Game game = (Game) getWorld();
             game.addObject(bullet, this.getX(), this.getY());
-            bullet.setRotation(rotate);
-
-            rotate += 2;
+            rotate += 3;
             timer.mark();
         }
     }
