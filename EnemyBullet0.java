@@ -8,10 +8,8 @@ public class EnemyBullet0 extends Actor
         this.setImage(image);
     }
 
-
     public void act()
     {
         move(1);
-
     }
 }

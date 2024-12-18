@@ -8,26 +8,37 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class CircleEnemy extends Actor
 {
+    SimpleTimer timer = new SimpleTimer();
+    double rotate = 0;
+
     public CircleEnemy() {
         GreenfootImage image = new GreenfootImage("EnemySpaceship1.png");
         image.scale(75, 75);
         this.setImage(image);
+        timer.mark();
     }
-
-    int rotate = 0;
-    SimpleTimer timer = new SimpleTimer();
-    timer.mark();
 
     public void act()
     {
-        if(timer.millisElasped() > 100) {
-            EnemyBullet0 bullet = new EnemyBullet0();
-            Game game = (Game) getWorld();
-            game.addObject(bullet, this.getX(), this.getY());
+        makeBullet();
+    }
 
-            bullet.turn(rotate);
-            rotate += 1;
+    public void makeBullet() {
+        if(timer.millisElapsed() > 100) {
+            //EnemyBullet0 bullet = new EnemyBullet0();
+            //Game game = (Game) getWorld();
+            //game.addObject(bullet, this.getX(), this.getY());
+            rotation();
+            rotate += (Math.PI * 5) / (180.0);
             timer.mark();
         }
+    }
+
+    public void rotation() {
+        double r = 500.0;
+        int x = (int) (r * Math.cos(rotate));
+        int y = (int) (r * Math.sin(rotate));
+        this.turnTowards(x, y);
+        //bullet.turnTowards(x, y);
     }
 }
