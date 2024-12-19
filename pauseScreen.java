@@ -1,6 +1,6 @@
 import greenfoot.*;
 
-public class pauseScreen extends World {
+public class PauseScreen extends World {
   private static final int BUTTON_X = 250;
   private static final int BUTTON_Y = 300;
 
@@ -8,7 +8,7 @@ public class pauseScreen extends World {
 
   private boolean checker;
 
-  public pauseScreen(MenuScreen menuScreen) {
+  public PauseScreen(MenuScreen menuScreen) {
     super(500, 750, 1);
 
     // Initialize worlds
