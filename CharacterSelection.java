@@ -87,9 +87,9 @@ public class CharacterSelection extends World {
     public void selectCharacter() {
         menuMusic.stop(); // Stop the menu music
         // Scale the images properly for the game world
-        characters[0].scale(90, 140);
-        characters[1].scale(95, 110);
-        characters[2].scale(100, 85);
+        characters[0].scale(75, 120);
+        characters[1].scale(85, 100);
+        characters[2].scale(80, 67);
 
         // Get the selected spaceship image
         GreenfootImage selectedShip = new GreenfootImage(characters[indexShips]); // Use the selected character image
