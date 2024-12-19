@@ -31,7 +31,8 @@ public class CharacterSelection extends World {
 
         // Rotate the images to fit your required orientation
         for (int i = 0; i < characters.length; i++) {
-            characters[i].rotate(-90); // Rotate them to match your desired orientation
+            characters[i].scale(250, 250); // Resize to 100x100 pixels (adjust size as needed)
+            characters[i].rotate(-90);
         }
 
         // Scale the characters to the correct size without cutting off the top
