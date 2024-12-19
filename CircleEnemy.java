@@ -1,11 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-/**
- * Write a description of class CircleEnemy here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class CircleEnemy extends Actor
 {
     SimpleTimer timer = new SimpleTimer();
@@ -14,6 +8,7 @@ public class CircleEnemy extends Actor
     public CircleEnemy() {
         GreenfootImage image = new GreenfootImage("EnemySpaceship1.png");
         image.scale(75, 75);
+        image.rotate(90);
         this.setImage(image);
         timer.mark();
     }
@@ -29,8 +24,9 @@ public class CircleEnemy extends Actor
             Game game = (Game) getWorld();
             game.addObject(bullet, this.getX(), this.getY());
             bullet.setRotation(rotate);
+            bullet.move(30);
 
-            rotate += 2;
+            rotate += 30;
             timer.mark();
         }
     }
