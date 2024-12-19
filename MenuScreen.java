@@ -30,6 +30,7 @@ public class MenuScreen extends World {
 
     private void setupButtons() {
         pauseButton = new Button(this::gopauseScreen, "");
+        pauseButton.updateButtonImage();
         addObject(pauseButton, 450, 30);
     }
 
@@ -50,7 +51,7 @@ public class MenuScreen extends World {
     }
 
     private void gocharacterselection() {
-        Greenfoot.setWorld(new CharacterSelection(this));
+        Greenfoot.setWorld(new CharacterSelection());
 
     }
 }
