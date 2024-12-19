@@ -14,12 +14,11 @@ public class CharacterSelection extends World {
      * Constructor for CharacterSelection.
      * Sets up the character selection screen.
      */
-    public CharacterSelection() {
+    public CharacterSelection(MenuScreen menuScreen) {
         super(500, 700, 1); // Create a new world with specified dimensions
         GreenfootImage background = new GreenfootImage("CharacterSelection.jpg");
         background.scale(getWidth(), getHeight()); // Adjust to world size (500x700)
         setBackground(background);
-        
         this.menuScreen = menuScreen;
 
         // Load character images
@@ -49,6 +48,10 @@ public class CharacterSelection extends World {
         // Play the background music
         menuMusic = new GreenfootSound("Menu.mp3");
         menuMusic.playLoop();
+    }
+
+    public void act() {
+        Util.handleEscapeKey(this, menuScreen);
     }
 
     /**
