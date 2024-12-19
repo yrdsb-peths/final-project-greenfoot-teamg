@@ -1,23 +1,15 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 
-/**
- * Represents the main game screen with the selected character.
- */
 public class Game extends World {
-    private Character selectedCharacter;
+    private Character player;
 
-    /**
-     * Constructor for the Game class.
-     * @param selectedCharacterImage The image of the selected character.
-     */
-    public Game(GreenfootImage selectedCharacterImage) {
-        // Create a new world with 600x400 cells.
-        super(500, 700, 1);
+    public Game(GreenfootImage selectedImage) {
+        super(500, 700, 1); 
 
-        // Instantiate the selected character based on the passed image
-        selectedCharacter = new Character(selectedCharacterImage);
+        // Create the player's character
+        player = new Character(selectedImage);
 
-        // Add the character to the center of the game world.
-        addObject(selectedCharacter, getWidth() / 2, getHeight() - 50);
+        // Add the character to the center of the screen
+        addObject(player, getWidth() / 2, getHeight() - 50);
     }
 }
