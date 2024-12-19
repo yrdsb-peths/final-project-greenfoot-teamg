@@ -27,7 +27,7 @@ public class CharacterSelection extends World {
             new GreenfootImage("Spaceship3.png")
         };
         for (int i = 0; i < characters.length; i++) {
-            characters[i].scale(150, 200); // Resize to 100x100 pixels (adjust size as needed)
+            characters[i].scale(250, 250); // Resize to 100x100 pixels (adjust size as needed)
             characters[i].rotate(-90);
         }
 
