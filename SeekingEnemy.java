@@ -1,12 +1,11 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-public class CircleEnemy extends Enemy
+public class SeekingEnemy extends Enemy
 {
     SimpleTimer timer = new SimpleTimer();
-    int rotate = 0;
 
-    public CircleEnemy() {
-        GreenfootImage image = new GreenfootImage("EnemySpaceship1.png");
+    public SeekingEnemy() {
+        GreenfootImage image = new GreenfootImage("EnemySpaceship2.png");
         image.scale(75, 75);
         image.rotate(90);
         this.setImage(image);
@@ -23,10 +22,8 @@ public class CircleEnemy extends Enemy
             EnemyBullet0 bullet = new EnemyBullet0();
             Game game = (Game) getWorld();
             game.addObject(bullet, this.getX(), this.getY());
-            bullet.setRotation(rotate);
             bullet.move(30);
 
-            rotate += 30;
             timer.mark();
         }
     }

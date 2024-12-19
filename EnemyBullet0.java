@@ -1,6 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-public class EnemyBullet0 extends Actor
+public class EnemyBullet0 extends Bullet
 {
     SimpleTimer timer = new SimpleTimer();
 
@@ -21,13 +21,6 @@ public class EnemyBullet0 extends Actor
         if(timer.millisElapsed() > 20) {
             move(5);
             timer.mark();
-        }
-    }
-
-    public void checkBounds() {
-        Game game = (Game) getWorld();
-        if(getX() <= 0 || getY() <= 0 || getX() >= game.getWidth() - 1 || getY() >= game.getHeight() - 1) {
-            game.removeObject(this);
         }
     }
 }
