@@ -77,7 +77,7 @@ public class Character extends Actor {
         getWorld().addObject(projectile, getX(), getY() - getImage().getHeight() / 2);
 
         // Optional: Add a sound effect
-        Greenfoot.playSound("Star Wars Blaster Sound Effect.mp3");
+        Greenfoot.playSound("StarWarsBlaster.mp3");
     }
     
 }
