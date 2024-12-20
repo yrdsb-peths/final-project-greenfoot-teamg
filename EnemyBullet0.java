@@ -17,6 +17,7 @@ public class EnemyBullet0 extends Bullet
         checkBounds();
     }
 
+    // Linear movement
     public void moveBullet() {
         if(timer.millisElapsed() > 20) {
             move(5);

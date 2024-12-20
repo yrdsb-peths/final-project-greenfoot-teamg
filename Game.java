@@ -1,7 +1,7 @@
 import greenfoot.*;
 
 public class Game extends World {
-    private Character player;
+    Character player;
 
     public Game(GreenfootImage selectedImage) {
         super(500, 700, 1); 

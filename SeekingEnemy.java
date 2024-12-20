@@ -22,6 +22,8 @@ public class SeekingEnemy extends Enemy
             Bullet bullet = new EnemyBullet1();
             Game game = (Game) getWorld();
             game.addObject(bullet, this.getX(), this.getY());
+
+            // Bullet faces and spawns in front of ship initially
             bullet.setRotation(90);
             bullet.move(30);
             

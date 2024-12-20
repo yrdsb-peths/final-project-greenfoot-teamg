@@ -23,6 +23,8 @@ public class CircleEnemy extends Enemy
             Bullet bullet = new EnemyBullet0();
             Game game = (Game) getWorld();
             game.addObject(bullet, this.getX(), this.getY());
+
+            // Rotates each bullet so they shoot out in a circlular pattern
             bullet.setRotation(rotate);
             bullet.move(30);
 

@@ -19,33 +19,43 @@ public class EnemyBullet1 extends Bullet
         moveBullet();
         checkBounds();
     }
-
-    // Make location of character update here
-    double x = 100.0;
-    double y = 550.0;
-
+    
 
     public void moveBullet() {
-        if(timer.millisElapsed() > 20) {
+        if(timer.millisElapsed() > 20) { // Rate of movement
 
-            if(far == true) {
+            Game game = (Game) getWorld();
 
+            // Updates location of player's character
+            double x = game.player.getX();
+            double y = game.player.getY();
+
+            if(far == true) { // Only rotates if not close to target
+
+                // x and y distances to target
                 double toX = x - getX();
                 double toY = getY() - y;
 
+                // required angle between bullet and target
                 double angle = Math.atan2(toY, toX);
 
+                // angle of bullet
                 double a = Math.toRadians(-1 * getRotation());
                 if(a < 0) {
                     a += Math.PI * 2;
                 }
                 
+                // distance between target and bullet
                 double distance = Math.sqrt(toX * toX + toY * toY);
-                if(distance < 50) {
+                // If closer than this amount, bullet no longer turns
+                if(distance < 150) {
                     far = false;
                 }
 
+                // Difference between required angle and bullet's angle
                 double diff = angle - a;
+
+                // Only allows angles between -pi and pi by subtracting 2pi if greater, and depending on that value, it will turn a direction
                 if(diff > Math.PI) {
                     diff -= 2 * Math.PI;
                 }
@@ -53,12 +63,13 @@ public class EnemyBullet1 extends Bullet
                     diff += 2 * Math.PI;
                 }
 
+                // Only turns if the difference in the angles is greater than an amount
                 if(Math.abs(diff) > Math.PI / 12) {
                     if(diff > 0) {
-                        turn(-2);
+                        turn(-3);
                     }
                     else {
-                        turn(2);
+                        turn(3);
                     }
                 }
             }
