@@ -33,7 +33,6 @@ public class EnemyBullet1 extends Bullet
             }
             if(toX < getX() && toY > getY()) {
                 angle += 180;
-                System.out.println("what");
             }
             if(toX > getX() && toY > getY()) {
                 angle += 270;
