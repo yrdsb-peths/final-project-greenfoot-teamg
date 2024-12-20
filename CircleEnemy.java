@@ -6,7 +6,7 @@ public class CircleEnemy extends Enemy
     int rotate = 0;
 
     public CircleEnemy() {
-        GreenfootImage image = new GreenfootImage("EnemySpaceship1.png");
+        GreenfootImage image = new GreenfootImage("EnemySpaceShip1.png");
         image.scale(75, 75);
         image.rotate(90);
         this.setImage(image);
@@ -20,7 +20,7 @@ public class CircleEnemy extends Enemy
 
     public void makeBullet() {
         if(timer.millisElapsed() > 100) {
-            EnemyBullet0 bullet = new EnemyBullet0();
+            Bullet bullet = new EnemyBullet0();
             Game game = (Game) getWorld();
             game.addObject(bullet, this.getX(), this.getY());
             bullet.setRotation(rotate);
