@@ -17,16 +17,14 @@ public class SeekingEnemy extends Enemy
         makeBullet();
     }
 
-    boolean spawn = true;
-
     public void makeBullet() {
-        if(timer.millisElapsed() > 1000 && spawn == true) {
+        if(timer.millisElapsed() > 500) {
             Bullet bullet = new EnemyBullet1();
             Game game = (Game) getWorld();
             game.addObject(bullet, this.getX(), this.getY());
+            bullet.setRotation(90);
             bullet.move(30);
             
-            spawn = false;
             timer.mark();
         }
     }

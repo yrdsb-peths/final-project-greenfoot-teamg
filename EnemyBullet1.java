@@ -1,8 +1,11 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
+// Seeking bullet, follows target
+
 public class EnemyBullet1 extends Bullet
 {
     SimpleTimer timer = new SimpleTimer();
+    boolean far = true;
 
     public EnemyBullet1() {
         GreenfootImage image = new GreenfootImage("EnemyBullet1.png");
@@ -17,46 +20,48 @@ public class EnemyBullet1 extends Bullet
         checkBounds();
     }
 
-    double x = 35.0;
-    double y = 100.0;
+    // Make location of character update here
+    double x = 100.0;
+    double y = 550.0;
 
 
     public void moveBullet() {
         if(timer.millisElapsed() > 20) {
 
-            double toX = x - getX();
-            double toY = y - getY();
+            if(far == true) {
 
-            int angle = (int) Math.toDegrees(Math.atan(toY / toX));
-            if(toX < getX() && toY < getY()) {
-                angle += 90;
-            }
-            if(toX < getX() && toY > getY()) {
-                angle += 180;
-            }
-            if(toX > getX() && toY > getY()) {
-                angle += 270;
-            }
+                double toX = x - getX();
+                double toY = getY() - y;
 
+                double angle = Math.atan2(toY, toX);
 
-
-            int a = (int) -1 * getRotation();
-            if(a < 0) {
-                a += 360;
-            }
-
-            System.out.println("Target: " + angle + ", " + a);
-
-            
-            if(a >= angle + 5 || a <= angle - 5) {
-                if(getX() > x) {
-                    turn(-2);
+                double a = Math.toRadians(-1 * getRotation());
+                if(a < 0) {
+                    a += Math.PI * 2;
                 }
-                else if(getX() < x){
-                    turn(2);
+                
+                double distance = Math.sqrt(toX * toX + toY * toY);
+                if(distance < 50) {
+                    far = false;
+                }
+
+                double diff = angle - a;
+                if(diff > Math.PI) {
+                    diff -= 2 * Math.PI;
+                }
+                else if(diff < -Math.PI) {
+                    diff += 2 * Math.PI;
+                }
+
+                if(Math.abs(diff) > Math.PI / 12) {
+                    if(diff > 0) {
+                        turn(-2);
+                    }
+                    else {
+                        turn(2);
+                    }
                 }
             }
-
 
             move(5);
             timer.mark();

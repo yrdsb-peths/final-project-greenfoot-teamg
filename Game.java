@@ -16,6 +16,6 @@ public class Game extends World {
         addObject(test, 250, 350);
 
         Enemy a = new CircleEnemy();
-        addObject(a, 35, 100); 
+        //addObject(a, 35, 100); 
     }
 }
