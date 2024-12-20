@@ -14,12 +14,11 @@ public class CharacterSelection extends World {
      * Constructor for CharacterSelection.
      * Sets up the character selection screen.
      */
-    public CharacterSelection() {
+    public CharacterSelection(MenuScreen menuScreen) {
         super(500, 700, 1); // Create a new world with specified dimensions
         GreenfootImage background = new GreenfootImage("CharacterSelection.jpg");
         background.scale(getWidth(), getHeight()); // Adjust to world size (500x700)
         setBackground(background);
-        
         this.menuScreen = menuScreen;
 
         // Load character images
@@ -30,16 +29,13 @@ public class CharacterSelection extends World {
         };
 
         // Rotate the images to fit your required orientation
-        for (int i = 0; i < characters.length; i++) {
-            characters[i].scale(250, 250); // Resize to 100x100 pixels (adjust size as needed)
-            characters[i].rotate(-90);
-        }
-
-        // Scale the characters to the correct size without cutting off the top
-        characters[0].scale(270, 420); 
-        characters[1].scale(285, 330); 
-        characters[2].scale(300, 255);
-
+        characters[0].scale(160, 320); // Resize to 100x100 pixels (adjust size as needed)
+        characters[0].rotate(-90);
+        characters[1].scale(200, 200); // Resize to 100x100 pixels (adjust size as needed)
+        characters[1].rotate(-90);
+        characters[2].scale(200, 200); // Resize to 100x100 pixels (adjust size as needed)
+        characters[2].rotate(-90);
+        
         // Initialize the character display with the first character
         characterDisplay = new CharacterDisplay(characters[indexShips]);
         addObject(characterDisplay, 250, 350); // Position it at the center of the screen
@@ -52,6 +48,10 @@ public class CharacterSelection extends World {
         // Play the background music
         menuMusic = new GreenfootSound("Menu.mp3");
         menuMusic.playLoop();
+    }
+
+    public void act() {
+        Util.handleEscapeKey(this, menuScreen);
     }
 
     /**
