@@ -4,7 +4,7 @@ public class Game extends World {
     Character player;
 
     public Game(GreenfootImage selectedImage) {
-        super(500, 700, 1); 
+        super(600, 800, 1); 
 
         // Create the player's character
         player = new Character(selectedImage);

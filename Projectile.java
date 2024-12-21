@@ -25,8 +25,8 @@ public class Projectile extends Actor {
      * Remove the projectile if it goes out of bounds.
      */
     private void checkRemoval() {
-        if (getY() < 0) {
-            getWorld().removeObject(this); // Remove from world
+        if (getY() <= 0) {
+            getWorld().removeObject(this); 
         }
     }
 }
