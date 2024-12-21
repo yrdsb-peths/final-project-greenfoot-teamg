@@ -5,7 +5,7 @@ import greenfoot.*;
 public class MenuScreen extends World {
     private Button pauseButton;
     private CharacterSelection characterSelection;
-    private pauseScreen pauseScreen;
+    private PauseScreen pauseScreen;
     boolean checker;
 
     public MenuScreen() {
@@ -22,7 +22,7 @@ public class MenuScreen extends World {
 
     public void act() {
         if (pauseScreen == null) {
-            pauseScreen = new pauseScreen(this);
+            pauseScreen = new PauseScreen(this);
         }
         Util.handleEscapeKey(this, pauseScreen);
         handleEnterKey();
@@ -30,7 +30,7 @@ public class MenuScreen extends World {
 
     private void setupButtons() {
         pauseButton = new Button(this::gopauseScreen, "");
-        pauseButton.updateButtonImage();
+        pauseButton.changeButtonImage("pausebutton.png");
         addObject(pauseButton, 450, 30);
     }
 
@@ -47,7 +47,7 @@ public class MenuScreen extends World {
     }
 
     private void gopauseScreen() {
-        Greenfoot.setWorld(new pauseScreen(this));
+        Greenfoot.setWorld(new PauseScreen(this));
     }
 
     private void gocharacterselection() {
