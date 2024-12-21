@@ -20,7 +20,7 @@ public class RichochetEnemy extends Enemy
         if(timer.millisElapsed() > 500) {
             Bullet bullet = new EnemyBullet2();
             Game game = (Game) getWorld();
-            game.addObject(bullet, this.getX(), this.getY());
+            game.addObject(bullet, getX(), getY());
 
             int toX = game.player.getX();
             int toY = game.player.getY();
