@@ -20,5 +20,7 @@ public class Game extends World {
 
         Enemy test3 = new SplitEnemy();
         addObject(test3, 375, 350);
+        Enemy test = new RichochetEnemy();
+        addObject(test, 250, 350);
     }
 }

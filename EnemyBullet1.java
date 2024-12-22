@@ -26,9 +26,9 @@ public class EnemyBullet1 extends Bullet
     
 
     public void moveBullet() {
-        if(timer.millisElapsed() > 20) { // Rate of movement
+        Game game = (Game) getWorld();
 
-            Game game = (Game) getWorld();
+        if(timer.millisElapsed() > 20) { // Rate of movement
 
             // Updates location of player's character
             double x = game.player.getX();
