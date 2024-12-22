@@ -6,6 +6,10 @@ public class EnemyBullet1 extends Bullet
 {
     SimpleTimer timer = new SimpleTimer();
     boolean far = true;
+    int lockDistance = 200; // Distance from target to stop tracking
+    double reqAngle = Math.PI / 6; // Minimum angle to target, smaller angle is more accurate
+    int turnAmount = 2; // Amount the bullet can turn each time
+
 
     public EnemyBullet1() {
         GreenfootImage image = new GreenfootImage("EnemyBullet1.png");
@@ -48,7 +52,7 @@ public class EnemyBullet1 extends Bullet
                 // distance between target and bullet
                 double distance = Math.sqrt(toX * toX + toY * toY);
                 // If closer than this amount, bullet no longer turns
-                if(distance < 150) {
+                if(distance < lockDistance) {
                     far = false;
                 }
 
@@ -64,12 +68,12 @@ public class EnemyBullet1 extends Bullet
                 }
 
                 // Only turns if the difference in the angles is greater than an amount
-                if(Math.abs(diff) > Math.PI / 12) {
+                if(Math.abs(diff) > reqAngle) {
                     if(diff > 0) {
-                        turn(-3);
+                        turn(-turnAmount);
                     }
                     else {
-                        turn(3);
+                        turn(turnAmount);
                     }
                 }
             }

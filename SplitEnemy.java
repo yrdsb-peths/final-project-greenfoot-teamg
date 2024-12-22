@@ -1,11 +1,11 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-public class SeekingEnemy extends Enemy
+public class SplitEnemy extends Enemy
 {
     SimpleTimer timer = new SimpleTimer();
 
-    public SeekingEnemy() {
-        GreenfootImage image = new GreenfootImage("EnemySpaceShip2.png");
+    public SplitEnemy() {
+        GreenfootImage image = new GreenfootImage("EnemySpaceShip4.png");
         image.scale(75, 75);
         image.rotate(90);
         this.setImage(image);
@@ -17,15 +17,19 @@ public class SeekingEnemy extends Enemy
         makeBullet();
     }
 
+    
     public void makeBullet() {
-        if(timer.millisElapsed() > 500) {
-            EnemyBullet1 bullet = new EnemyBullet1();
+        if(timer.millisElapsed() > 1500) {
+            EnemyBullet3 bullet = new EnemyBullet3();
             Game game = (Game) getWorld();
-            game.addObject(bullet, this.getX(), this.getY());
+            game.addObject(bullet, getX(), getY());
+            bullet.setInitial(getX(), getY());
 
             // Bullet faces and spawns in front of ship initially
-            bullet.setRotation(90);
+            bullet.setRotation(getRotation() + 90);
             bullet.move(30);
+
+            bullet.turnTowards(game.player.getX(), game.player.getY());
             
             timer.mark();
         }
