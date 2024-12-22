@@ -1,21 +1,28 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Level1 here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Level 1 of the game.
  */
-public class Level1 extends World
-{
+public class Level1 extends Game {
 
     /**
-     * Constructor for objects of class Level1.
-     * 
+     * Constructor for Level1.
+     * @param selectedImage The image for the player's character.
      */
-    public Level1()
-    {    
-        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(500, 700, 1);
+    public Level1(GreenfootImage selectedImage) {
+        super(600, 800, 1, selectedImage);
+    }
+
+    @Override
+    protected void setupLevel() {
+        // Set the background for Stage 1
+        setBackground("Stage1Background.jpg");
+
+        // Add unique elements for Level 1
+        /*
+        addObject(new Enemy(), 300, 200);
+        addObject(new Enemy(), 100, 150);
+        addObject(new Enemy(), 500, 150);
+        */
     }
 }
