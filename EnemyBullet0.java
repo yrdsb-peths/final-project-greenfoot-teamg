@@ -13,6 +13,7 @@ public class EnemyBullet0 extends Bullet
         timer.mark();
     }
 
+
     public void act()
     {
         moveBullet();
