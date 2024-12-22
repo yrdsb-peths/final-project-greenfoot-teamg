@@ -11,7 +11,6 @@ public abstract class Game extends World {
 
         // Create and add the player's character
         player = new Character(selectedImage);
-        addObject(player, getWidth() / 2, getHeight() - 50);
 
         // Setup common elements
         setupLevel();
@@ -22,11 +21,16 @@ public abstract class Game extends World {
      */
     protected abstract void setupLevel();
     
-
     /**
      * Common method to reset the player's position.
      */
     public void resetPlayerPosition() {
         player.setLocation(getWidth() / 2, getHeight() - 50);
+
+        // Add the character to the center of the game world.
+        addObject(player, getWidth() / 2, getHeight() - 50);
+
+        Enemy test = new SeekingEnemy();
+        addObject(test, 250, 350);
     }
 }

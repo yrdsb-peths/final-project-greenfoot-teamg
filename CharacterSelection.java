@@ -19,6 +19,7 @@ public class CharacterSelection extends World {
         GreenfootImage background = new GreenfootImage("CharacterSelection.jpg");
         background.scale(getWidth(), getHeight()); // Adjust to world size (500x700)
         setBackground(background);
+        
         this.menuScreen = menuScreen;
 
         // Load character images
