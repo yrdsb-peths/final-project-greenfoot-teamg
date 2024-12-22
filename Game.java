@@ -12,7 +12,7 @@ public class Game extends World {
         // Add the character to the center of the game world.
         addObject(player, getWidth() / 2, getHeight() - 50);
 
-        Enemy test = new SeekingEnemy();
+        Enemy test = new RichochetEnemy();
         addObject(test, 250, 350);
     }
 }

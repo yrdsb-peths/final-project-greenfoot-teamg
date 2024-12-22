@@ -6,6 +6,7 @@ public class EnemyBullet1 extends Bullet
 {
     SimpleTimer timer = new SimpleTimer();
     boolean far = true;
+    int turnAmount = 2; // Amount bullet turns
 
     public EnemyBullet1() {
         GreenfootImage image = new GreenfootImage("EnemyBullet1.png");
@@ -22,9 +23,9 @@ public class EnemyBullet1 extends Bullet
     
 
     public void moveBullet() {
-        if(timer.millisElapsed() > 20) { // Rate of movement
+        Game game = (Game) getWorld();
 
-            Game game = (Game) getWorld();
+        if(timer.millisElapsed() > 20) { // Rate of movement
 
             // Updates location of player's character
             double x = game.player.getX();
@@ -66,10 +67,10 @@ public class EnemyBullet1 extends Bullet
                 // Only turns if the difference in the angles is greater than an amount
                 if(Math.abs(diff) > Math.PI / 12) {
                     if(diff > 0) {
-                        turn(-3);
+                        turn(-turnAmount);
                     }
                     else {
-                        turn(3);
+                        turn(turnAmount);
                     }
                 }
             }
