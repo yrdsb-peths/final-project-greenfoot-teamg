@@ -96,6 +96,6 @@ public class CharacterSelection extends World {
         GreenfootImage selectedShip = new GreenfootImage(characters[indexShips]); // Use the selected character image
         
         // Pass the scaled image to the Game world
-        Greenfoot.setWorld(new Game(selectedShip));
+        Greenfoot.setWorld(new Level2 (selectedShip));
     }
 }

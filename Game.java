@@ -1,13 +1,31 @@
-import greenfoot.*;
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-public class Game extends World {
-    Character player;
+/**
+ * Abstract class representing the base functionality for all game levels.
+ */
+public abstract class Game extends World {
+    protected Character player;
+    
+    public Game(int width, int height, int cellSize, GreenfootImage selectedImage) {
+        super(width, height, cellSize);
 
-    public Game(GreenfootImage selectedImage) {
-        super(600, 800, 1); 
-
-        // Create the player's character
+        // Create and add the player's character
         player = new Character(selectedImage);
+
+        // Setup common elements
+        setupLevel();
+    }
+
+    /**
+     * Abstract method to be implemented by each level for unique setup.
+     */
+    protected abstract void setupLevel();
+    
+    /**
+     * Common method to reset the player's position.
+     */
+    public void resetPlayerPosition() {
+        player.setLocation(getWidth() / 2, getHeight() - 50);
 
         // Add the character to the center of the game world.
         addObject(player, getWidth() / 2, getHeight() - 50);
