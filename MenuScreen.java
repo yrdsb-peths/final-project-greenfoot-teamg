@@ -1,17 +1,15 @@
-import javax.xml.stream.events.Characters;
-
 import greenfoot.*;
 
 public class MenuScreen extends World {
-    private Button pauseButton;
+    private Button settingButton;
+    private Button leaderboardButton;
     private CharacterSelection characterSelection;
-    private PauseScreen pauseScreen;
-    boolean checker;
+    private boolean checker;
 
     public MenuScreen() {
         super(500, 750, 1);
         GreenfootImage background = new GreenfootImage("CharacterSelection.jpg");
-        background.scale(getWidth(), getHeight()); // Adjust to world size (500x700)
+        background.scale(getWidth(), getHeight());
         setBackground(background);
 
         checker = true;
@@ -20,24 +18,21 @@ public class MenuScreen extends World {
         addLabels();
     }
 
-    public void act() {
-        if (pauseScreen == null) {
-            pauseScreen = new PauseScreen(this);
-        }
-        Util.handleEscapeKey(this, pauseScreen);
-        handleEnterKey();
-    }
-
     private void setupButtons() {
-        pauseButton = new Button(this::gopauseScreen, "");
-        pauseButton.changeButtonImage("pausebutton.png");
-        addObject(pauseButton, 450, 30);
+        // Setting button
+        settingButton = new Button(this::goSettingScreen, "");
+        settingButton.changeButtonImage("setting.png", 70, 70);
+        addObject(settingButton, 450, 40);
+
+        // Leaderboard button
+        leaderboardButton = new Button(this::goHighScoresScreen, "");
+        leaderboardButton.changeButtonImage("leaderboard.png", 90, 90);
+        addObject(leaderboardButton, 450, 115);
     }
 
     private void addLabels() {
         addObject(new Label("Title", 100), getWidth() / 2, 100);
-
-        addObject(new Label("Press Enter to Start", 50), getWidth()/ 2, getHeight() / 2);
+        addObject(new Label("Press Enter to Start", 50), getWidth() / 2, getHeight() / 2);
     }
 
     private void handleEnterKey() {
@@ -46,12 +41,15 @@ public class MenuScreen extends World {
         }
     }
 
-    private void gopauseScreen() {
-        Greenfoot.setWorld(new PauseScreen(this));
+    private void goSettingScreen() {
+        Greenfoot.setWorld(new Settings(this));
     }
 
     private void gocharacterselection() {
-        Greenfoot.setWorld(new CharacterSelection(this));
+        Greenfoot.setWorld(new CharacterSelection());
+    }
 
+    private void goHighScoresScreen() {
+        Greenfoot.setWorld(new HighScore(this));
     }
 }
