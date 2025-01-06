@@ -64,24 +64,34 @@ public class Button extends Actor {
         updateButtonImage(); // Refresh the button image with the new text
     }
     
-    public void changeButtonImage(String imageName) {
-        // Verify image exists or use default
+    public void changeButtonImage(String imageName, int width, int height) {
+        // Create and scale the base image
         GreenfootImage newButtonImage = new GreenfootImage(imageName);
         
         // Fallback to default if image is invalid
         if (newButtonImage.getWidth() <= 0 || newButtonImage.getHeight() <= 0) {
-            newButtonImage = new GreenfootImage(200, 50);
+            newButtonImage = new GreenfootImage(width, height);
             newButtonImage.setColor(Color.LIGHT_GRAY);
             newButtonImage.fill();
+        } else {
+            newButtonImage.scale(width, height);
         }
         
-        // Reapply text
-        GreenfootImage textOverlay = new GreenfootImage(text, 23, Color.BLACK, new Color(0, 0, 0, 0));
+        // Reapply text if there is any
+        if (text != null && !text.isEmpty()) {
+            GreenfootImage textOverlay = new GreenfootImage(text, 23, Color.BLACK, new Color(0, 0, 0, 0));
+            
+            int textX = (newButtonImage.getWidth() - textOverlay.getWidth()) / 2;
+            int textY = (newButtonImage.getHeight() - textOverlay.getHeight()) / 2;
+            
+            newButtonImage.drawImage(textOverlay, textX, textY);
+        }
         
-        int textX = (newButtonImage.getWidth() - textOverlay.getWidth()) / 2;
-        int textY = (newButtonImage.getHeight() - textOverlay.getHeight()) / 2;
-        
-        newButtonImage.drawImage(textOverlay, textX, textY);
         setImage(newButtonImage);
+    }
+    
+    // Keep the original method for backward compatibility
+    public void changeButtonImage(String imageName) {
+        changeButtonImage(imageName, 200, 50); // Default sizes
     }
 }
