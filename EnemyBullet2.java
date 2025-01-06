@@ -30,7 +30,7 @@ public class EnemyBullet2 extends Bullet
     public void moveBullet() {
         if(timer.millisElapsed() > 20) {
             checkBounce();
-            move(5);
+            move(10);
             timer.mark();
         }
     }

@@ -29,55 +29,56 @@ public class EnemyBullet1 extends Bullet
         Game game = (Game) getWorld();
 
         if(timer.millisElapsed() > 20) { // Rate of movement
-
-            // Updates location of player's character
-            double x = game.player.getX();
-            double y = game.player.getY();
-
-            if(far == true) { // Only rotates if not close to target
-
-                // x and y distances to target
-                double toX = x - getX();
-                double toY = getY() - y;
-
-                // required angle between bullet and target
-                double angle = Math.atan2(toY, toX);
-
-                // angle of bullet
-                double a = Math.toRadians(-1 * getRotation());
-                if(a < 0) {
-                    a += Math.PI * 2;
-                }
-                
-                // distance between target and bullet
-                double distance = Math.sqrt(toX * toX + toY * toY);
-                // If closer than this amount, bullet no longer turns
-                if(distance < lockDistance) {
-                    far = false;
-                }
-
-                // Difference between required angle and bullet's angle
-                double diff = angle - a;
-
-                // Only allows angles between -pi and pi by subtracting 2pi if greater, and depending on that value, it will turn a direction
-                if(diff > Math.PI) {
-                    diff -= 2 * Math.PI;
-                }
-                else if(diff < -Math.PI) {
-                    diff += 2 * Math.PI;
-                }
-
-                // Only turns if the difference in the angles is greater than an amount
-                if(Math.abs(diff) > reqAngle) {
-                    if(diff > 0) {
-                        turn(-turnAmount);
+            if(game.player.isOnScreen == true)
+            {
+                // Updates location of player's character
+                double x = game.player.getX();
+                double y = game.player.getY();
+    
+                if(far == true) { // Only rotates if not close to target
+    
+                    // x and y distances to target
+                    double toX = x - getX();
+                    double toY = getY() - y;
+    
+                    // required angle between bullet and target
+                    double angle = Math.atan2(toY, toX);
+    
+                    // angle of bullet
+                    double a = Math.toRadians(-1 * getRotation());
+                    if(a < 0) {
+                        a += Math.PI * 2;
                     }
-                    else {
-                        turn(turnAmount);
+                    
+                    // distance between target and bullet
+                    double distance = Math.sqrt(toX * toX + toY * toY);
+                    // If closer than this amount, bullet no longer turns
+                    if(distance < lockDistance) {
+                        far = false;
+                    }
+    
+                    // Difference between required angle and bullet's angle
+                    double diff = angle - a;
+    
+                    // Only allows angles between -pi and pi by subtracting 2pi if greater, and depending on that value, it will turn a direction
+                    if(diff > Math.PI) {
+                        diff -= 2 * Math.PI;
+                    }
+                    else if(diff < -Math.PI) {
+                        diff += 2 * Math.PI;
+                    }
+    
+                    // Only turns if the difference in the angles is greater than an amount
+                    if(Math.abs(diff) > reqAngle) {
+                        if(diff > 0) {
+                            turn(-turnAmount);
+                        }
+                        else {
+                            turn(turnAmount);
+                        }
                     }
                 }
             }
-
             move(5);
             timer.mark();
         }

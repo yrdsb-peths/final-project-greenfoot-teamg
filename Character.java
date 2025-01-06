@@ -7,7 +7,7 @@ public class Character extends Actor {
     private int speed = 6; // Normal movement speed
     private int shootDelay = 10; // Delay between consecutive shots (in frames)
     private int shootCooldown = 0; // Countdown for the next allowed shot
-
+    boolean isOnScreen = false;
     /**
      * Constructor to set the character's initial image.
      */

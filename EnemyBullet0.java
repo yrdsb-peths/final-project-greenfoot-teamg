@@ -5,7 +5,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class EnemyBullet0 extends Bullet
 {
     SimpleTimer timer = new SimpleTimer();
-
+    
     public EnemyBullet0() {
         GreenfootImage image = new GreenfootImage("EnemyBullet0.png");
         image.scale(10, 10);
@@ -23,7 +23,7 @@ public class EnemyBullet0 extends Bullet
     // Linear movement
     public void moveBullet() {
         if(timer.millisElapsed() > 20) {
-            move(5);
+            move(10);
             timer.mark();
         }
     }
