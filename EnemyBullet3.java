@@ -31,7 +31,7 @@ public class EnemyBullet3 extends Bullet
 
     public void moveBullet() {
         if(timer.millisElapsed() > 20) {
-            move(5);
+            move(10);
             timer.mark();
             if(calcDistance(inX, inY) > splitDis) {
                 splitBullets();
