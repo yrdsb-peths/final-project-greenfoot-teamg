@@ -8,6 +8,7 @@ public class Character extends Actor {
     private int shootDelay = 10; // Delay between consecutive shots (in frames)
     private int shootCooldown = 0; // Countdown for the next allowed shot
     boolean isOnScreen = false;
+
     /**
      * Constructor to set the character's initial image.
      */
@@ -20,11 +21,12 @@ public class Character extends Actor {
     }
 
     /**
-     * Called on every frame; handles movement.
+     * Called on every frame; handles movement and checks for collisions.
      */
     public void act() {
         handleMovement();
         handleShooting();
+        checkForBulletCollision();
     }
 
     /**
@@ -52,7 +54,7 @@ public class Character extends Actor {
             setLocation(getX() + currentSpeed, getY()); // Move right
         }
     }
-    
+
     /**
      * Handle shooting when the space bar is held down.
      */
@@ -79,5 +81,30 @@ public class Character extends Actor {
         // Optional: Add a sound effect
         Greenfoot.playSound("StarWarsBlaster.mp3");
     }
-    
+
+    /**
+     * Check if the character is hit by a bullet and handle death.
+     */
+    private void checkForBulletCollision() {
+        Bullet bullet = (Bullet) getOneIntersectingObject(Bullet.class); // Detect collision with any Bullet subclass
+        if (bullet != null) {
+            getWorld().removeObject(bullet); // Remove the bullet from the world
+            die(); // Handle character death
+        }
+    }
+
+    /**
+     * Handle character death by removing the character, showing an explosion, and ending the game.
+     */
+    private void die() {
+        // Create an explosion effect
+        //Explosion explosion = new Explosion();
+        //getWorld().addObject(explosion, getX(), getY());
+
+        // Remove the character
+        getWorld().removeObject(this);
+
+        // Transition to a game-over screen or similar
+        Greenfoot.setWorld(new GameOver());
+    }
 }
