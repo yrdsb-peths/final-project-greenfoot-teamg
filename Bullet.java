@@ -11,4 +11,5 @@ public abstract class Bullet extends Actor
             game.removeObject(this);
         }
     }
+    
 }
