@@ -14,7 +14,7 @@ public class CharacterSelection extends World {
      * Constructor for CharacterSelection.
      * Sets up the character selection screen.
      */
-    public CharacterSelection(MenuScreen menuScreen) {
+    public CharacterSelection() {
         super(500, 700, 1); // Create a new world with specified dimensions
         GreenfootImage background = new GreenfootImage("CharacterSelection.jpg");
         background.scale(getWidth(), getHeight()); // Adjust to world size (500x700)
