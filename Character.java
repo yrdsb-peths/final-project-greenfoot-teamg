@@ -7,13 +7,19 @@ public class Character extends Actor {
     private int speed = 6; // Normal movement speed
     private int shootDelay = 10; // Delay between consecutive shots (in frames)
     private int shootCooldown = 0; // Countdown for the next allowed shot
-    boolean isOnScreen = false;
+    private TransparentBox hitbox; // Reference to the associated TransparentBox
 
     /**
-     * Constructor to set the character's initial image.
+     * Constructor to set the character's initial image and create a hitbox.
      */
     public Character(GreenfootImage characterImage) {
         setImage(characterImage);
+    }
+
+    public void addedToWorld(World world) {
+        // Create and add the hitbox when the character is added to the world
+        hitbox = new TransparentBox(this);
+        getWorld().addObject(hitbox, getX(), getY());
     }
 
     public void updateImage(GreenfootImage characterImage) {
@@ -21,12 +27,11 @@ public class Character extends Actor {
     }
 
     /**
-     * Called on every frame; handles movement and checks for collisions.
+     * Called on every frame; handles movement and shooting.
      */
     public void act() {
         handleMovement();
         handleShooting();
-        checkForBulletCollision();
     }
 
     /**
@@ -83,28 +88,30 @@ public class Character extends Actor {
     }
 
     /**
-     * Check if the character is hit by a bullet and handle death.
+     * Handle character death by removing the character, the hitbox, and transitioning to a game-over screen.
      */
-    private void checkForBulletCollision() {
-        Bullet bullet = (Bullet) getOneIntersectingObject(Bullet.class); // Detect collision with any Bullet subclass
-        if (bullet != null) {
-            getWorld().removeObject(bullet); // Remove the bullet from the world
-            die(); // Handle character death
-        }
-    }
-
-    /**
-     * Handle character death by removing the character, showing an explosion, and ending the game.
-     */
-    private void die() {
+    public void die() {
         // Create an explosion effect
         //Explosion explosion = new Explosion();
         //getWorld().addObject(explosion, getX(), getY());
 
-        // Remove the character
+        // Remove the hitbox and character
+        if (hitbox != null) {
+            getWorld().removeObject(hitbox);
+        }
         getWorld().removeObject(this);
 
         // Transition to a game-over screen or similar
         Greenfoot.setWorld(new GameOver());
+    }
+    
+    public boolean isOnScreen() {
+        World world = getWorld();
+        if (world != null) {
+            int x = getX();
+            int y = getY();
+            return x > 0 && x < world.getWidth() && y > 0 && y < world.getHeight();
+        }
+        return false;
     }
 }
