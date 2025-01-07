@@ -26,13 +26,14 @@ public class DoubleEndEnemy extends Enemy
     }
 
     public void makeBullet() {
-        if(timer.millisElapsed() > 100) {
+        if(timer.millisElapsed() > 500) {
             Game game = (Game) getWorld();
 
             EnemyBullet0 bullet = new EnemyBullet0();
             Bullet backBullet = new EnemyBullet3();
 
             game.addObject(bullet, this.getX(), this.getY());
+            game.addObject(backBullet, this.getX(), this.getY());
 
 
             bullet.setRotation(rotate);
