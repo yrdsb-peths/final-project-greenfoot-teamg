@@ -40,15 +40,10 @@ public class BigEnemy extends Enemy
                 Bullet ricochetBullet = new EnemyBullet2();
                 game.addObject(ricochetBullet, getX(), getY());
     
-                int toX = game.player.getX();
-                int toY = game.player.getY();
-    
                 // Bullet faces and spawns in front of ship initially
                 ricochetBullet.setRotation(90);
                 ricochetBullet.move(30);
     
-                ricochetBullet.turnTowards(toX, toY);
-
                 ricochet = false;
             }
             else {
