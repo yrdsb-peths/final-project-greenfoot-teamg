@@ -17,6 +17,10 @@ public class MenuScreen extends World {
         setupButtons();
         addLabels();
     }
+    
+    public void act() {
+        handleEnterKey();
+    }
 
     private void setupButtons() {
         // Setting button
@@ -46,7 +50,7 @@ public class MenuScreen extends World {
     }
 
     private void gocharacterselection() {
-        Greenfoot.setWorld(new CharacterSelection());
+        Greenfoot.setWorld(new CharacterSelection(this));
     }
 
     private void goHighScoresScreen() {

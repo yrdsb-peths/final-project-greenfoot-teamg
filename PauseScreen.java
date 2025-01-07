@@ -53,7 +53,6 @@ public class PauseScreen extends World {
   }
 
   public void goMenuScreen() {
-    menuScreen.checker = true;
     Greenfoot.setWorld(menuScreen);
   }
 }
