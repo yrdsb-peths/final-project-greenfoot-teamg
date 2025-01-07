@@ -10,6 +10,19 @@ public class Level2 extends Game {
      */
     public Level2(GreenfootImage selectedImage) {
         super(600, 800, 1, selectedImage);
+
+        // delete if on main
+        Enemy test1 = new CircleEnemy();
+        addObject(test1, 125, 350);
+
+        Enemy test2 = new SeekingEnemy();
+        addObject(test2, 250, 350);
+
+        Enemy test3 = new SplitEnemy();
+        addObject(test3, 375, 350);
+        
+        Enemy test4 = new RichochetEnemy();
+        addObject(test4, 450, 350);
     }
 
     @Override
