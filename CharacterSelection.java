@@ -9,6 +9,9 @@ public class CharacterSelection extends World {
     private CharacterDisplay characterDisplay; // Actor to display the current character
     private GreenfootSound menuMusic; // Music for the menu
     private MenuScreen menuScreen;
+    private Actor leftArrow;
+    private Actor rightArrow;
+    private static boolean checker = true;
 
     /**
      * Constructor for CharacterSelection.
@@ -21,6 +24,9 @@ public class CharacterSelection extends World {
         setBackground(background);
         
         this.menuScreen = menuScreen;
+        
+        addLabels();
+        arrow();
 
         // Load character images
         characters = new GreenfootImage[] {
@@ -30,22 +36,17 @@ public class CharacterSelection extends World {
         };
 
         // Rotate the images to fit your required orientation
-        characters[0].scale(160, 320); // Resize to 100x100 pixels (adjust size as needed)
+        characters[0].scale(160, 320); // Resize to 160x320 pixels (adjust size as needed)
         characters[0].rotate(-90);
-        characters[1].scale(200, 200); // Resize to 100x100 pixels (adjust size as needed)
+        characters[1].scale(200, 200); // Resize to 200x200 pixels (adjust size as needed)
         characters[1].rotate(-90);
-        characters[2].scale(200, 200); // Resize to 100x100 pixels (adjust size as needed)
+        characters[2].scale(200, 200); // Resize to 200x200 pixels (adjust size as needed)
         characters[2].rotate(-90);
         
         // Initialize the character display with the first character
         characterDisplay = new CharacterDisplay(characters[indexShips]);
         addObject(characterDisplay, 250, 350); // Position it at the center of the screen
-
-        // Add navigation buttons for selecting characters
-        addObject(new Button(this::nextCharacter, "Next"), 350, 600);
-        addObject(new Button(this::previousCharacter, "Previous"), 150, 600);
-        addObject(new Button(this::selectCharacter, "Select"), 250, 650);
-
+        
         // Play the background music
         menuMusic = new GreenfootSound("Menu.mp3");
         menuMusic.playLoop();
@@ -53,6 +54,44 @@ public class CharacterSelection extends World {
 
     public void act() {
         Util.handleEscapeKey(this, menuScreen);
+        handleNavigateKey(); // Call the method to handle navigation
+        handleEnterKey();
+    }
+    
+        public void addLabels() {
+        addObject(new Label("Press Enter to Select character", 42), getWidth() / 2, 100);
+    }
+    
+    public void arrow() {
+        // Add arrow images beside the character image
+        leftArrow = new Actor() {};
+        GreenfootImage leftArrowImage = new GreenfootImage("arrow.png");
+        leftArrowImage.mirrorHorizontally(); // Reflect the image horizontally
+        leftArrow.setImage(leftArrowImage);
+        addObject(leftArrow, 90, 360);
+
+        rightArrow = new Actor() {};
+        rightArrow.setImage("arrow.png");
+        addObject(rightArrow, 410, 360);
+    }
+    
+    public void handleEnterKey() {
+        if (Greenfoot.isKeyDown("enter")) {
+            selectCharacter();
+          }
+    }
+
+    public void handleNavigateKey() {
+        // Continuously check for "left", "a", "right", "d", and "escape" key presses
+        if ((Greenfoot.isKeyDown("left") || Greenfoot.isKeyDown("a")) && !checker) {
+            checker = true;
+            previousCharacter();
+        } else if ((Greenfoot.isKeyDown("right") || Greenfoot.isKeyDown("d")) && !checker) {
+            checker = true;
+            nextCharacter();
+        } else if (!Greenfoot.isKeyDown("left") && !Greenfoot.isKeyDown("a") && !Greenfoot.isKeyDown("right") && !Greenfoot.isKeyDown("d")) {
+            checker = false;
+        }
     }
 
     /**
@@ -74,15 +113,8 @@ public class CharacterSelection extends World {
             updateCharacterImage();
         }
     }
-
-    /**
-     * Update the character display image to the current character.
-     */
-    private void updateCharacterImage() {
-        characterDisplay.setImage(characters[indexShips]);
-    }
-
-    /**
+    
+        /**
      * Handle character selection and return to the game screen.
      */
     public void selectCharacter() {
@@ -96,6 +128,13 @@ public class CharacterSelection extends World {
         GreenfootImage selectedShip = new GreenfootImage(characters[indexShips]); // Use the selected character image
         
         // Pass the scaled image to the Game world
-        Greenfoot.setWorld(new Level1 (selectedShip));
+        Greenfoot.setWorld(new Level1(selectedShip));
+    }
+
+    /**
+     * Update the character display image to the current character.
+     */
+    private void updateCharacterImage() {
+        characterDisplay.setImage(characters[indexShips]);
     }
 }
