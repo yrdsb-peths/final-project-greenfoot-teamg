@@ -22,8 +22,7 @@ public class Boss2 extends Boss
         super.act();
         if(!isAttacking)
         {
-            List<Bullet> a = getIntersectingObjects(Bullet.class);
-            for(Bullet bullet: a) { // Get all bullets touching 
+            for(Bullet bullet: getWorld().getObjects(Bullet.class)) { // Get all bullets touching 
                 World world = (World) getWorld();
                 world.removeObject(bullet);
             }
@@ -43,8 +42,7 @@ public class Boss2 extends Boss
         }
         else if(attackTimer.millisElapsed() > 7000 && attackTimer.millisElapsed() <= 10000)
         {
-            List<EnemyBullet5> a = getObjectsInRange(1000, EnemyBullet5.class);
-            for(EnemyBullet5 bullet: a) { // Get all bullets in range 
+            for(EnemyBullet5 bullet: getWorld().getObjects(EnemyBullet5.class)) { // Get all bullets in range 
                 World world = (World) getWorld();
                 GreenfootImage image = new GreenfootImage("EnemyBullet5.png");
                 image.scale(10, 10);
@@ -54,8 +52,7 @@ public class Boss2 extends Boss
         }
         else if(attackTimer.millisElapsed() > 10000 && attackTimer.millisElapsed() < 10500)
         {
-            List<Bullet> a = getIntersectingObjects(Bullet.class);
-            for(Bullet bullet: a) { // Get all bullets touching 
+            for(Bullet bullet: getWorld().getObjects(Bullet.class)) { // Get all bullets touching 
                 World world = (World) getWorld();
                 world.removeObject(bullet);
             }
@@ -95,8 +92,7 @@ public class Boss2 extends Boss
             if(random == 0)
             {
                 random = Util.randomInt(1);
-                List<LaserBeam> a = getIntersectingObjects(LaserBeam.class);
-                for(LaserBeam laser: a) { // Get all lasers touching 
+                for(LaserBeam laser: getWorld().getObjects(LaserBeam.class)) { // Get all lasers touching 
                      if(random == 0)
                     {
                         laser.turnSpeed = 1;
@@ -113,8 +109,7 @@ public class Boss2 extends Boss
         }
         if(attackTimer.millisElapsed() > 10000)
         {
-            List<LaserBeam> a = getIntersectingObjects(LaserBeam.class);
-            for(LaserBeam laser: a) { // Get all lasers touching 
+            for(LaserBeam laser: getWorld().getObjects(LaserBeam.class)) { // Get all lasers touching 
                 World world = (World) getWorld();
                 world.removeObject(laser);
             }

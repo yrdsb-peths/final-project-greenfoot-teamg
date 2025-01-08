@@ -6,7 +6,7 @@ public class CircleEnemy extends Enemy
     int rotate = 0;
 
     public CircleEnemy() {
-        GreenfootImage image = new GreenfootImage("EnemySpaceShip1.png");
+        GreenfootImage image = new GreenfootImage("EnemySpaceship1.png");
         image.scale(75, 75);
         image.rotate(90);
         this.setImage(image);

@@ -1,15 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.List;
 
-/**
- * Write a description of class Boss1 here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class Boss1 extends Boss
 {
     SimpleTimer curveCooldown = new SimpleTimer();
+    SimpleTimer test1 = new SimpleTimer();
     
     public Boss1()
     {
@@ -22,12 +17,36 @@ public class Boss1 extends Boss
     
     public void act()
     {
-        super.act();
-        if(curveCooldown.millisElapsed() > 500)
+        if(((Game)getWorld()).isFreeze == false)
         {
-            randomCurveBall();
-            curveCooldown.mark();
+            super.act();
+            if(curveCooldown.millisElapsed() > 500)
+            {
+                randomCurveBall();
+                curveCooldown.mark();
+            }
         }
+        // if(((Game)getWorld()).isFreeze == true && ((Game)getWorld()).freezeTimer.millisElapsed() > 5000)
+        // {
+            // ((Game)getWorld()).resumeGame();
+            // test1.mark();
+        // }
+        // if(test1.millisElapsed() > 5000 && ((Game)getWorld()).isFreeze == false)
+        // {
+            // ((Game)getWorld()).freezeGame();
+        // }
+    }
+    
+    public void freeze()
+    {
+        super.freeze();
+        curveCooldown.freeze();
+    }
+    
+    public void unfreeze()
+    {
+        super.unfreeze();
+        curveCooldown.unfreeze();
     }
     
     public void randomCurveBall()
@@ -84,8 +103,7 @@ public class Boss1 extends Boss
             }
             else
             {
-                List<EnemyBullet1> a = getObjectsInRange(800, EnemyBullet1.class);;
-                for(EnemyBullet1 bullet : a) { // Get all enemies touching 
+                for(EnemyBullet1 bullet : getWorld().getObjects(EnemyBullet1.class)) { // Get all enemies touching 
                     EnemyBullet4 bullet4 = new EnemyBullet4();
                     getWorld().addObject(bullet4, bullet.getX(), bullet.getY());
                     getWorld().removeObject(bullet);
