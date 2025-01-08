@@ -1,11 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-/**
- * Write a description of class DoubleEndEnemy here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class DoubleEndEnemy extends Enemy
 {
     SimpleTimer timer = new SimpleTimer();
@@ -30,7 +24,9 @@ public class DoubleEndEnemy extends Enemy
             Game game = (Game) getWorld();
 
             EnemyBullet0 bullet = new EnemyBullet0();
-            Bullet backBullet = new EnemyBullet3();
+            EnemyBullet3 backBullet = new EnemyBullet3();
+            backBullet.setInitial(getX(), getY());
+
 
             game.addObject(bullet, this.getX(), this.getY());
             game.addObject(backBullet, this.getX(), this.getY());

@@ -27,7 +27,7 @@ public class TransparentBox extends Actor {
         setLocation(character.getX(), character.getY());
 
         // Check for collisions with bullets
-        checkForBulletCollision();
+        //checkForBulletCollision();
     }
 
     /**

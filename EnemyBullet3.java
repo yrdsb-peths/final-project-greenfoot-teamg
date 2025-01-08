@@ -6,7 +6,7 @@ public class EnemyBullet3 extends Bullet
 {
     SimpleTimer timer = new SimpleTimer();
     int inX, inY;
-    int splitDis = 300; // Distance before splitting
+    int splitDis = 200; // Distance before splitting
     int spawnNum = 5; // Number of bullets that split off
     int spawnAngle = 180; // Angle the bullets make when splitting
     
