@@ -49,11 +49,6 @@ public class Settings extends World {
         ClosingButton = new Button(this::goMenuScreen, "");
         ClosingButton.changeButtonImage("Home.png", 70, 70);
         addObject(ClosingButton, 450, 40);
-
-        // Reset defaults button
-        resetDefaultsButton = new Button(this::resetDefaults, "Reset");
-        resetDefaultsButton.changeButtonImage("buttonLong_beige.png", 200, 50);
-        addObject(resetDefaultsButton, 250, 550);
     }
 
     public void goMenuScreen() {
