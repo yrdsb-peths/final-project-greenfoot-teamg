@@ -1,6 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-public abstract class Boss extends Actor
+public abstract class Boss extends Actor implements Freezable
 {
     SimpleTimer moveTimer = new SimpleTimer();
     SimpleTimer attackCooldown = new SimpleTimer();
@@ -43,6 +43,22 @@ public abstract class Boss extends Actor
         {
             resumeAttack();
         }
+    }
+    
+    public void freeze()
+    {
+        moveTimer.freeze();
+        attackCooldown.freeze();
+        attackTimer.freeze();
+        attackSlower.freeze();
+    }
+    
+    public void unfreeze()
+    {
+        moveTimer.unfreeze();
+        attackCooldown.unfreeze();
+        attackTimer.unfreeze();
+        attackSlower.unfreeze();
     }
     
     public void resumeAttack()

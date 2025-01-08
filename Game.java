@@ -1,10 +1,13 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.List;
 
 /**
  * Abstract class representing the base functionality for all game levels.
  */
 public abstract class Game extends World {
     protected Character player;
+    public boolean isFreeze = false;
+    public SimpleTimer freezeTimer = new SimpleTimer();
     
     public Game(int width, int height, int cellSize, GreenfootImage selectedImage) {
         super(width, height, cellSize);
@@ -40,5 +43,22 @@ public abstract class Game extends World {
         addObject(test3, 375, 350);
         Enemy test = new RichochetEnemy();
         addObject(test, 250, 350);
+    }
+    
+    public void freezeGame()
+    {
+        isFreeze = true;
+        for(Freezable object: getObjects(Freezable.class)) { // Get all Freezable actors 
+            object.freeze();
+        }
+        freezeTimer.mark();
+    }
+    
+    public void resumeGame()
+    {
+        isFreeze = false;
+        for(Freezable object: getObjects(Freezable.class)) { // Get all Freezable actors 
+            object.unfreeze();
+        }
     }
 }

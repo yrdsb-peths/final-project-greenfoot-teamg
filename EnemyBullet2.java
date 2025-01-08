@@ -4,7 +4,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 public class EnemyBullet2 extends Bullet
 {
-    SimpleTimer timer = new SimpleTimer();
     int maxBounces = 2; // Times bullet can bounce
     int bounce = 0;
 
@@ -16,22 +15,25 @@ public class EnemyBullet2 extends Bullet
         GreenfootImage image = new GreenfootImage("EnemyBullet2.png");
         image.scale(10, 10);
         this.setImage(image);
-        timer.mark();
+        moveTimer.mark();
     }
 
     public void act()
     {
-        moveBullet();
-        if(bounce >= maxBounces) { // Delete if touching edge and cannot bounce
-            checkBounds();
+        if(((Game)getWorld()).isFreeze == false)
+        {
+            moveBullet();
+            if(bounce >= maxBounces) { // Delete if touching edge and cannot bounce
+                checkBounds();
+            }
         }
     }
 
     public void moveBullet() {
-        if(timer.millisElapsed() > 20) {
+        if(moveTimer.millisElapsed() > 20) {
             checkBounce();
             move(10);
-            timer.mark();
+            moveTimer.mark();
         }
     }
 

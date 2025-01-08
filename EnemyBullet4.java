@@ -5,8 +5,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class EnemyBullet4 extends Bullet
 {
-    SimpleTimer timer = new SimpleTimer();
-    SimpleTimer aliveTime = new SimpleTimer();
+    SimpleTimer curveTime = new SimpleTimer();
     boolean curveRight;
     int turnSpeed;
     public EnemyBullet4(){
@@ -14,8 +13,8 @@ public class EnemyBullet4 extends Bullet
         image.scale(10, 10);
         this.setImage(image);
         this.curveRight = curveRight;
-        timer.mark();
-        aliveTime.mark();
+        moveTimer.mark();
+        curveTime.mark();
         turnSpeed = Util.randomInt(1) + 1;
         curveRight = Util.randomBoolean();
         if(curveRight)
@@ -30,14 +29,25 @@ public class EnemyBullet4 extends Bullet
 
     public void act()
     {
-        moveBullet();
-        checkBounds();
+        super.act();
+    }
+    
+    public void freeze()
+    {
+        super.freeze();
+        curveTime.freeze();
+    }
+    
+    public void unfreeze()
+    {
+        super.unfreeze();
+        curveTime.unfreeze();
     }
     
     public void moveBullet() {
-        if(timer.millisElapsed() > 20) {
+        if(moveTimer.millisElapsed() > 20) {
             move(10);
-            if(aliveTime.millisElapsed() < 4000)
+            if(curveTime.millisElapsed() < 4000)
                 if(curveRight)
                 {
                     turn(turnSpeed);
@@ -45,7 +55,7 @@ public class EnemyBullet4 extends Bullet
                 {
                     turn(-turnSpeed);
                 }
-            timer.mark();
+            moveTimer.mark();
         }
     }
 }
