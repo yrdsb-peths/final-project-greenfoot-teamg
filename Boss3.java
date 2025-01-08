@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Boss3 extends Boss
 {
-    SimpleTimer BounceCooldown = new SimpleTimer();
+    SimpleTimer bounceCooldown = new SimpleTimer();
     
     public Boss3()
     {
@@ -21,11 +21,23 @@ public class Boss3 extends Boss
     public void act()
     {
         super.act();
-        if(BounceCooldown.millisElapsed() > 1000)
+        if(bounceCooldown.millisElapsed() > 1000)
         {
             randomBounceAttack();
-            BounceCooldown.mark();
+            bounceCooldown.mark();
         }
+    }
+    
+    public void freeze()
+    {
+        super.act();
+        bounceCooldown.freeze();
+    }
+    
+    public void unfreeze()
+    {
+        super.act();
+        bounceCooldown.unfreeze();
     }
     
     public void randomBounceAttack()

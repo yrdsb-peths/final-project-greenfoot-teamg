@@ -82,7 +82,10 @@ public class Character extends Actor {
         // Create a new projectile and add it to the world
         Projectile projectile = new Projectile();
         getWorld().addObject(projectile, getX(), getY() - getImage().getHeight() / 2);
-
+    
+        // Set the bullet to move upwards (270 degrees)
+        projectile.setRotation(270);
+    
         // Optional: Add a sound effect
         Greenfoot.playSound("StarWarsBlaster.mp3");
     }

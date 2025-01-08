@@ -4,7 +4,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 public class EnemyBullet3 extends Bullet
 {
-    SimpleTimer timer = new SimpleTimer();
     int inX, inY;
     int splitDis = 200; // Distance before splitting
     int spawnNum = 5; // Number of bullets that split off
@@ -14,13 +13,12 @@ public class EnemyBullet3 extends Bullet
         GreenfootImage image = new GreenfootImage("EnemyBullet3.png");
         image.scale(20, 20);
         this.setImage(image);
-        timer.mark();
+        moveTimer.mark();
     }
 
     public void act()
     {
-        checkBounds();
-        moveBullet();
+        super.act();
     }
 
     // Initial position when spawned
@@ -30,9 +28,9 @@ public class EnemyBullet3 extends Bullet
     }
 
     public void moveBullet() {
-        if(timer.millisElapsed() > 20) {
+        if(moveTimer.millisElapsed() > 20) {
             move(10);
-            timer.mark();
+            moveTimer.mark();
             if(calcDistance(inX, inY) > splitDis) {
                 splitBullets();
             }
