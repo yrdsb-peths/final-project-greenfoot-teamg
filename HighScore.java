@@ -13,10 +13,20 @@ public class HighScore extends World {
 
     this.menuScreen = menuScreen;
 
-    addObject(new Button(this::goMenuScreen, "Menu"), 250, 600);
-
     displayHighScores();
+
+    addLabels();
   }
+
+  public void act() {
+    // Update volume
+    Util.handleEscapeKey(this, menuScreen);
+}
+
+private void addLabels() {
+    addObject(new Label("ESC", 30), 40, 700);
+    addObject(new Label("Back", 25), 100, 700);
+}
 
   public void displayHighScores() {
     // y-intercept
@@ -28,7 +38,7 @@ public class HighScore extends World {
     // Get and sort the scores
     List<NameScore> sortedScores = getSortTopScore();
 
-    Label title = new Label("High Score", 50);
+    Label title = new Label("LEADERBOARD", 50);
     addObject(title, getWidth() / 2, 70);
 
     Label headerRank = new Label("Rank", Header_FontSize);
