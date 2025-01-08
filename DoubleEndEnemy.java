@@ -1,5 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
+// Enemy shoots normal bullet forwards, split bullet backwards, rotates
+
 public class DoubleEndEnemy extends Enemy
 {
     SimpleTimer timer = new SimpleTimer();
@@ -32,8 +34,8 @@ public class DoubleEndEnemy extends Enemy
             game.addObject(backBullet, this.getX(), this.getY());
 
 
-            bullet.setRotation(rotate);
-            backBullet.setRotation(180 + rotate);
+            bullet.setRotation(rotate + 90);
+            backBullet.setRotation(270 + rotate);
 
             bullet.move(30);
             backBullet.move(30);

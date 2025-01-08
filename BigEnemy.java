@@ -1,5 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
+// 2 seeking bullets shoot from sides, 1 ricochet bullet from middle
+
 public class BigEnemy extends Enemy
 {
     SimpleTimer timer = new SimpleTimer();

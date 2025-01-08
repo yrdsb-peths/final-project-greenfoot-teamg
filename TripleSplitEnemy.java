@@ -1,6 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-// 3 splitting bullets
+// 3 spaced out splitting bullets in same direction
 
 public class TripleSplitEnemy extends Enemy
 {

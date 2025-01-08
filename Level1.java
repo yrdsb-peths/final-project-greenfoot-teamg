@@ -23,13 +23,7 @@ public class Level1 extends Game {
         addObject(player, getWidth() / 2, getHeight() - 100);
 
         // Add unique elements for Level 1 (enemies, obstacles, etc.)
-        addObject(new DoubleEndEnemy(), 200, 350);
 
-        addObject(new TripleSplitEnemy(), 300, 350);
-
-        addObject(new SimpleEnemy(), 400, 350);
-
-        addObject(new BigEnemy(), 500, 350);
         //addObject(new SeekingEnemy(), 250, 350);
         //addObject(new SplitEnemy(), 375, 350);
         //addObject(new RichochetEnemy(), 250, 450);
