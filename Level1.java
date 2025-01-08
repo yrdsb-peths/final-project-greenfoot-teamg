@@ -5,12 +5,17 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Level1 extends Game {
 
+    private PauseScreen pauseScreen;
+    private MenuScreen menuScreen; // Add menuScreen
+
     /**
      * Constructor for Level1.
      * @param selectedImage The image for the player's character.
      */
-    public Level1(GreenfootImage selectedImage) {
+    public Level1(GreenfootImage selectedImage, MenuScreen menuScreen) {
         super(600, 800, 1, selectedImage);
+        this.menuScreen = menuScreen; // Initialize menuScreen
+        pauseScreen = new PauseScreen(this, menuScreen); // Initialize the pause screen
     }
 
     @Override
@@ -26,5 +31,9 @@ public class Level1 extends Game {
         //addObject(new SeekingEnemy(), 250, 350);
         //addObject(new SplitEnemy(), 375, 350);
         //addObject(new RichochetEnemy(), 250, 450);
+    }
+
+    public void act() {
+        Util.handleEscapeKey(this, pauseScreen);
     }
 }

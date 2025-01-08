@@ -4,25 +4,26 @@ public class PauseScreen extends World {
   private static final int BUTTON_X = 250;
   private static final int BUTTON_Y = 300;
 
+  private Game gameWorld; // Change to Game instead of MenuScreen
   private MenuScreen menuScreen;
 
   private boolean checker;
 
-  public PauseScreen(MenuScreen menuScreen) {
+  public PauseScreen(Game gameWorld, MenuScreen menuScreen) {
     super(500, 750, 1);
 
     // Initialize worlds
+    this.gameWorld = gameWorld;
     this.menuScreen = menuScreen;
-
+    
     checker = true;
 
-    setupButtons(menuScreen);
+    setupButtons();
     addLabels();
   }
 
-  private void setupButtons(MenuScreen menuScreen) {
-    addObject(new Button(this::goSettingsScreen, "Settings"), BUTTON_X, BUTTON_Y);
-    addObject(new Button(this::goHighScoresScreen, "Leaderboard"), BUTTON_X, BUTTON_Y + 50);
+  public void act() {
+    Util.handleEscapeKey(this, gameWorld);
   }
 
   private void addLabels() {
@@ -30,29 +31,16 @@ public class PauseScreen extends World {
     addObject(new Label("Back", 25), 100, 700);
   }
 
-  public void act() {
-    Util.handleEscapeKey(this, menuScreen);
+  private void setupButtons() {
+    addObject(new Button(this::goSettingsScreen, "Settings"), BUTTON_X, BUTTON_Y);
+    addObject(new Button(this::goMenuScreen, "Quit Game"), BUTTON_X, BUTTON_Y + 50);
   }
-
-  /*private void handleEscapeKey() {
-    // Continuously check for "escape" key press to return to the menu screen
-    if (Greenfoot.isKeyDown("escape") && checker != true) {
-      checker = true;
-      goMenuScreen();
-    } else if (!Greenfoot.isKeyDown("escape")) {
-      checker = false;
-    }
-  }*/
 
   private void goSettingsScreen() {
     Greenfoot.setWorld(new Settings(menuScreen));
   }
 
-  private void goHighScoresScreen() {
-    Greenfoot.setWorld(new HighScore(menuScreen));
-  }
-
-  public void goMenuScreen() {
+  private void goMenuScreen() {
     Greenfoot.setWorld(menuScreen);
   }
 }
