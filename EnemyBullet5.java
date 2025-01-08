@@ -2,7 +2,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 public class EnemyBullet5 extends Bullet
 {
-    SimpleTimer timer = new SimpleTimer();
     Boss boss;
     boolean isReturning = false;
     
@@ -11,17 +10,20 @@ public class EnemyBullet5 extends Bullet
         image.scale(10, 10);
         this.setImage(image);
         this.boss = boss;
-        timer.mark();
+        moveTimer.mark();
     }
 
 
     public void act()
     {
-        moveBullet();
-        checkBounds();
-        if(isReturning)
+        if(((Game)getWorld()).isFreeze == false)
         {
-            turnTowards(boss.getX(), boss.getY());
+            moveBullet();
+            checkBounds();
+            if(isReturning)
+            {
+                turnTowards(boss.getX(), boss.getY());
+            }
         }
     }
 
@@ -37,9 +39,9 @@ public class EnemyBullet5 extends Bullet
     
     // Linear movement
     public void moveBullet() {
-        if(timer.millisElapsed() > 20) {
+        if(moveTimer.millisElapsed() > 20) {
             move(10);
-            timer.mark();
+            moveTimer.mark();
         }
     }
 }

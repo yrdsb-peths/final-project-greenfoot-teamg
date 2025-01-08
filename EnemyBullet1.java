@@ -4,7 +4,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 public class EnemyBullet1 extends Bullet
 {
-    SimpleTimer timer = new SimpleTimer();
     boolean far = true;
     int lockDistance = 200; // Distance from target to stop tracking
     double reqAngle = Math.PI / 6; // Minimum angle to target, smaller angle is more accurate
@@ -15,20 +14,19 @@ public class EnemyBullet1 extends Bullet
         GreenfootImage image = new GreenfootImage("EnemyBullet1.png");
         image.scale(10, 10);
         this.setImage(image);
-        timer.mark();
+        moveTimer.mark();
     }
 
     public void act()
     {
-        moveBullet();
-        checkBounds();
+        super.act();
     }
     
 
     public void moveBullet() {
         Game game = (Game) getWorld();
 
-        if(timer.millisElapsed() > 20) { // Rate of movement
+        if(moveTimer.millisElapsed() > 20) { // Rate of movement
             if(game.player.isOnScreen == true)
             {
                 // Updates location of player's character
@@ -80,7 +78,7 @@ public class EnemyBullet1 extends Bullet
                 }
             }
             move(5);
-            timer.mark();
+            moveTimer.mark();
         }
     }
 }
