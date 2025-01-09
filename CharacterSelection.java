@@ -9,6 +9,7 @@ public class CharacterSelection extends World {
     private CharacterDisplay characterDisplay; // Actor to display the current character
     private GreenfootSound menuMusic; // Music for the menu
     private MenuScreen menuScreen;
+    private Game game;
     private Actor leftArrow;
     private Actor rightArrow;
     private static boolean checker = true;
@@ -20,7 +21,7 @@ public class CharacterSelection extends World {
     public CharacterSelection(MenuScreen menuScreen) {
         super(600, 750, 1); // Create a new world with specified dimensions
         GreenfootImage background = new GreenfootImage("CharacterSelection.jpg");
-        background.scale(getWidth(), getHeight()); // Adjust to world size (500x700)
+        background.scale(getWidth(), getHeight());
         setBackground(background);
         
         this.menuScreen = menuScreen;
@@ -45,7 +46,7 @@ public class CharacterSelection extends World {
         
         // Initialize the character display with the first character
         characterDisplay = new CharacterDisplay(characters[indexShips]);
-        addObject(characterDisplay, getWidth()/2, getHeight()/2); // Position it at the center of the screen
+        addObject(characterDisplay, getWidth() / 2, getHeight() / 2); // Position it at the center of the screen
         
         // Play the background music
         menuMusic = new GreenfootSound("Menu.mp3");
@@ -55,7 +56,7 @@ public class CharacterSelection extends World {
     public void act() {
         Util.handleEscapeKey(this, menuScreen);
         handleNavigateKey(); // Call the method to handle navigation
-        handleEnterKey();
+        handleEnterKey(); // Call the method to handle enter key
     }
     
     public void addLabels() {
@@ -68,20 +69,18 @@ public class CharacterSelection extends World {
         GreenfootImage leftArrowImage = new GreenfootImage("arrow.png");
         leftArrowImage.mirrorHorizontally(); // Reflect the image horizontally
         leftArrow.setImage(leftArrowImage);
-        addObject(leftArrow, getWidth()/2 - 200, 390);
+        addObject(leftArrow, getWidth() / 2 - 200, 390);
 
         rightArrow = new Actor() {};
         rightArrow.setImage("arrow.png");
-        addObject(rightArrow, getWidth()/2 + 200, 390);
+        addObject(rightArrow, getWidth() / 2 + 200, 390);
     }
-    
+
     public void handleEnterKey() {
-        if (Greenfoot.isKeyDown("enter") && MenuScreen.enterChecker == false) {
+        if (Greenfoot.isKeyDown("enter") && !MenuScreen.enterChecker) {
             MenuScreen.enterChecker = true;
             selectCharacter();
-        }
-        else if(!Greenfoot.isKeyDown("enter") && MenuScreen.enterChecker == true)
-        {
+        } else if (!Greenfoot.isKeyDown("enter")) {
             MenuScreen.enterChecker = false;
         }
     }
@@ -125,12 +124,13 @@ public class CharacterSelection extends World {
     public void selectCharacter() {
         menuMusic.stop(); // Stop the menu music
         // Scale the images properly for the game world
-        characters[0].scale(75, 120);
-        characters[1].scale(85, 100);
-        characters[2].scale(80, 67);
+        GreenfootImage[] scaleCharacters = characters;
+        scaleCharacters[0].scale(75, 120);
+        scaleCharacters[1].scale(85, 100);
+        scaleCharacters[2].scale(80, 67);
 
         // Get the selected spaceship image
-        GreenfootImage selectedShip = new GreenfootImage(characters[indexShips]); // Use the selected character image
+        GreenfootImage selectedShip = new GreenfootImage(scaleCharacters[indexShips]); // Use the selected character image
         
         // Pass the scaled image to the Game world
         Greenfoot.setWorld(new Level1(selectedShip, menuScreen)); // Pass menuScreen as a parameter

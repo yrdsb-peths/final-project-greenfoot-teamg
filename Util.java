@@ -1,5 +1,4 @@
-import greenfoot.Greenfoot;
-import greenfoot.World;
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.Random;
 
 public class Util {
@@ -14,6 +13,22 @@ public class Util {
       checker = false;
     }
   }
+
+  public static void PausehandleEscapeKey(World currentScreen, World targetScreen) {
+    // Continuously check for "escape" key press to return to the target screen
+    if (Greenfoot.isKeyDown("escape") && !checker) {
+        checker = true;
+        
+        if (targetScreen instanceof Game) {
+            ((Game) targetScreen).resumeGame();
+        }
+        
+        Greenfoot.setWorld(targetScreen);
+    } else if (!Greenfoot.isKeyDown("escape")) {
+        checker = false;
+    }
+}
+
 
   public static void handleEnterKey(World currentScreen, World targetScreen) {
     checker = true;
