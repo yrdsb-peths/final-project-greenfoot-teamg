@@ -78,7 +78,7 @@ public class Boss3 extends Boss
             int random = Util.randomInt(1);
             if(random == 0)
             {
-                Bullet bullet = new EnemyBullet3();
+                Bullet bullet = new EnemyBullet3(getX(), getY());
                 getWorld().addObject(bullet, getX(), getY());
                 bullet.turn(Util.randomInt(180));
             }
@@ -104,7 +104,7 @@ public class Boss3 extends Boss
             attackCooldown.unfreeze();
             attackTimer.unfreeze();
             TimeStopAnimation timeStop = new TimeStopAnimation();
-            getWorld().addObject(timeStop, 300, 400);
+            getWorld().addObject(timeStop, getWorld().getWidth()/2, getWorld().getHeight()/2);
             isTimeStop = true;
         }
     }
@@ -129,7 +129,7 @@ public class Boss3 extends Boss
             {
                for(int i = 0; i < 3; i++)
                {
-                    Bullet bullet = new EnemyBullet3();
+                    Bullet bullet = new EnemyBullet3(getX(),getY());
                     int randomAngle = Util.randomInt(360);
                     int y = ((Game)getWorld()).player.getY() + (int) Math.round(Math.sin(Math.toRadians(randomAngle)) * 200);
                     int x = ((Game)getWorld()).player.getX() + (int) Math.round(Math.cos(Math.toRadians(randomAngle)) * 200);
@@ -148,7 +148,7 @@ public class Boss3 extends Boss
             if(attackSlower.millisElapsed() > 200)
             {
                 TimeStopAnimation timeResume = new TimeStopAnimation(this);
-                getWorld().addObject(timeResume, 300, 400);
+                getWorld().addObject(timeResume, getWorld().getWidth()/2, getWorld().getHeight()/2);
                 attackSlower.mark();
             }
         }
@@ -192,7 +192,7 @@ public class Boss3 extends Boss
                     }
                     else
                     {
-                        bullet = new EnemyBullet3();
+                        bullet = new EnemyBullet3(getX(),getY());
                     }
                     int y = Util.randomInt(getWorld().getHeight());
                     int x = Util.randomInt(getWorld().getWidth());
@@ -217,7 +217,7 @@ public class Boss3 extends Boss
             if(attackSlower.millisElapsed() > 200)
             {
                 TimeStopAnimation timeResume = new TimeStopAnimation(this);
-                getWorld().addObject(timeResume, 300, 400);
+                getWorld().addObject(timeResume, getWorld().getWidth()/2, getWorld().getHeight()/2);
                 attackSlower.mark();
             }
         }

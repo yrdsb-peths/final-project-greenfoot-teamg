@@ -9,10 +9,12 @@ public class EnemyBullet3 extends Bullet
     int spawnNum = 5; // Number of bullets that split off
     int spawnAngle = 180; // Angle the bullets make when splitting
     
-    public EnemyBullet3() {
+    public EnemyBullet3(int x, int y) {
         GreenfootImage image = new GreenfootImage("EnemyBullet3.png");
         image.scale(20, 20);
         this.setImage(image);
+        inX = x;
+        inY = y;
         moveTimer.mark();
     }
 
@@ -23,12 +25,6 @@ public class EnemyBullet3 extends Bullet
             checkBounds();
             moveBullet();
         }
-    }
-
-    // Initial position when spawned
-    public void setInitial(int x, int y) {
-        inX = x;
-        inY = y;
     }
 
     public void moveBullet() {

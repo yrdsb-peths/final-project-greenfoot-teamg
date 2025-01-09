@@ -26,8 +26,7 @@ public class DoubleEndEnemy extends Enemy
             Game game = (Game) getWorld();
 
             EnemyBullet0 bullet = new EnemyBullet0();
-            EnemyBullet3 backBullet = new EnemyBullet3();
-            backBullet.setInitial(getX(), getY());
+            EnemyBullet3 backBullet = new EnemyBullet3(getX(),getY());
 
 
             game.addObject(bullet, this.getX(), this.getY());

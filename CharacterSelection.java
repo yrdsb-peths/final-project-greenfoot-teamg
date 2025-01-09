@@ -18,7 +18,7 @@ public class CharacterSelection extends World {
      * Sets up the character selection screen.
      */
     public CharacterSelection(MenuScreen menuScreen) {
-        super(500, 700, 1); // Create a new world with specified dimensions
+        super(600, 750, 1); // Create a new world with specified dimensions
         GreenfootImage background = new GreenfootImage("CharacterSelection.jpg");
         background.scale(getWidth(), getHeight()); // Adjust to world size (500x700)
         setBackground(background);
@@ -45,7 +45,7 @@ public class CharacterSelection extends World {
         
         // Initialize the character display with the first character
         characterDisplay = new CharacterDisplay(characters[indexShips]);
-        addObject(characterDisplay, 250, 350); // Position it at the center of the screen
+        addObject(characterDisplay, getWidth()/2, getHeight()/2); // Position it at the center of the screen
         
         // Play the background music
         menuMusic = new GreenfootSound("Menu.mp3");
@@ -68,16 +68,21 @@ public class CharacterSelection extends World {
         GreenfootImage leftArrowImage = new GreenfootImage("arrow.png");
         leftArrowImage.mirrorHorizontally(); // Reflect the image horizontally
         leftArrow.setImage(leftArrowImage);
-        addObject(leftArrow, 90, 360);
+        addObject(leftArrow, getWidth()/2 - 200, 390);
 
         rightArrow = new Actor() {};
         rightArrow.setImage("arrow.png");
-        addObject(rightArrow, 410, 360);
+        addObject(rightArrow, getWidth()/2 + 200, 390);
     }
     
     public void handleEnterKey() {
-        if (Greenfoot.isKeyDown("enter")) {
+        if (Greenfoot.isKeyDown("enter") && MenuScreen.enterChecker == false) {
+            MenuScreen.enterChecker = true;
             selectCharacter();
+        }
+        else if(!Greenfoot.isKeyDown("enter") && MenuScreen.enterChecker == true)
+        {
+            MenuScreen.enterChecker = false;
         }
     }
 

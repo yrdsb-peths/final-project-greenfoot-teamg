@@ -20,11 +20,9 @@ public class SplitEnemy extends Enemy
     
     public void makeBullet() {
         if(timer.millisElapsed() > 1500) {
-            EnemyBullet3 bullet = new EnemyBullet3();
+            EnemyBullet3 bullet = new EnemyBullet3(getX(), getY());
             Game game = (Game) getWorld();
             game.addObject(bullet, getX(), getY());
-            bullet.setInitial(getX(), getY());
-
             // Bullet faces and spawns in front of ship initially
             bullet.setRotation(getRotation() + 90);
             bullet.move(30);

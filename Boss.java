@@ -140,7 +140,7 @@ public abstract class Boss extends Actor implements Freezable
         forceMove = false;
         isBypassBoundries = false;
         attackCooldown.mark();
-        if(getY() > 400)
+        if(getY() > getWorld().getHeight()/2)
         {
             changePosition();
         }

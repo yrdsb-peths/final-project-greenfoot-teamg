@@ -6,9 +6,9 @@ public class HighScore extends World {
   private static final int MAX_SCORES = 5; // Maximum number of scores that are accepted
 
   public HighScore(MenuScreen menuScreen) {
-    super(500, 750, 1);
+    super(600, 750, 1);
     GreenfootImage background = new GreenfootImage("CharacterSelection.jpg");
-    background.scale(getWidth(), getHeight()); // Adjust to world size (500x700)
+    background.scale(getWidth(), getHeight()); // Adjust to world size (600, 750)
     setBackground(background);
 
     this.menuScreen = menuScreen;
@@ -24,8 +24,8 @@ public class HighScore extends World {
 }
 
 private void addLabels() {
-    addObject(new Label("ESC", 30), 40, 700);
-    addObject(new Label("Back", 25), 100, 700);
+    addObject(new Label("ESC", 30), 40, 725);
+    addObject(new Label("Back", 25), 100, 725);
 }
 
   public void displayHighScores() {
@@ -45,9 +45,9 @@ private void addLabels() {
     Label headerName = new Label("Name", Header_FontSize);
     Label headerScore = new Label("Score", Header_FontSize);
 
-    addObject(headerRank, 100, yint);
-    addObject(headerName, 250, yint);
-    addObject(headerScore, 400, yint);
+    addObject(headerRank, 150, yint);
+    addObject(headerName, 300, yint);
+    addObject(headerScore, 450, yint);
 
     yint += 50;
 
@@ -57,9 +57,9 @@ private void addLabels() {
       Label nameLabel = new Label(name.getName(), Label_FontSize);
       Label scoreLabel = new Label(String.valueOf(name.getScores()), Label_FontSize);
 
-      addObject(rankLabel, 100, yint);
-      addObject(nameLabel, 250, yint);
-      addObject(scoreLabel, 400, yint);
+      addObject(rankLabel, 150, yint);
+      addObject(nameLabel, 300, yint);
+      addObject(scoreLabel, 450, yint);
 
       rank++;
       yint += 50;

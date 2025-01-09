@@ -24,7 +24,7 @@ public class EverythingEnemy extends Enemy
         if(timer.millisElapsed() > 1000) {
             Game game = (Game) getWorld();
             Bullet bullet = null;
-            EnemyBullet3 split = new EnemyBullet3();
+            EnemyBullet3 split = new EnemyBullet3(getX(), getY());
 
             if(cycle == 0) {
                 // Linear bullet
@@ -45,7 +45,6 @@ public class EverythingEnemy extends Enemy
 
             if(bullet == null) {
                 game.addObject(split, getX(), getY());
-                split.setInitial(getX(), getY());
                 split.setRotation(90);
                 split.move(30);
             }

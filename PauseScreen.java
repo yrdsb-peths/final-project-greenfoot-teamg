@@ -1,7 +1,7 @@
 import greenfoot.*;
 
 public class PauseScreen extends World {
-  private static final int BUTTON_X = 250;
+  private static final int BUTTON_X = 300;
   private static final int BUTTON_Y = 300;
 
   private Game gameWorld; // Change to Game instead of MenuScreen
@@ -10,7 +10,7 @@ public class PauseScreen extends World {
   private boolean checker;
 
   public PauseScreen(Game gameWorld, MenuScreen menuScreen) {
-    super(500, 750, 1);
+    super(600, 750, 1);
 
     // Initialize worlds
     this.gameWorld = gameWorld;
@@ -27,8 +27,8 @@ public class PauseScreen extends World {
   }
 
   private void addLabels() {
-    addObject(new Label("ESC", 30), 40, 700);
-    addObject(new Label("Back", 25), 100, 700);
+    addObject(new Label("ESC", 30), 40, 725);
+    addObject(new Label("Back", 25), 100, 725);
   }
 
   private void setupButtons() {

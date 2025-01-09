@@ -10,7 +10,7 @@ public class Settings extends World {
     private static boolean isMuted = false;
 
     public Settings(MenuScreen menuScreen) {
-        super(500, 750, 1);
+        super(600, 750, 1);
         this.menuScreen = menuScreen;
         
         // Add VolumeBar image 
@@ -20,7 +20,7 @@ public class Settings extends World {
         
         volumeSlider = new VolumeSlider(volume);
 
-        addObject(volumeSlider, 250, 350);  // Below the label
+        addObject(volumeSlider, getWidth()/2, 350);  // Below the label
 
         soundButton = new Button(this::toggleSound, "");
         soundButton.changeButtonImage("Sound.jpg", 70, 70);
@@ -39,16 +39,16 @@ public class Settings extends World {
     private void addLabels() {
         // Set up volume controls
         volumeLabel = new Label("Volume: " + volume + "%", 30);
-        addObject(volumeLabel, 250, 300);
-        addObject(new Label("ESC", 30), 40, 700);
-        addObject(new Label("Back", 25), 100, 700);
+        addObject(volumeLabel, getWidth()/2, 300);
+        addObject(new Label("ESC", 30), 40, 725);
+        addObject(new Label("Back", 25), 100, 725);
     }
 
     private void setupButtons() {
         // Closing button
         ClosingButton = new Button(this::goMenuScreen, "");
         ClosingButton.changeButtonImage("Home.png", 70, 70);
-        addObject(ClosingButton, 450, 40);
+        addObject(ClosingButton, 550, 40);
     }
 
     public void goMenuScreen() {

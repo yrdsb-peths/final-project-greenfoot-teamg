@@ -1,13 +1,14 @@
 import greenfoot.*;
 
 public class MenuScreen extends World {
+    public static boolean enterChecker = false;
     private Button settingButton;
     private Button leaderboardButton;
     private CharacterSelection characterSelection;
     private boolean checker;
 
     public MenuScreen() {
-        super(500, 750, 1);
+        super(600, 750, 1);
         GreenfootImage background = new GreenfootImage("CharacterSelection.jpg");
         background.scale(getWidth(), getHeight());
         setBackground(background);
@@ -26,12 +27,12 @@ public class MenuScreen extends World {
         // Setting button
         settingButton = new Button(this::goSettingScreen, "");
         settingButton.changeButtonImage("setting.png", 70, 70);
-        addObject(settingButton, 450, 40);
+        addObject(settingButton, 550, 40);
 
         // Leaderboard button
         leaderboardButton = new Button(this::goHighScoresScreen, "");
         leaderboardButton.changeButtonImage("leaderboard.png", 90, 90);
-        addObject(leaderboardButton, 450, 115);
+        addObject(leaderboardButton, 550, 115);
     }
 
     private void addLabels() {
@@ -40,8 +41,13 @@ public class MenuScreen extends World {
     }
 
     private void handleEnterKey() {
-        if (Greenfoot.isKeyDown("enter")) {
+        if(Greenfoot.isKeyDown("enter") && enterChecker == false) {
+            enterChecker = true;
             gocharacterselection();
+        }
+        else if(!Greenfoot.isKeyDown("enter") && enterChecker == true)
+        {
+            enterChecker = false;
         }
     }
 
