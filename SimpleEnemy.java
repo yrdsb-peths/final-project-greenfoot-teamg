@@ -16,6 +16,7 @@ public class SimpleEnemy extends Enemy
 
     public void act()
     {
+        super.act();  // Ensure the enemy moves down
         makeBullet();
     }
 

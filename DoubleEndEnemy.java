@@ -18,6 +18,7 @@ public class DoubleEndEnemy extends Enemy
 
     public void act()
     {
+        super.act();  // Ensure the enemy moves down
         makeBullet();
     }
 

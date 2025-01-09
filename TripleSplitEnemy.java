@@ -16,6 +16,7 @@ public class TripleSplitEnemy extends Enemy
 
     public void act()
     {
+        super.act();  // Ensure the enemy moves down
         makeBullet();
     }
 
