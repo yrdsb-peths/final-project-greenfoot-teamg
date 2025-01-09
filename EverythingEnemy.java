@@ -38,8 +38,6 @@ public class EverythingEnemy extends Enemy
                 // Ricochet bullet
                 bullet = new EnemyBullet2();
             }
-
-            System.out.println(cycle);
             cycle += 1;
             cycle %= 4;
 
