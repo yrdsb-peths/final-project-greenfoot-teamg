@@ -58,7 +58,7 @@ public class CharacterSelection extends World {
         handleEnterKey();
     }
     
-        public void addLabels() {
+    public void addLabels() {
         addObject(new Label("Press Enter to Select character", 42), getWidth() / 2, 100);
     }
     
@@ -78,7 +78,7 @@ public class CharacterSelection extends World {
     public void handleEnterKey() {
         if (Greenfoot.isKeyDown("enter")) {
             selectCharacter();
-          }
+        }
     }
 
     public void handleNavigateKey() {
@@ -113,8 +113,8 @@ public class CharacterSelection extends World {
             updateCharacterImage();
         }
     }
-    
-        /**
+
+    /**
      * Handle character selection and return to the game screen.
      */
     public void selectCharacter() {
@@ -128,7 +128,7 @@ public class CharacterSelection extends World {
         GreenfootImage selectedShip = new GreenfootImage(characters[indexShips]); // Use the selected character image
         
         // Pass the scaled image to the Game world
-        Greenfoot.setWorld(new Level1(selectedShip));
+        Greenfoot.setWorld(new Level1(selectedShip, menuScreen)); // Pass menuScreen as a parameter
     }
 
     /**
