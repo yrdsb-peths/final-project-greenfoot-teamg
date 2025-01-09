@@ -18,7 +18,11 @@ public class EnemyBullet3 extends Bullet
 
     public void act()
     {
-        super.act();
+        if(((Game)getWorld()).isFreeze == false)
+        {
+            checkBounds();
+            moveBullet();
+        }
     }
 
     // Initial position when spawned
@@ -59,7 +63,7 @@ public class EnemyBullet3 extends Bullet
             game.addObject(bullet, getX(), getY());
 
             bullet.setLocation(getX(), getY());
-            bullet.setRotation((int) Math.round(iRotate + (spawnAngle / spawnNum) * i)); // Rotate more for each bullet
+            bullet.setRotation((int) Math.round(iRotate + (spawnAngle / (spawnNum - 1)) * i)); // Rotate more for each bullet
         }
 
         game.removeObject(this);

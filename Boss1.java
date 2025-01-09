@@ -8,7 +8,7 @@ public class Boss1 extends Boss
     
     public Boss1()
     {
-        super(200);
+        super(150);
         GreenfootImage image = new GreenfootImage("BossSpaceShip0.png");
         image.scale(100,105);
         setImage(image);
@@ -26,15 +26,6 @@ public class Boss1 extends Boss
                 curveCooldown.mark();
             }
         }
-        // if(((Game)getWorld()).isFreeze == true && ((Game)getWorld()).freezeTimer.millisElapsed() > 5000)
-        // {
-            // ((Game)getWorld()).resumeGame();
-            // test1.mark();
-        // }
-        // if(test1.millisElapsed() > 5000 && ((Game)getWorld()).isFreeze == false)
-        // {
-            // ((Game)getWorld()).freezeGame();
-        // }
     }
     
     public void freeze()
@@ -76,11 +67,11 @@ public class Boss1 extends Boss
     public void attack2(){
         if(attackSlower.millisElapsed() > 100)
         {
-            for(int i = 0; i < 8; i++)
+            for(int i = 0; i < 18; i++)
             {
                 Bullet bullet = new EnemyBullet0();
                 getWorld().addObject(bullet, getX(), getY());
-                bullet.turn(i * 45 + attackTimer.millisElapsed()/10);
+                bullet.turn(i * (360/18) + Util.randomInt(360));
             }
             attackSlower.mark();
         }

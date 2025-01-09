@@ -4,18 +4,16 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 public class EnemyBullet2 extends Bullet
 {
-    int maxBounces = 2; // Times bullet can bounce
-    int bounce = 0;
-
-    int maxX, maxY;
+    SimpleTimer bounceTimer = new SimpleTimer();
+    int maxX;
     int minX = 0;
-    int minY = 0;
 
     public EnemyBullet2() {
         GreenfootImage image = new GreenfootImage("EnemyBullet2.png");
         image.scale(10, 10);
         this.setImage(image);
         moveTimer.mark();
+        bounceTimer.mark();
     }
 
     public void act()
@@ -23,12 +21,22 @@ public class EnemyBullet2 extends Bullet
         if(((Game)getWorld()).isFreeze == false)
         {
             moveBullet();
-            if(bounce >= maxBounces) { // Delete if touching edge and cannot bounce
-                checkBounds();
-            }
+            checkBounds();
         }
     }
-
+    
+    public void freeze()
+    {
+        super.freeze();
+        bounceTimer.freeze();
+    }
+    
+    public void unfreeze()
+    {
+        super.unfreeze();
+        bounceTimer.unfreeze();
+    }
+    
     public void moveBullet() {
         if(moveTimer.millisElapsed() > 20) {
             checkBounce();
@@ -38,24 +46,31 @@ public class EnemyBullet2 extends Bullet
     }
 
     public void checkBounce() {
-        if(bounce < maxBounces) {
+        if(bounceTimer.millisElapsed() <= 5000) {
             Game game = (Game) getWorld(); // Game edges
             maxX = game.getWidth();
-            maxY = game.getHeight();
-
             int rotation = getRotation();
     
             if(getX() <= minX + 1 || getX() >= maxX - 1) { // set angle if hits either sides
                 int ref = 180 - rotation;
                 setRotation(ref);
-
-                bounce += 1;
             }
-            else if(getY() <= minY + 1|| getY() >= maxY - 1) { // set angle if hits top or bottom
-                int ref = 360 - rotation;
-                setRotation(ref);
-
-                bounce += 1;
+        }
+    }
+    
+    public void checkBounds() {
+        Game game = (Game) getWorld();
+        if(bounceTimer.millisElapsed() > 5000)
+        {
+            if(getX() <= 0 || getY() <= 0 || getX() >= game.getWidth() - 1 || getY() >= game.getHeight() - 1) {
+                game.removeObject(this);
+            }
+        }
+        else
+        {
+            if(getY() <= 0 || getY() >= game.getHeight() - 1)
+            {
+               game.removeObject(this); 
             }
         }
     }

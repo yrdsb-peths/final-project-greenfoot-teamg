@@ -3,12 +3,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Represents a playable character in the game with movement functionality.
  */
-public class Character extends Actor {
+public class Character extends Actor implements Freezable{
     private int speed = 6; // Normal movement speed
-    private int shootDelay = 10; // Delay between consecutive shots (in frames)
-    private int shootCooldown = 0; // Countdown for the next allowed shot
     private TransparentBox hitbox; // Reference to the associated TransparentBox
-
+    SimpleTimer shootCooldown = new SimpleTimer();
+    
     /**
      * Constructor to set the character's initial image and create a hitbox.
      */
@@ -30,8 +29,11 @@ public class Character extends Actor {
      * Called on every frame; handles movement and shooting.
      */
     public void act() {
-        handleMovement();
-        handleShooting();
+        if(((Game)getWorld()).isFreeze == false)
+        {
+            handleMovement();
+            handleShooting();
+        }
     }
 
     /**
@@ -64,14 +66,10 @@ public class Character extends Actor {
      * Handle shooting when the space bar is held down.
      */
     private void handleShooting() {
-        if (shootCooldown > 0) {
-            shootCooldown--; // Decrease the cooldown timer
-        }
-
         // Shoot when space is pressed and cooldown is 0
-        if (Greenfoot.isKeyDown("space") && shootCooldown == 0) {
+        if (Greenfoot.isKeyDown("space") && shootCooldown.millisElapsed() > 200) {
             shoot();
-            shootCooldown = shootDelay; // Reset cooldown
+            shootCooldown.mark();
         }
     }
 
@@ -116,5 +114,16 @@ public class Character extends Actor {
             return x > 0 && x < world.getWidth() && y > 0 && y < world.getHeight();
         }
         return false;
+    }
+    
+    public void freeze()
+    {
+        shootCooldown.freeze();
+    }
+    
+    
+    public void unfreeze()
+    {
+        shootCooldown.unfreeze();
     }
 }

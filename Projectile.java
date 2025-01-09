@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot, and MouseInfo)
 
 public class Projectile extends Actor {
-    private int speed = 10; // Speed of the projectile
+    private int speed = 15; // Speed of the projectile
 
     /**
      * This method is called every frame to handle the projectile's behavior.
@@ -10,9 +10,11 @@ public class Projectile extends Actor {
         if (getWorld() == null) {
             return; // Ensure that the projectile is still in the world before doing anything
         }
-
-        moveProjectile();
-        checkForCollision();
+        if(((Game)getWorld()).isFreeze == false)
+        {
+            moveProjectile();
+            checkForCollision();
+        }
     }
 
     /**

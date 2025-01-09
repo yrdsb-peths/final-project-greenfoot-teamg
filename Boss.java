@@ -2,7 +2,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 public abstract class Boss extends Actor implements Freezable
 {
-    SimpleTimer moveTimer = new SimpleTimer();
+    SimpleTimer moveCooldown = new SimpleTimer();
     SimpleTimer attackCooldown = new SimpleTimer();
     SimpleTimer attackTimer = new SimpleTimer();
     SimpleTimer attackSlower = new SimpleTimer();
@@ -19,7 +19,7 @@ public abstract class Boss extends Actor implements Freezable
     
     public Boss(int hp)
     {
-        moveTimer.mark();
+        moveCooldown.mark();
         attackCooldown.mark();
         this.hp = hp;
         turn(90);
@@ -27,7 +27,7 @@ public abstract class Boss extends Actor implements Freezable
     
     public void act()
     {
-        if(moveTimer.millisElapsed() > 10000 && !isAttacking)
+        if(moveCooldown.millisElapsed() > 10000 && !isAttacking)
         {
             changePosition();
         }
@@ -47,7 +47,7 @@ public abstract class Boss extends Actor implements Freezable
     
     public void freeze()
     {
-        moveTimer.freeze();
+        moveCooldown.freeze();
         attackCooldown.freeze();
         attackTimer.freeze();
         attackSlower.freeze();
@@ -55,7 +55,7 @@ public abstract class Boss extends Actor implements Freezable
     
     public void unfreeze()
     {
-        moveTimer.unfreeze();
+        moveCooldown.unfreeze();
         attackCooldown.unfreeze();
         attackTimer.unfreeze();
         attackSlower.unfreeze();
@@ -100,22 +100,29 @@ public abstract class Boss extends Actor implements Freezable
     public void changePosition(){
         if(!isBypassBoundries)
         {
-            x = Util.randomInt(501) + 50;
-            y = Util.randomInt(301) + 50;
+            x = Util.randomInt(440) + 80;
+            y = Util.randomInt(240) + 80;
         }
         else
         {
-            x = Util.randomInt(501) + 50;
-            y = Util.randomInt(701) + 50;
+            x = Util.randomInt(440) + 80;
+            y = Util.randomInt(640) + 80;
         }
-        moveTimer.mark();
+        moveCooldown.mark();
     }
     
     public void moveToSpot(){
         if(!isAttacking || forceMove){
             int xDist = x - getX();
             int yDist = y - getY();
-            this.setLocation(getX() + xDist/10, getY() + yDist/10);
+            if(!isBypassBoundries)
+            {
+                this.setLocation(getX() + xDist/10, getY() + yDist/10);
+            }
+            else
+            {
+                this.setLocation(getX() + xDist/30, getY() + yDist/30);
+            }
         }
     }
     
@@ -131,11 +138,12 @@ public abstract class Boss extends Actor implements Freezable
         isAttacking = false;
         isSetup = false;
         forceMove = false;
+        isBypassBoundries = false;
+        attackCooldown.mark();
         if(getY() > 400)
         {
             changePosition();
         }
-        attackCooldown.mark();
     }
     
     public abstract void attack1();
