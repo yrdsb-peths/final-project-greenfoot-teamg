@@ -13,7 +13,7 @@ public class TransparentBox extends Actor {
         this.character = character;
         // Ensure you have the "TransparentBox.png" image and it is scaled appropriately
         GreenfootImage image = new GreenfootImage("TransparentBox.png");
-        image.scale(30, 30); // Example scaling to make it smaller
+        image.scale(10, 10); // Example scaling to make it smaller
         setImage(image);
     }
 
@@ -35,9 +35,7 @@ public class TransparentBox extends Actor {
      */
     private void checkForBulletCollision() {
         // Detect collision with any Bullet subclass (e.g., EnemyBullet0, EnemyBullet1, etc.)
-        Bullet bullet = (Bullet) getOneIntersectingObject(Bullet.class); 
-        if (bullet != null) {
-            getWorld().removeObject(bullet); // Remove the bullet
+        if (isTouching(Bullet.class) || isTouching(LaserBeam.class)) {
             character.die(); // Trigger the character's death
         }
     }

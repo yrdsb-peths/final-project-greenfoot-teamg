@@ -11,7 +11,7 @@ public class Boss2 extends Boss
 {
     public Boss2()
     {
-        super(400);
+        super(200);
         GreenfootImage image = new GreenfootImage("BossSpaceShip1.png");
         image.scale(120,110);
         setImage(image);
@@ -19,12 +19,15 @@ public class Boss2 extends Boss
     
     public void act()
     {
-        super.act();
-        if(!isAttacking)
+        if(((Game)getWorld()).isFreeze == false)
         {
-            for(Bullet bullet: getWorld().getObjects(Bullet.class)) { // Get all bullets touching 
-                World world = (World) getWorld();
-                world.removeObject(bullet);
+            super.act();
+            if(!isAttacking)
+            {
+                for(Bullet bullet: getIntersectingObjects(Bullet.class)) { // Get all bullets touching 
+                    World world = (World) getWorld();
+                    world.removeObject(bullet);
+                }
             }
         }
     }
@@ -50,14 +53,14 @@ public class Boss2 extends Boss
                 bullet.isReturning = true;
             }
         }
-        else if(attackTimer.millisElapsed() > 10000 && attackTimer.millisElapsed() < 10500)
+        else if(attackTimer.millisElapsed() > 10000 && attackTimer.millisElapsed() <= 10500)
         {
-            for(Bullet bullet: getWorld().getObjects(Bullet.class)) { // Get all bullets touching 
+            for(Bullet bullet: getIntersectingObjects(Bullet.class)) { // Get all bullets touching 
                 World world = (World) getWorld();
                 world.removeObject(bullet);
             }
         }
-        else if(attackTimer.millisElapsed() >10500 && attackTimer.millisElapsed() < 15000)
+        else if(attackTimer.millisElapsed() > 10500 && attackTimer.millisElapsed() <= 15000)
         {
             if(!isSetup)
             {
@@ -119,28 +122,21 @@ public class Boss2 extends Boss
     
     public void attack2Setup()
     {
-        x = 300;
-        y = 150;
-        forceMove = true;
-        if(getX() < x + 10 && getX() > x - 10 && getY() < y + 10 && getY() > y - 10)
+        int random = Util.randomInt(1);
+        for(int i = 0; i < 4; i++)
         {
-            forceMove = false;
-            int random = Util.randomInt(1);
-            for(int i = 0; i < 4; i++)
+            if(random == 0)
             {
-                if(random == 0)
-                {
-                    LaserBeam laser = new LaserBeam(-1, i*90, -1, 10);
-                    getWorld().addObject(laser, getX(), getY());
-                }
-                else
-                {
-                    LaserBeam laser = new LaserBeam(-1, i*90, -1, 10);
-                    getWorld().addObject(laser, getX(), getY());
-                }
+                LaserBeam laser = new LaserBeam(-1, i*90, -1, 10);
+                getWorld().addObject(laser, getX(), getY());
             }
-            isSetup = true;
+            else
+            {
+                LaserBeam laser = new LaserBeam(-1, i*90, -1, 10);
+                getWorld().addObject(laser, getX(), getY());
+            }
         }
+        isSetup = true;
     }
     
     public void attack3(){
@@ -150,10 +146,10 @@ public class Boss2 extends Boss
             isBypassBoundries = true;
             isSetup = true;
         }
-        if(attackSlower.millisElapsed() > 500)
+        if(attackSlower.millisElapsed() > 1000 && attackTimer.millisElapsed() <= 10000)
         {
             changePosition();
-            for(int i = 0; i < 4; i++)
+            for(int i = 0; i < 8; i++)
             {
                 Bullet bullet = new EnemyBullet5(this);
                 getWorld().addObject(bullet, getX(), getY());
@@ -161,10 +157,8 @@ public class Boss2 extends Boss
             }
             attackSlower.mark();
         }
-        if(attackTimer.millisElapsed() > 10000)
+        if(attackTimer.millisElapsed() > 12000)
         {
-            forceMove = false;
-            isBypassBoundries = false;
             endAttack();
         }
     }

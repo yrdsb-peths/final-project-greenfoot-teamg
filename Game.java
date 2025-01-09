@@ -7,7 +7,6 @@ import java.util.List;
 public abstract class Game extends World {
     protected Character player;
     public boolean isFreeze = false;
-    public SimpleTimer freezeTimer = new SimpleTimer();
     
     public Game(int width, int height, int cellSize, GreenfootImage selectedImage) {
         super(width, height, cellSize);
@@ -51,7 +50,6 @@ public abstract class Game extends World {
         for(Freezable object: getObjects(Freezable.class)) { // Get all Freezable actors 
             object.freeze();
         }
-        freezeTimer.mark();
     }
     
     public void resumeGame()
