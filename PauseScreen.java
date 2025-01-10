@@ -7,8 +7,6 @@ public class PauseScreen extends World {
     private Game gameWorld;
     private MenuScreen menuScreen;
 
-    private boolean checker;
-    private boolean enterPressed;
     private boolean fromSettings;
 
     public PauseScreen(Game gameWorld, MenuScreen menuScreen) {
@@ -16,9 +14,7 @@ public class PauseScreen extends World {
 
         this.gameWorld = gameWorld;
         this.menuScreen = menuScreen;
-
-        checker = true;
-        enterPressed = false;
+        
         fromSettings = false; // Initialize the fromSettings flag
 
         setupButtons();
