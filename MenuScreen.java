@@ -17,8 +17,11 @@ public class MenuScreen extends World {
         
         setupButtons();
         addLabels();
+
+        // Initialize characterSelection
+        characterSelection = new CharacterSelection(this);
     }
-    
+
     public void act() {
         handleEnterKey();
     }
@@ -52,11 +55,11 @@ public class MenuScreen extends World {
     }
 
     private void goSettingScreen() {
-        Greenfoot.setWorld(new Settings(this));
+        Greenfoot.setWorld(new Settings(this, null)); // Pass the MenuScreen instance and null for PauseScreen
     }
 
     private void gocharacterselection() {
-        Greenfoot.setWorld(new CharacterSelection(this));
+        Greenfoot.setWorld(characterSelection);
     }
 
     private void goHighScoresScreen() {
