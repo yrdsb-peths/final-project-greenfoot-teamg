@@ -35,8 +35,19 @@ public class TransparentBox extends Actor {
      */
     private void checkForBulletCollision() {
         // Detect collision with any Bullet subclass (e.g., EnemyBullet0, EnemyBullet1, etc.)
-        if (isTouching(Bullet.class) || isTouching(LaserBeam.class)) {
+        if (isTouching(Bullet.class)){
             character.die(); // Trigger the character's death
+        }
+        
+        if(isTouching(LaserBeam.class))
+        {
+            LaserBeam laser = (LaserBeam) getOneIntersectingObject(LaserBeam.class);
+            int laserRotation = laser.getRotation();
+            boolean isSameSide = getY() >= laser.getY() && laserRotation <= 180 || getY() <= laser.getY() && laserRotation <= 360 && laserRotation >= 180;
+            if(isSameSide)
+            {
+                character.die();
+            }
         }
     }
 }

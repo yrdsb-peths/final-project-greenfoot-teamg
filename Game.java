@@ -8,11 +8,11 @@ public abstract class Game extends World {
     protected Character player;
     public boolean isFreeze = false;
     
-    public Game(int width, int height, int cellSize, GreenfootImage selectedImage) {
+    public Game(int width, int height, int cellSize, GreenfootImage selectedImage, int whichCharacter) {
         super(width, height, cellSize);
 
         // Create and add the player's character
-        player = new Character(selectedImage);
+        player = new Character(selectedImage, whichCharacter);
         addObject(player, getWidth() / 2, getHeight() - 50);
 
         // Setup common elements

@@ -26,8 +26,7 @@ public class CircleEnemy extends Enemy
 
             // Rotates each bullet so they shoot out in a circlular pattern
             bullet.setRotation(rotate);
-            bullet.move(30);
-
+            
             rotate += 30;
             timer.mark();
         }

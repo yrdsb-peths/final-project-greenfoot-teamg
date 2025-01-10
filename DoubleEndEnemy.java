@@ -25,7 +25,7 @@ public class DoubleEndEnemy extends Enemy
         if(timer.millisElapsed() > 500) {
             Game game = (Game) getWorld();
 
-            EnemyBullet0 bullet = new EnemyBullet0();
+            EnemyBullet1 bullet = new EnemyBullet1();
             EnemyBullet3 backBullet = new EnemyBullet3(getX(),getY());
 
 
@@ -35,9 +35,6 @@ public class DoubleEndEnemy extends Enemy
 
             bullet.setRotation(rotate + 90);
             backBullet.setRotation(270 + rotate);
-
-            bullet.move(30);
-            backBullet.move(30);
 
             rotate += 30;
             timer.mark();

@@ -11,8 +11,8 @@ public class Level2 extends Game {
      * Constructor for Level2.
      * @param selectedImage The image for the player's character.
      */
-    public Level2(GreenfootImage selectedImage, MenuScreen menuScreen) {
-        super(600, 750, 1, selectedImage);
+    public Level2(GreenfootImage selectedImage, MenuScreen menuScreen, int whichCharacter) {
+        super(600, 750, 1, selectedImage, whichCharacter);
         this.menuScreen = menuScreen; // Initialize menuScreen
         pauseScreen = new PauseScreen(this, menuScreen); // Initialize the pause screen
     }

@@ -21,7 +21,7 @@ public class EverythingEnemy extends Enemy
     }
 
     public void makeBullet() {
-        if(timer.millisElapsed() > 1000) {
+        if(timer.millisElapsed() > 500) {
             Game game = (Game) getWorld();
             Bullet bullet = null;
             EnemyBullet3 split = new EnemyBullet3(getX(), getY());
@@ -43,13 +43,11 @@ public class EverythingEnemy extends Enemy
 
             if(bullet == null) {
                 game.addObject(split, getX(), getY());
-                split.setRotation(90);
-                split.move(30);
+                split.turn(Util.randomInt(180));
             }
             else {
                 game.addObject(bullet, getX(), getY());
-                bullet.setRotation(90);
-                bullet.move(30);
+                bullet.turn(Util.randomInt(180));
             }
 
             timer.mark();

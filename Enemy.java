@@ -3,7 +3,7 @@ import greenfoot.*;  // Importing the Greenfoot library
 public class Enemy extends Actor
 {
     // Health variable
-    private int health = 10;
+    private int health = 15;
 
     // This method decreases the health of the enemy
     public void decreaseHealth(int damage)

@@ -39,12 +39,13 @@ public class BigEnemy extends Enemy
 
             // Middle ricochet bullet
             if(ricochet == true) {
-                Bullet ricochetBullet = new EnemyBullet2();
-                game.addObject(ricochetBullet, getX(), getY());
-    
-                // Bullet faces and spawns in front of ship initially
-                ricochetBullet.setRotation(90);
-                ricochetBullet.move(30);
+                for(int i = 0; i < 2; i++)
+                {
+                    Bullet ricochetBullet = new EnemyBullet2();
+                    game.addObject(ricochetBullet, getX(), getY());
+                    // Bullet faces and spawns in front of ship initially
+                    ricochetBullet.turn(Util.randomInt(90) + 90 * i);
+                }
     
                 ricochet = false;
             }
