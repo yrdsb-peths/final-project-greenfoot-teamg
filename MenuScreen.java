@@ -4,6 +4,7 @@ public class MenuScreen extends World {
     public static boolean enterChecker = false;
     private Button settingButton;
     private Button leaderboardButton;
+    private Button instructionsButton;
     private CharacterSelection characterSelection;
     private boolean checker;
 
@@ -36,6 +37,10 @@ public class MenuScreen extends World {
         leaderboardButton = new Button(this::goHighScoresScreen, "");
         leaderboardButton.changeButtonImage("leaderboard.png", 90, 90);
         addObject(leaderboardButton, 550, 115);
+
+        instructionsButton = new Button(this::goInstructionsScreen, "");
+        instructionsButton.changeButtonImage("questionMark.png", 95, 95);
+        addObject(instructionsButton, 550, 190);
     }
 
     private void addLabels() {
@@ -52,6 +57,10 @@ public class MenuScreen extends World {
         {
             enterChecker = false;
         }
+    }
+
+    private void goInstructionsScreen() {
+        Greenfoot.setWorld(new InstructionScreen(this));
     }
 
     private void goSettingScreen() {
