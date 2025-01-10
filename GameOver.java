@@ -1,21 +1,165 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.*;
 
 /**
- * Write a description of class GameOver here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * GameOver class represents the game over screen that appears when the player dies.
+ * It handles displaying the final score, getting player name input, and managing high scores.
  */
-public class GameOver extends World
-{
+public class GameOver extends World {
+    // Maximum number of high scores to keep
+    private static final int MAX_SCORES = 5;
+    
+    // Static ArrayList to store player names and scores across game sessions
+    public static ArrayList<NameScore> UserNames = new ArrayList<>();
+    
+    // References to other game worlds
+    private MenuScreen menuScreen;
+    private HighScore highScore;
+    
+    // UI and game state variables
+    private String ending = "GameOver";         // Text displayed at game over
+    private String userName = "";               // Stores user's input name
+    private Label input;                        // Label to display user's input
+    private boolean inputAccepted = true;       // Flag to control input acceptance
+    private int finalScore;                     // Player's final score
+    
+    // Sound effects for game over screen
+    GreenfootSound GameOverMusic;              // Background music
+    GreenfootSound YouLose;                    // Sound played when entering game over screen
+
+    public GameOver() {
+        super(600, 700, 1);
+        this.finalScore = finalScore;
+        menuScreen = new MenuScreen();
+        highScore = new HighScore(menuScreen);
+        setBackground(new GreenfootImage("Background.jpg"));
+        
+        DisplayGameOver();
+        
+        // Initialize and play sound effects
+        GameOverMusic = new GreenfootSound("GameOverMusic.mp3");
+        YouLose = new GreenfootSound("YouLose.mp3");
+        GameOverMusic.playLoop();
+        YouLose.play();
+    }
+
+    public void act() {
+        requestName();
+    }
 
     /**
-     * Constructor for objects of class GameOver.
-     * 
+     * Sets up the visual elements of the game over screen.
+     * Displays final score and prompts for name input.
      */
-    public GameOver()
-    {    
-        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(600, 400, 1); 
+    public void DisplayGameOver() {
+        Label end = new Label(ending, 60);
+        addObject(end, 250, 70);
+        
+        Label scoreDisplay = new Label("Final Score: " + finalScore, 35);
+        addObject(scoreDisplay, 250, 120);
+        
+        Label name = new Label("Enter your name: ", 40);
+        addObject(name, 250, 200);
+        
+        Label enter = new Label("Press Enter to Continue", 35);
+        addObject(enter, 250, 600);
+        
+        input = new Label("", 40);
+        addObject(input, 250, 250);
     }
+
+    /**
+     * Handles player name input.
+     * Processes keyboard input for name entry and manages input validation.
+     * When enter is pressed, saves the score and returns to menu.
+     */
+    public void requestName() {
+        if (!inputAccepted) return;
+
+        String key = Greenfoot.getKey();
+        if (key != null) {
+            if (key.equals("enter") && !userName.trim().isEmpty()) {
+                // Create new score entry and add to high scores
+                NameScore playerInfo = new NameScore(userName, finalScore);
+                addHighScore(playerInfo);
+                goMenuScreen();
+                
+                inputAccepted = false;
+            } else if (key.equals("backspace")) {
+                // Handle backspace for name input
+                if (userName.length() > 0) {
+                    userName = userName.substring(0, userName.length() - 1);
+                }
+            } else if (key.length() == 1 && userName.length() < 20) {  // 20 character limit
+                // Handle regular character input, with shift key support
+                if (Greenfoot.isKeyDown("shift")) {
+                    key = key.toUpperCase();
+                }
+                userName += key;
+            }
+            input.setValue(userName);
+        }
+    }
+
+    /**
+     * Adds a new high score to the list and maintains the maximum number of scores.
+     * Sorts scores in descending order and keeps only the top MAX_SCORES entries.
+     */
+    private void addHighScore(NameScore newScore) {
+        UserNames.add(newScore);
+        Collections.sort(UserNames);  // Sort in descending order
+        
+        // Keep only top scores based on MAX_SCORES
+        if (UserNames.size() > MAX_SCORES) {
+            UserNames = new ArrayList<>(UserNames.subList(0, MAX_SCORES));
+        }
+    }
+
+    /**
+     * Transitions to the menu screen and handles music cleanup.
+     */
+    public void goMenuScreen() {
+        menuScreen.started();
+        GameOverMusic.stop();
+        YouLose.stop();
+        Greenfoot.setWorld(menuScreen);
+    }
+
+    /**
+     * Transitions to the high score screen.
+     */
+    public void goHighScoreScreen() {
+        Greenfoot.setWorld(highScore);
+    }
+    
+    /**
+     * Called when the world is started/resumed.
+     * Ensures background music continues playing.
+     */
+    public void started() {
+        GameOverMusic.playLoop();
+    }
+    
+    /**
+     * Called when the world is stopped/paused.
+     * Pauses all sound effects.
+     */
+    public void stopped() {
+        YouLose.pause();
+        GameOverMusic.pause();
+    }
+
+
+    
+public boolean array6(int[] nums, int index) {
+    if (nums.length == 0) {
+      return false;
+    } else if (nums[index] == 6){
+      return true;
+    } else {
+        return array6(nums, index + 1);
+    }
+  }
 }
+
+  
