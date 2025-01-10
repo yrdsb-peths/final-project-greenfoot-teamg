@@ -19,8 +19,8 @@ public class Level3 extends Game {
      * Constructor for Level3.
      * @param selectedImage The image for the player's character.
      */
-    public Level3(GreenfootImage selectedImage, MenuScreen menuScreen) {
-        super(600, 750, 1, selectedImage);
+    public Level3(GreenfootImage selectedImage, MenuScreen menuScreen, int whichCharacter) {
+        super(600, 750, 1, selectedImage, whichCharacter);
         this.menuScreen = menuScreen; // Initialize menuScreen
         pauseScreen = new PauseScreen(this, menuScreen); // Initialize the pause screen
         spawnTimer = new SimpleTimer(); // Initialize the timer

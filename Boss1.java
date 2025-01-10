@@ -13,7 +13,6 @@ public class Boss1 extends Boss
         image.scale(100,105);
         setImage(image);
         curveCooldown.mark();
-        hp = 1;  // Set boss health to 30
     }
     
     public void act()
