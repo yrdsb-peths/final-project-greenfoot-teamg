@@ -9,11 +9,11 @@ public abstract class Game extends World {
     public boolean isFreeze = false;
     protected SimpleTimer waveTimer; // Add waveTimer as a shared resource for all levels
 
-    public Game(int width, int height, int cellSize, GreenfootImage selectedImage) {
+    public Game(int width, int height, int cellSize, GreenfootImage selectedImage, int whichCharacter) {
         super(width, height, cellSize);
 
         // Create and add the player's character
-        player = new Character(selectedImage);
+        player = new Character(selectedImage, whichCharacter);
         addObject(player, getWidth() / 2, getHeight() - 50);
 
         // Initialize the wave timer

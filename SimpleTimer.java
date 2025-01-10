@@ -34,7 +34,7 @@
 public class SimpleTimer
 {
     private long lastMark = System.currentTimeMillis();
-    private long freezeMark = 0;
+    long freezeMark = 0;
     
     /**
      * Marks the current time.  You can then in future call

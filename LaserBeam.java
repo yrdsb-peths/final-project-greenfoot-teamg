@@ -53,7 +53,10 @@ public class LaserBeam extends Actor
         if(growTimer.millisElapsed() < 1000)
         {
             GreenfootImage image = new GreenfootImage("LaserBeam.png");
-            image.scale(2 * growTimer.millisElapsed(),thickness);
+            if(growTimer.millisElapsed() != 0)
+            {
+                image.scale(2 * growTimer.millisElapsed(),thickness);
+            }
             setImage(image);
         }
     }

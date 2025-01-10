@@ -14,7 +14,7 @@ public abstract class Boss extends Enemy implements Freezable
     boolean isBypassBoundries = false;
     int x = 300;
     int y = 100;
-    protected int hp;
+    int health;
     int attackNumber;
     
     public Boss(int health)
@@ -43,6 +43,21 @@ public abstract class Boss extends Enemy implements Freezable
         {
             resumeAttack();
         }
+    }
+    
+    // This method decreases the health of the boss
+    public void decreaseHealth(int damage)
+    {
+        health -= damage;  // Subtract the damage value from the health
+        if (health <= 0) {
+            die();  // Call the die method when health reaches 0
+        }
+    }
+
+    // Method for handling the boss' death (removal from the world)
+    private void die()
+    {
+        getWorld().removeObject(this);  // Remove the boss from the world
     }
     
     public void freeze()

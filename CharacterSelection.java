@@ -126,16 +126,16 @@ public class CharacterSelection extends World {
         menuMusic.stop(); // Stop the menu music
         // Scale the images properly for the game world
         GreenfootImage[] scaleCharacters = characters;
-        scaleCharacters[0].scale(75, 120);
-        scaleCharacters[1].scale(85, 100);
-        scaleCharacters[2].scale(80, 67);
+        characters[0].scale(75, 120);
+        characters[1].scale(85, 100);
+        characters[2].scale(75, 67);
 
         // Get the selected spaceship image
         GreenfootImage selectedShip = new GreenfootImage(scaleCharacters[indexShips]); // Use the selected character
                                                                                        // image
 
         // Pass the scaled image to the Game world
-        Greenfoot.setWorld(new Level3(selectedShip, menuScreen)); // Pass menuScreen as a parameter
+        Greenfoot.setWorld(new Level3(selectedShip, menuScreen, indexShips)); // Pass menuScreen as a parameter
     }
 
     /**
