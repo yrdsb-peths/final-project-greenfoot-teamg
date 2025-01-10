@@ -33,7 +33,6 @@ public abstract class Boss extends Enemy implements Freezable
             changePosition();
         }
         moveToSpot();
-        checkHp();
         if(attackCooldown.millisElapsed() > 4000 && isAttacking == false)
         {
             isAttacking = true;
@@ -124,13 +123,6 @@ public abstract class Boss extends Enemy implements Freezable
             {
                 this.setLocation(getX() + xDist/30, getY() + yDist/30);
             }
-        }
-    }
-    
-    public void checkHp(){
-        if(hp <= 0){
-            World world = (World) getWorld();
-            world.removeObject(this);
         }
     }
     
