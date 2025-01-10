@@ -21,7 +21,7 @@ public class SimpleEnemy extends Enemy
     }
 
     public void makeBullet() {
-        if(timer.millisElapsed() > 300) {
+        if(timer.millisElapsed() > 700) {
             EnemyBullet0 bullet = new EnemyBullet0();
             Game game = (Game) getWorld();
             game.addObject(bullet, this.getX(), this.getY());

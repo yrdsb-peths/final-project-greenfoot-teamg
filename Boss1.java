@@ -8,11 +8,12 @@ public class Boss1 extends Boss
     
     public Boss1()
     {
-        super(150);
+        super(150);  // Initial health
         GreenfootImage image = new GreenfootImage("BossSpaceShip0.png");
         image.scale(100,105);
         setImage(image);
         curveCooldown.mark();
+        hp = 1;  // Set boss health to 30
     }
     
     public void act()
@@ -25,6 +26,17 @@ public class Boss1 extends Boss
                 randomCurveBall();
                 curveCooldown.mark();
             }
+        }
+        checkHealth();  // Check if the boss's health is zero
+    }
+    
+    // Method to check if the boss's health is zero
+    public void checkHealth()
+    {
+        if(hp <= 0)
+        {
+            World world = getWorld();
+            world.removeObject(this);  // Remove the boss from the world
         }
     }
     
@@ -82,7 +94,7 @@ public class Boss1 extends Boss
     }
     
     public void attack3(){
-        //Shoot a bunch of normal bullets, at the end turn into curve bullets and circle around
+        // Shoot a bunch of normal bullets, at the end turn into curve bullets and circle around
         if(attackSlower.millisElapsed() > 100)
         {
             if(attackTimer.millisElapsed() <= 5000)

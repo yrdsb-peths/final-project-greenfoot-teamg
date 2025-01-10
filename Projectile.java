@@ -2,7 +2,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot, and MouseInfo)
 
 public class Projectile extends Actor {
     private int speed = 15; // Speed of the projectile
-
+    
     /**
      * This method is called every frame to handle the projectile's behavior.
      */

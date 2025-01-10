@@ -1,6 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-public abstract class Boss extends Actor implements Freezable
+public abstract class Boss extends Enemy implements Freezable
 {
     SimpleTimer moveCooldown = new SimpleTimer();
     SimpleTimer attackCooldown = new SimpleTimer();
@@ -14,19 +14,20 @@ public abstract class Boss extends Actor implements Freezable
     boolean isBypassBoundries = false;
     int x = 300;
     int y = 100;
-    int hp;
+    protected int hp;
     int attackNumber;
     
-    public Boss(int hp)
+    public Boss(int health)
     {
         moveCooldown.mark();
         attackCooldown.mark();
-        this.hp = hp;
+        this.health = health;
         turn(90);
     }
     
     public void act()
     {
+
         if(moveCooldown.millisElapsed() > 10000 && !isAttacking)
         {
             changePosition();
