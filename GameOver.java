@@ -53,19 +53,19 @@ public class GameOver extends World {
      */
     public void DisplayGameOver() {
         Label end = new Label(ending, 60);
-        addObject(end, 250, 70);
+        addObject(end, 300, 70);
         
         Label scoreDisplay = new Label("Final Score: " + finalScore, 35);
-        addObject(scoreDisplay, 250, 120);
+        addObject(scoreDisplay, 300, 120);
         
         Label name = new Label("Enter your name: ", 40);
-        addObject(name, 250, 200);
+        addObject(name, 300, 200);
         
         Label enter = new Label("Press Enter to Continue", 35);
-        addObject(enter, 250, 600);
+        addObject(enter, 300, 600);
         
         input = new Label("", 40);
-        addObject(input, 250, 250);
+        addObject(input, 300, 250);
     }
 
     /**
