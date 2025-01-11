@@ -36,8 +36,8 @@ public class VolumeSlider extends Actor {
             MouseInfo mouse = Greenfoot.getMouseInfo();
             if (mouse != null) {
                 if (minX == 0) {
-                    minX = getX() - (sliderWidth * 1);
-                    maxX = getX() + (sliderWidth * 3);
+                    minX = 170;    // Keep left boundary the same
+                    maxX = 430;    // Extended from 330 to 430 (added 100px)
                 }
 
                 int newX = Math.min(maxX, Math.max(minX, mouse.getX()));
@@ -56,5 +56,13 @@ public class VolumeSlider extends Actor {
     public void setValue(int volume) {
         volume = Math.min(100, Math.max(0, volume)); // Ensure volume is within 0-100 range
         Settings.setVolume(volume);
+        
+        // Calculate and set position based on volume
+        if (minX == 0) {
+            minX = 170;
+            maxX = 430;
+        }
+        int newX = minX + (int)((maxX - minX) * (volume / 100.0));
+        setLocation(newX, getY());
     }
 }
