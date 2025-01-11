@@ -65,14 +65,14 @@ public class CharacterSelection extends World {
         // Add arrow images beside the character image
         leftArrow = new Actor() {
         };
-        GreenfootImage leftArrowImage = new GreenfootImage("arrow.png");
+        GreenfootImage leftArrowImage = new GreenfootImage("newarrow.png");
         leftArrowImage.mirrorHorizontally(); // Reflect the image horizontally
         leftArrow.setImage(leftArrowImage);
         addObject(leftArrow, getWidth() / 2 - 200, 390);
 
         rightArrow = new Actor() {
         };
-        rightArrow.setImage("arrow.png");
+        rightArrow.setImage("newarrow.png");
         addObject(rightArrow, getWidth() / 2 + 200, 390);
     }
 

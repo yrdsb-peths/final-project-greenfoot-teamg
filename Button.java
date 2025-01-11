@@ -20,7 +20,8 @@ public class Button extends Actor {
      */
     public void updateButtonImage() {
         // Default button background
-        GreenfootImage buttonImage = new GreenfootImage("buttonLong_beige.png");
+        GreenfootImage buttonImage = new GreenfootImage("Button.png");
+        buttonImage.scale(230, 50);
         
         // Adding text
         GreenfootImage textOverlay = new GreenfootImage(text, 23, Color.BLACK, new Color(0, 0, 0, 0));
