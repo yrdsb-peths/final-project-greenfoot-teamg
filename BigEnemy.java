@@ -33,11 +33,14 @@ public class BigEnemy extends Enemy {
             seek2.move(30);
 
             // Middle ricochet bullet
-            if (ricochet) {
-                Bullet ricochetBullet = new EnemyBullet2();
-                game.addObject(ricochetBullet, getX(), getY());
-                ricochetBullet.setRotation(90);
-                ricochetBullet.move(30);
+            if(ricochet == true) {
+                for(int i = 0; i < 2; i++)
+                {
+                    Bullet ricochetBullet = new EnemyBullet2();
+                    game.addObject(ricochetBullet, getX(), getY());
+                    ricochetBullet.turn(Util.randomInt(90) + 90 * i);
+                }
+    
                 ricochet = false;
             } else {
                 ricochet = true;

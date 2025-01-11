@@ -22,17 +22,8 @@ public class RichochetEnemy extends Enemy
             Bullet bullet = new EnemyBullet2();
             Game game = (Game) getWorld();
             game.addObject(bullet, getX(), getY());
-
-            int toX = game.player.getX();
-            int toY = game.player.getY();
-
-            // Bullet faces and spawns in front of ship initially
-            bullet.setRotation(90);
-            bullet.move(30);
-
-            bullet.turnTowards(toX, toY);
-            
-            timer.mark();
+            bullet.turn(Util.randomInt(180));    
+            timer.mark();   
         }
     }
 }

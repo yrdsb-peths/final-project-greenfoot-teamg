@@ -12,6 +12,8 @@ public class CharacterSelection extends World {
     private Actor leftArrow;
     private Actor rightArrow;
     private static boolean checker = true;
+    private static final int[] MENU_WIDTHS = {160, 200, 200};
+    private static final int[] MENU_HEIGHTS = {320, 200, 200};
 
     /**
      * Constructor for CharacterSelection.
@@ -35,13 +37,10 @@ public class CharacterSelection extends World {
                 new GreenfootImage("Spaceship3.png")
         };
 
-        // Rotate the images to fit your required orientation
-        characters[0].scale(160, 320); // Resize to 160x320 pixels (adjust size as needed)
-        characters[0].rotate(-90);
-        characters[1].scale(200, 200); // Resize to 200x200 pixels (adjust size as needed)
-        characters[1].rotate(-90);
-        characters[2].scale(200, 200); // Resize to 200x200 pixels (adjust size as needed)
-        characters[2].rotate(-90);
+        for (int i = 0; i < characters.length; i++) {
+            characters[i].scale(MENU_WIDTHS[i], MENU_HEIGHTS[i]); // Resize to menu pixels (adjust size as needed)
+            characters[i].rotate(-90);
+        }
 
         // Initialize the character display with the first character
         characterDisplay = new CharacterDisplay(characters[indexShips]);
@@ -66,14 +65,14 @@ public class CharacterSelection extends World {
         // Add arrow images beside the character image
         leftArrow = new Actor() {
         };
-        GreenfootImage leftArrowImage = new GreenfootImage("arrow.png");
+        GreenfootImage leftArrowImage = new GreenfootImage("newarrow.png");
         leftArrowImage.mirrorHorizontally(); // Reflect the image horizontally
         leftArrow.setImage(leftArrowImage);
         addObject(leftArrow, getWidth() / 2 - 200, 390);
 
         rightArrow = new Actor() {
         };
-        rightArrow.setImage("arrow.png");
+        rightArrow.setImage("newarrow.png");
         addObject(rightArrow, getWidth() / 2 + 200, 390);
     }
 
@@ -127,16 +126,16 @@ public class CharacterSelection extends World {
         menuMusic.stop(); // Stop the menu music
         // Scale the images properly for the game world
         GreenfootImage[] scaleCharacters = characters;
-        scaleCharacters[0].scale(75, 120);
-        scaleCharacters[1].scale(85, 100);
-        scaleCharacters[2].scale(80, 67);
+        characters[0].scale(75, 120);
+        characters[1].scale(85, 100);
+        characters[2].scale(75, 67);
 
         // Get the selected spaceship image
         GreenfootImage selectedShip = new GreenfootImage(scaleCharacters[indexShips]); // Use the selected character
                                                                                        // image
 
         // Pass the scaled image to the Game world
-        Greenfoot.setWorld(new Level1(selectedShip, menuScreen)); // Pass menuScreen as a parameter
+        Greenfoot.setWorld(new Level1(selectedShip, menuScreen, indexShips)); // Pass menuScreen as a parameter
     }
 
     /**
@@ -145,4 +144,23 @@ public class CharacterSelection extends World {
     private void updateCharacterImage() {
         characterDisplay.setImage(characters[indexShips]);
     }
+
+    public void resetScales() {
+        // Reload the images fresh instead of rescaling
+        characters = new GreenfootImage[] {
+            new GreenfootImage("Spaceship1.png"),
+            new GreenfootImage("Spaceship2.png"),
+            new GreenfootImage("Spaceship3.png")
+        };
+
+        // Apply the menu scales
+        for (int i = 0; i < characters.length; i++) {
+            characters[i].scale(MENU_WIDTHS[i], MENU_HEIGHTS[i]);
+        }
+        
+        // Update the display with the reset image
+        updateCharacterImage();
+    }
 }
+
+

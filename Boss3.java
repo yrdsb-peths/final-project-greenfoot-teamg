@@ -103,7 +103,7 @@ public class Boss3 extends Boss
             ((Game)getWorld()).freezeGame();
             attackCooldown.unfreeze();
             attackTimer.unfreeze();
-            TimeStopAnimation timeStop = new TimeStopAnimation();
+            TimeStopAnimation timeStop = new TimeStopAnimation(this, false);
             getWorld().addObject(timeStop, getWorld().getWidth()/2, getWorld().getHeight()/2);
             isTimeStop = true;
         }
@@ -147,7 +147,7 @@ public class Boss3 extends Boss
         {
             if(attackSlower.millisElapsed() > 200)
             {
-                TimeStopAnimation timeResume = new TimeStopAnimation(this);
+                TimeStopAnimation timeResume = new TimeStopAnimation(this, true);
                 getWorld().addObject(timeResume, getWorld().getWidth()/2, getWorld().getHeight()/2);
                 attackSlower.mark();
             }
@@ -216,7 +216,7 @@ public class Boss3 extends Boss
         {
             if(attackSlower.millisElapsed() > 200)
             {
-                TimeStopAnimation timeResume = new TimeStopAnimation(this);
+                TimeStopAnimation timeResume = new TimeStopAnimation(this, true);
                 getWorld().addObject(timeResume, getWorld().getWidth()/2, getWorld().getHeight()/2);
                 attackSlower.mark();
             }

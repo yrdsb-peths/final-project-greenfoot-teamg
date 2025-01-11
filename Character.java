@@ -7,12 +7,17 @@ public class Character extends Actor implements Freezable{
     private int speed = 6; // Normal movement speed
     private TransparentBox hitbox; // Reference to the associated TransparentBox
     SimpleTimer shootCooldown = new SimpleTimer();
+    SimpleTimer abilityCooldown = new SimpleTimer();
+    int whichCharacter;
+    boolean isHoming, isDoubleDamage;
     
     /**
      * Constructor to set the character's initial image and create a hitbox.
      */
-    public Character(GreenfootImage characterImage) {
+    public Character(GreenfootImage characterImage, int whichCharacter) {
         setImage(characterImage);
+        this.whichCharacter = whichCharacter;
+        abilityCooldown.freezeMark = 999999999;
     }
 
     public void addedToWorld(World world) {
@@ -33,9 +38,41 @@ public class Character extends Actor implements Freezable{
         {
             handleMovement();
             handleShooting();
+            handleAbility();
         }
     }
 
+    public void handleAbility()
+    {
+        if(Greenfoot.isKeyDown("v") && abilityCooldown.millisElapsed() > 40000)
+        {
+            useAbility();
+            abilityCooldown.mark();
+        }
+        if(abilityCooldown.millisElapsed() > 10000)
+        {
+            isHoming = false;
+            isDoubleDamage = false;
+        }
+    }
+    
+    public void useAbility()
+    {
+        if(whichCharacter == 0)
+        {
+            isHoming = true;
+        }
+        else if(whichCharacter == 1)
+        {
+            isDoubleDamage = true;
+        }
+        else if(whichCharacter == 2)
+        {
+            getWorld().addObject(new Forcefield(), getX(), getY());
+            abilityCooldown.freezeMark = 10000;
+        }
+    }
+    
     /**
      * Handle WASD movement and Shift-based speed adjustment.
      */
@@ -50,15 +87,31 @@ public class Character extends Actor implements Freezable{
         // WASD movement
         if (Greenfoot.isKeyDown("w")) {
             setLocation(getX(), getY() - currentSpeed); // Move up
+            if(getY() < 10)
+            {
+                setLocation(getX(), 10);
+            }
         }
         if (Greenfoot.isKeyDown("s")) {
             setLocation(getX(), getY() + currentSpeed); // Move down
+            if(getY() > getWorld().getHeight()-10)
+            {
+                setLocation(getX(), getWorld().getHeight() - 10);
+            }
         }
         if (Greenfoot.isKeyDown("a")) {
             setLocation(getX() - currentSpeed, getY()); // Move left
+            if(getX() < 10)
+            {
+                setLocation(10, getY());
+            }
         }
         if (Greenfoot.isKeyDown("d")) {
             setLocation(getX() + currentSpeed, getY()); // Move right
+            if(getX() > getWorld().getWidth()-10)
+            {
+                setLocation(getWorld().getWidth() - 10, getY());
+            }
         }
     }
 
@@ -78,14 +131,8 @@ public class Character extends Actor implements Freezable{
      */
     private void shoot() {
         // Create a new projectile and add it to the world
-        Projectile projectile = new Projectile();
+        Projectile projectile = new Projectile(isHoming, isDoubleDamage);
         getWorld().addObject(projectile, getX(), getY() - getImage().getHeight() / 2);
-    
-        // Set the bullet to move upwards (270 degrees)
-        projectile.setRotation(270);
-    
-        // Optional: Add a sound effect
-        Greenfoot.playSound("StarWarsBlaster.mp3");
     }
 
     /**
@@ -119,11 +166,13 @@ public class Character extends Actor implements Freezable{
     public void freeze()
     {
         shootCooldown.freeze();
+        abilityCooldown.freeze();
     }
     
     
     public void unfreeze()
     {
         shootCooldown.unfreeze();
+        abilityCooldown.freeze();
     }
 }

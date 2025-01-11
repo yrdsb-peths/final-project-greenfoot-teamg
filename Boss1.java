@@ -1,19 +1,18 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.List;
 
-public class Boss1 extends Boss
+public class Boss1 extends Boss 
 {
     SimpleTimer curveCooldown = new SimpleTimer();
     SimpleTimer test1 = new SimpleTimer();
     
     public Boss1()
     {
-        super(150);  // Initial health
+        super(10);  // Initial health
         GreenfootImage image = new GreenfootImage("BossSpaceShip0.png");
         image.scale(100,105);
         setImage(image);
         curveCooldown.mark();
-        hp = 1;  // Set boss health to 30
     }
     
     public void act()
@@ -27,19 +26,9 @@ public class Boss1 extends Boss
                 curveCooldown.mark();
             }
         }
-        checkHealth();  // Check if the boss's health is zero
     }
     
-    // Method to check if the boss's health is zero
-    public void checkHealth()
-    {
-        if(hp <= 0)
-        {
-            World world = getWorld();
-            world.removeObject(this);  // Remove the boss from the world
-        }
-    }
-    
+
     public void freeze()
     {
         super.freeze();

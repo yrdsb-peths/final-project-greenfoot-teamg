@@ -3,7 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Level 1 of the game, with progressive waves.
  */
-public class Level2 extends Game {
+public class Level3 extends Game {
 
     private PauseScreen pauseScreen;
     private MenuScreen menuScreen; // Add menuScreen
@@ -16,10 +16,10 @@ public class Level2 extends Game {
     private boolean levelDisplayed = true; // Flag to display the level intro message
 
     /**
-     * Constructor for Level1.
+     * Constructor for Level3.
      * @param selectedImage The image for the player's character.
      */
-    public Level2(GreenfootImage selectedImage, MenuScreen menuScreen, int whichCharacter) {
+    public Level3(GreenfootImage selectedImage, MenuScreen menuScreen, int whichCharacter) {
         super(600, 750, 1, selectedImage, whichCharacter);
         this.menuScreen = menuScreen; // Initialize menuScreen
         pauseScreen = new PauseScreen(this, menuScreen); // Initialize the pause screen
@@ -30,7 +30,7 @@ public class Level2 extends Game {
     @Override
     protected void setupLevel() {
         // Set the background for Level 1
-        setBackground("Stage2Background.jpg");
+        setBackground("Stage3Background.png");
 
         // Show the "Level 1" label for 3 seconds before starting the gameplay
         if (levelDisplayed) {
@@ -63,7 +63,7 @@ public class Level2 extends Game {
             enemiesInWave = 8;  // Wave 4 will have 8 enemies in total
         } else if (wave == 5) {
             // Boss wave: Add the Boss1 to the world
-            addObject(new Boss2(), getWidth() / 2, 10);
+            addObject(new Boss3(), getWidth() / 2, 10);
             enemiesInWave = 1;  // Wave 5 has only the boss (1 enemy)
         }
         waveDisplayed = true; // Set flag to true to display wave number
@@ -110,29 +110,29 @@ public class Level2 extends Game {
         } else if (waveNumber == 2) {
             // Wave 2: Add SimpleEnemies + SeekingEnemies
             if (enemiesSpawned % 2 == 0) {
-                addObject(new BigEnemy(), Greenfoot.getRandomNumber(getWidth()), 0);
+                addObject(new TripleSplitEnemy(), Greenfoot.getRandomNumber(getWidth()), 0);
             } else {
-                addObject(new RichochetEnemy(), Greenfoot.getRandomNumber(getWidth()), 0);
+                addObject(new EverythingEnemy(), Greenfoot.getRandomNumber(getWidth()), 0);
             }
             enemiesSpawned++; // Increase the spawn counter for the wave
         } else if (waveNumber == 3) {
             // Wave 3: Add SimpleEnemies + SeekingEnemies + SplitEnemies
             if (enemiesSpawned % 3 == 0) {
-                addObject(new BigEnemy(), Greenfoot.getRandomNumber(getWidth()), 0);
-            } else if (enemiesSpawned % 3 == 1) {
-                addObject(new RichochetEnemy(), Greenfoot.getRandomNumber(getWidth()), 0);
-            } else {
                 addObject(new TripleSplitEnemy(), Greenfoot.getRandomNumber(getWidth()), 0);
+            } else if (enemiesSpawned % 3 == 1) {
+                addObject(new EverythingEnemy(), Greenfoot.getRandomNumber(getWidth()), 0);
+            } else {
+                addObject(new DoubleEndEnemy(), Greenfoot.getRandomNumber(getWidth()), 0);
             }
             enemiesSpawned++; // Increase the spawn counter for the wave
         } else if (waveNumber == 4) {
             // Wave 4: A combination of all previous enemies, plus more
             if (enemiesSpawned % 4 == 0) {
-                addObject(new BigEnemy(), Greenfoot.getRandomNumber(getWidth()), 0);
-            } else if (enemiesSpawned % 4 == 1) {
-                addObject(new RichochetEnemy(), Greenfoot.getRandomNumber(getWidth()), 0);
-            } else {
                 addObject(new TripleSplitEnemy(), Greenfoot.getRandomNumber(getWidth()), 0);
+            } else if (enemiesSpawned % 4 == 1) {
+                addObject(new EverythingEnemy(), Greenfoot.getRandomNumber(getWidth()), 0);
+            } else {
+                addObject(new DoubleEndEnemy(), Greenfoot.getRandomNumber(getWidth()), 0);
             }
             enemiesSpawned++; // Increase the spawn counter for the wave
         }

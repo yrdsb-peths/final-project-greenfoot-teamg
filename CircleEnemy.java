@@ -23,9 +23,9 @@ public class CircleEnemy extends Enemy {
             Game game = (Game) getWorld();
             game.addObject(bullet, this.getX(), this.getY());
             bullet.setRotation(rotate);
-            bullet.move(30);
-            rotate += 30;  // Rotate the bullet's trajectory each time
-            timer.mark();  // Reset the timer
+            
+            rotate += 30; // Rotate the bullet's trajectory each time
+            timer.mark(); // Reset the timer
         }
     }
 }

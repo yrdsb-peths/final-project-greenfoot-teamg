@@ -19,10 +19,17 @@ public class EnemyBullet5 extends Bullet
         if(((Game)getWorld()).isFreeze == false)
         {
             moveBullet();
-            checkBounds();
-            if(isReturning)
+            if(boss.getWorld() != null)
             {
-                turnTowards(boss.getX(), boss.getY());
+                checkBounds();
+                if(isReturning)
+                {
+                    turnTowards(boss.getX(), boss.getY());
+                }
+            }
+            else
+            {
+                super.checkBounds();
             }
         }
     }

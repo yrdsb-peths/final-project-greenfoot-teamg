@@ -16,7 +16,6 @@ public class GameOver extends World {
 
     // References to other game worlds
     private MenuScreen menuScreen;
-    private HighScore highScore;
 
     // UI and game state variables
     private String ending = "GameOver"; // Text displayed at game over
@@ -33,7 +32,6 @@ public class GameOver extends World {
         super(600, 700, 1);
         this.finalScore = finalScore;
         menuScreen = new MenuScreen();
-        highScore = new HighScore(menuScreen);
         setBackground(new GreenfootImage("Background.jpg"));
 
         DisplayGameOver();
@@ -143,15 +141,5 @@ public class GameOver extends World {
     public void stopped() {
         YouLose.pause();
         GameOverMusic.pause();
-    }
-
-    public boolean array6(int[] nums, int index) {
-        if (nums.length == 0) {
-            return false;
-        } else if (nums[index] == 6) {
-            return true;
-        } else {
-            return array6(nums, index + 1);
-        }
     }
 }
