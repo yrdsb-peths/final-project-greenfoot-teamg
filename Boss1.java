@@ -8,7 +8,7 @@ public class Boss1 extends Boss
     
     public Boss1()
     {
-        super(150);  // Initial health
+        super(10);  // Initial health
         GreenfootImage image = new GreenfootImage("BossSpaceShip0.png");
         image.scale(100,105);
         setImage(image);
