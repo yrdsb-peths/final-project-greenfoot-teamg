@@ -135,7 +135,7 @@ public class CharacterSelection extends World {
                                                                                        // image
 
         // Pass the scaled image to the Game world
-        Greenfoot.setWorld(new Level3(selectedShip, menuScreen, indexShips)); // Pass menuScreen as a parameter
+        Greenfoot.setWorld(new Level1(selectedShip, menuScreen, indexShips)); // Pass menuScreen as a parameter
     }
 
     /**
