@@ -3,7 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Enemy extends Actor
 {
     // Health variable
-    protected int health = 15;
+    protected int health = 1;
 
     // This method decreases the health of the enemy
     public void decreaseHealth(int damage) {

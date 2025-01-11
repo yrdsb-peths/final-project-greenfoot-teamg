@@ -4,11 +4,7 @@ import java.util.List;
 public class Projectile extends Actor {
     private int speed = 15; // Speed of the projectile
     boolean isHoming, isDoubleDamage;
-    
-    /**
-     * This method is called every frame to handle the projectile's behavior.
-     */
-    
+
     public Projectile(boolean isHoming, boolean isDoubleDamage)
     {
         GreenfootImage image;
@@ -32,7 +28,7 @@ public class Projectile extends Actor {
         this.isDoubleDamage = isDoubleDamage;
         turn(-90);
     }
-    
+
     public void act() {
         if (getWorld() == null) {
             return; // Ensure that the projectile is still in the world before doing anything
@@ -44,9 +40,6 @@ public class Projectile extends Actor {
         }
     }
 
-    /**
-     * Move the projectile in the direction it is facing.
-     */
     private void moveProjectile() {
         if(isHoming)
         {
@@ -65,17 +58,14 @@ public class Projectile extends Actor {
                 }
             }
         }
-        move(speed); // Move in the direction the projectile is facing (which was set in the Character class)
-        
+        move(speed); // Move in the direction the projectile is facing
+
         // If the projectile goes off-screen, remove it
         if (!isOnScreen()) {
             getWorld().removeObject(this);
         }
     }
 
-    /**
-     * Check for collision with enemies or other objects.
-     */
     private void checkForCollision() {
         if (getWorld() == null) {
             return; // Ensure that the projectile is still in the world before doing anything
@@ -83,7 +73,6 @@ public class Projectile extends Actor {
         
         Actor hit = getOneIntersectingObject(Enemy.class);
         if (hit != null) {
-            // If the projectile hits an enemy, deal damage or remove the projectile
             if(isDoubleDamage)
             {
                  ((Enemy) hit).decreaseHealth(2);
@@ -98,22 +87,21 @@ public class Projectile extends Actor {
         
         hit = getOneIntersectingObject(Boss.class);
         if (hit != null) {
-            // If the projectile hits an enemy, deal damage or remove the projectile
+            System.out.println("Boss hit by projectile!"); // Debug message
             if(isDoubleDamage)
             {
+                 System.out.println("Double damage to boss!"); // Debug message
                  ((Boss) hit).decreaseHealth(2);
             }
             else
             {
+                 System.out.println("Normal damage to boss!"); // Debug message
                  ((Boss) hit).decreaseHealth(1);  
             }
-            getWorld().removeObject(this); // Remove the projectile after hitting the enemy
+            getWorld().removeObject(this); // Remove the projectile after hitting the boss
         }
     }
-    
-    /**
-     * Check if the projectile is on-screen.
-     */
+
     public boolean isOnScreen() {
         World world = getWorld();
         if (world != null) {

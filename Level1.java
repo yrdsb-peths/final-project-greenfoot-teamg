@@ -7,13 +7,18 @@ public class Level1 extends Game {
 
     private PauseScreen pauseScreen;
     private MenuScreen menuScreen; // Add menuScreen
-    private int waveNumber = 4;  // Tracks the wave number
+    private int waveNumber = 1;  // Starts at wave 1
     private int enemiesInWave = 2; // Number of enemies in the current wave
     private int enemiesSpawned = 0; // Tracks how many enemies have been spawned in the current wave
     private SimpleTimer spawnTimer; // Timer for controlling enemy spawn timing
     private int spawnDelay = 1000; // Delay in milliseconds between spawning each enemy
     private boolean waveDisplayed = false; // Flag to check if wave number is displayed
     private boolean levelDisplayed = true; // Flag to display the level intro message
+    private SimpleTimer levelTimer; // Timer for the level
+    private boolean levelEnded = false; // Flag to check if the level has ended
+    private Label timerLabel; // Label to display the timer
+    private boolean timerStopped = false; // Flag to track if the timer is stopped
+    private boolean isBossDefeated = false; // Flag to track if the boss is defeated
 
     /**
      * Constructor for Level1.
@@ -23,8 +28,10 @@ public class Level1 extends Game {
         super(600, 750, 1, selectedImage, whichCharacter);
         this.menuScreen = menuScreen; // Initialize menuScreen
         pauseScreen = new PauseScreen(this, menuScreen); // Initialize the pause screen
-        spawnTimer = new SimpleTimer(); // Initialize the timer
-        spawnTimer.mark(); // Start the timer
+        spawnTimer = new SimpleTimer(); // Initialize the spawn timer
+        spawnTimer.mark(); // Start the spawn timer
+        levelTimer = new SimpleTimer(); // Initialize the level timer
+        levelTimer.mark(); // Start the level timer
     }
 
     @Override
@@ -94,10 +101,20 @@ public class Level1 extends Game {
         if (enemiesSpawned >= enemiesInWave && areAllEnemiesDead()) {
             // Wait for some time before transitioning to the next wave
             if (waveNumber < 5) {
-                // Move to the next wave if it's not the last wave
+                // Move to the next wave if it's not the boss wave
                 waveNumber++;
                 setupWave(waveNumber); // Setup the next wave
             }
+        }
+
+        // Display the timer in the top right corner
+        if (!levelEnded) {
+            updateTimerDisplay();
+        }
+
+        // Check if boss is defeated and freeze the timer
+        if (waveNumber == 5 && isBossDefeated) {
+            stopTimer(); // Freeze the timer when the boss is defeated
         }
     }
 
@@ -141,5 +158,26 @@ public class Level1 extends Game {
     private boolean areAllEnemiesDead() {
         // Check if there are no Enemy objects in the world
         return getObjects(Enemy.class).isEmpty();
+    }
+
+    private void updateTimerDisplay() {
+        // Remove the old timer label if it exists
+        if (timerLabel != null) {
+            removeObject(timerLabel);
+        }
+
+        // Create and add a new timer label with the updated time
+        timerLabel = new Label("Time: " + levelTimer.millisElapsed() / 1000, 30);
+        addObject(timerLabel, getWidth() - 100, 20); // Display timer in the top-right corner
+    }
+
+    private void stopTimer() {
+        // Freeze the timer by setting the timerStopped flag to true
+        timerStopped = true;
+    }
+
+    public void bossDefeated() {
+        // This method is called when the boss is defeated
+        isBossDefeated = true; // Set the boss as defeated
     }
 }

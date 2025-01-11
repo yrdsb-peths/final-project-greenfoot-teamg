@@ -1,6 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-public abstract class Boss extends Enemy implements Freezable
+public abstract class Boss extends Actor implements Freezable
 {
     SimpleTimer moveCooldown = new SimpleTimer();
     SimpleTimer attackCooldown = new SimpleTimer();
@@ -16,7 +16,7 @@ public abstract class Boss extends Enemy implements Freezable
     int y = 100;
     int health;
     int attackNumber;
-    
+
     public Boss(int health)
     {
         moveCooldown.mark();
@@ -24,10 +24,9 @@ public abstract class Boss extends Enemy implements Freezable
         this.health = health;
         turn(90);
     }
-    
+
     public void act()
     {
-
         if(moveCooldown.millisElapsed() > 10000 && !isAttacking)
         {
             changePosition();
@@ -44,22 +43,25 @@ public abstract class Boss extends Enemy implements Freezable
             resumeAttack();
         }
     }
-    
+
     // This method decreases the health of the boss
     public void decreaseHealth(int damage)
     {
+        System.out.println("Boss health before damage: " + health); // Debug message
         health -= damage;  // Subtract the damage value from the health
+        System.out.println("Boss health after damage: " + health); // Debug message
         if (health <= 0) {
+            System.out.println("Boss health is zero or less, calling die()"); // Debug message
             die();  // Call the die method when health reaches 0
         }
     }
 
-    // Method for handling the boss' death (removal from the world)
     private void die()
     {
+        System.out.println("Boss is dying and being removed from the world"); // Debug message
         getWorld().removeObject(this);  // Remove the boss from the world
     }
-    
+
     public void freeze()
     {
         moveCooldown.freeze();
@@ -67,7 +69,7 @@ public abstract class Boss extends Enemy implements Freezable
         attackTimer.freeze();
         attackSlower.freeze();
     }
-    
+
     public void unfreeze()
     {
         moveCooldown.unfreeze();
@@ -75,7 +77,7 @@ public abstract class Boss extends Enemy implements Freezable
         attackTimer.unfreeze();
         attackSlower.unfreeze();
     }
-    
+
     public void resumeAttack()
     {
         if(attackNumber == 1)
@@ -91,7 +93,7 @@ public abstract class Boss extends Enemy implements Freezable
             attack3();
         }
     }
-    
+
     public void randomAttack()
     {
         int chooseAttack = Util.randomInt(2);
@@ -111,7 +113,7 @@ public abstract class Boss extends Enemy implements Freezable
             attack3();
         }
     }
-    
+
     public void changePosition(){
         if(!isBypassBoundries)
         {
@@ -125,7 +127,7 @@ public abstract class Boss extends Enemy implements Freezable
         }
         moveCooldown.mark();
     }
-    
+
     public void moveToSpot(){
         if(!isAttacking || forceMove){
             int xDist = x - getX();
@@ -140,7 +142,7 @@ public abstract class Boss extends Enemy implements Freezable
             }
         }
     }
-    
+
     public void endAttack()
     {
         isAttacking = false;
@@ -153,10 +155,10 @@ public abstract class Boss extends Enemy implements Freezable
             changePosition();
         }
     }
-    
+
     public abstract void attack1();
 
     public abstract void attack2();
-    
+
     public abstract void attack3();
 }
