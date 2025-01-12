@@ -37,10 +37,13 @@ public class CharacterSelection extends World {
                 new GreenfootImage("Spaceship3.png")
         };
 
-        for (int i = 0; i < characters.length; i++) {
-            characters[i].scale(MENU_WIDTHS[i], MENU_HEIGHTS[i]); // Resize to menu pixels (adjust size as needed)
-            characters[i].rotate(-90);
-        }
+        // Scale and rotate each character directly
+        characters[0].scale(MENU_WIDTHS[0], MENU_HEIGHTS[0]);
+        characters[0].rotate(-90);
+        characters[1].scale(MENU_WIDTHS[1], MENU_HEIGHTS[1]);
+        characters[1].rotate(-90);
+        characters[2].scale(MENU_WIDTHS[2], MENU_HEIGHTS[2]);
+        characters[2].rotate(-90);
 
         // Initialize the character display with the first character
         characterDisplay = new CharacterDisplay(characters[indexShips]);
@@ -123,19 +126,21 @@ public class CharacterSelection extends World {
      * Handle character selection and return to the game screen.
      */
     public void selectCharacter() {
-        menuMusic.stop(); // Stop the menu music
-        // Scale the images properly for the game world
-        GreenfootImage[] scaleCharacters = characters;
-        characters[0].scale(75, 120);
-        characters[1].scale(85, 100);
-        characters[2].scale(75, 67);
-
-        // Get the selected spaceship image
-        GreenfootImage selectedShip = new GreenfootImage(scaleCharacters[indexShips]); // Use the selected character
-                                                                                       // image
-
-        // Pass the scaled image to the Game world
-        Greenfoot.setWorld(new Level1(selectedShip, menuScreen, indexShips)); // Pass menuScreen as a parameter
+        menuMusic.stop();
+        
+        // Create a new image for the selected character
+        GreenfootImage selectedShip = new GreenfootImage(characters[indexShips]);
+        
+        // Scale only the copy, not the original
+        if (indexShips == 0) {
+            selectedShip.scale(75, 120);
+        } else if (indexShips == 1) {
+            selectedShip.scale(85, 100);
+        } else if (indexShips == 2) {
+            selectedShip.scale(75, 67);
+        }
+        
+        Greenfoot.setWorld(new Level1(selectedShip, menuScreen, indexShips));
     }
 
     /**

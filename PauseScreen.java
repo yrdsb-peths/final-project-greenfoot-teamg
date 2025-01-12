@@ -42,6 +42,8 @@ public class PauseScreen extends World {
 
     private void goMenuScreen() {
         fromSettings = false; // Set the flag indicating we're coming from the quit button
+        CharacterSelection characterSelection = new CharacterSelection(menuScreen);
+        characterSelection.resetScales();
         Greenfoot.setWorld(menuScreen);
     }
 
