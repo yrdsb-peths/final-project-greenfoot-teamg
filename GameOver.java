@@ -29,7 +29,7 @@ public class GameOver extends World {
     GreenfootSound YouLose; // Sound played when entering game over screen
 
     public GameOver() {
-        super(600, 700, 1);
+        super(600, 750, 1);
         this.finalScore = finalScore;
         menuScreen = new MenuScreen();
         setBackground(new GreenfootImage("Background.jpg"));
