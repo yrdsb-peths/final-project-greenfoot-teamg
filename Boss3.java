@@ -174,7 +174,7 @@ public class Boss3 extends Boss
         {
             if(attackSlower.millisElapsed() > 800)
             {
-               for(int i = 0; i < 20; i++)
+               for(int i = 0; i < 5; i++)
                {   
                     int randInt = Util.randomInt(3);
                     Bullet bullet;

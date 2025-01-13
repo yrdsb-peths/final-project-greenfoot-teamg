@@ -7,6 +7,7 @@ public class MenuScreen extends World {
     private Button instructionsButton;
     private CharacterSelection characterSelection;
     private boolean checker;
+    GreenfootSound menuMusic; // Music for the menu
 
     public MenuScreen() {
         super(600, 750, 1);
@@ -21,6 +22,9 @@ public class MenuScreen extends World {
 
         // Initialize characterSelection
         characterSelection = new CharacterSelection(this);
+        
+        // Initialize the background music
+        menuMusic = new GreenfootSound("Menu.mp3");
     }
 
     public void act() {
@@ -73,5 +77,15 @@ public class MenuScreen extends World {
 
     private void goHighScoresScreen() {
         Greenfoot.setWorld(new HighScore(this));
+    }
+    
+    public void started() {
+        // Ensure the music resumes when the world starts
+        menuMusic.playLoop();
+    }
+    
+    public void stopped() {
+        // Pause the music when the world is stopped
+        menuMusic.pause();
     }
 }

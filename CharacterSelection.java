@@ -7,7 +7,6 @@ public class CharacterSelection extends World {
     private int indexShips = 0; // Current character index
     private GreenfootImage[] characters; // Array of character images
     private CharacterDisplay characterDisplay; // Actor to display the current character
-    private GreenfootSound menuMusic; // Music for the menu
     private MenuScreen menuScreen;
     private Actor leftArrow;
     private Actor rightArrow;
@@ -48,10 +47,6 @@ public class CharacterSelection extends World {
         // Initialize the character display with the first character
         characterDisplay = new CharacterDisplay(characters[indexShips]);
         addObject(characterDisplay, getWidth() / 2, getHeight() / 2); // Position it at the center of the screen
-
-        // Play the background music
-        menuMusic = new GreenfootSound("Menu.mp3");
-        menuMusic.playLoop();
     }
 
     public void act() {
@@ -126,7 +121,7 @@ public class CharacterSelection extends World {
      * Handle character selection and return to the game screen.
      */
     public void selectCharacter() {
-        menuMusic.stop();
+        menuScreen.menuMusic.stop();
         
         // Create a new image for the selected character
         GreenfootImage selectedShip = new GreenfootImage(characters[indexShips]);
@@ -165,6 +160,16 @@ public class CharacterSelection extends World {
         
         // Update the display with the reset image
         updateCharacterImage();
+    }
+    
+    public void started() {
+        // Ensure the music resumes when the world starts
+        menuScreen.menuMusic.playLoop();
+    }
+    
+    public void stopped() {
+        // Pause the music when the world is stopped
+        menuScreen.menuMusic.pause();
     }
 }
 
