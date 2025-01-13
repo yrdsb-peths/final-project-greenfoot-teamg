@@ -1,4 +1,4 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+    import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
  * Level 1 of the game, with progressive waves.
@@ -14,7 +14,9 @@ public class Level2 extends Game {
     private int spawnDelay = 1000; // Delay in milliseconds between spawning each enemy
     private boolean waveDisplayed = false; // Flag to check if wave number is displayed
     private boolean levelDisplayed = true; // Flag to display the level intro message
-
+    GreenfootSound levelMusic; // Music for the level
+    GreenfootSound bossMusic; // Music for the boss
+    
     /**
      * Constructor for Level1.
      * @param selectedImage The image for the player's character.
@@ -25,6 +27,9 @@ public class Level2 extends Game {
         pauseScreen = new PauseScreen(this, menuScreen); // Initialize the pause screen
         spawnTimer = new SimpleTimer(); // Initialize the timer
         spawnTimer.mark(); // Start the timer
+        levelMusic = new GreenfootSound("Stage2.mp3");
+        levelMusic.playLoop();
+        bossMusic = new GreenfootSound("Stage2Boss.mp3");
     }
 
     @Override
@@ -63,6 +68,8 @@ public class Level2 extends Game {
             enemiesInWave = 8;  // Wave 4 will have 8 enemies in total
         } else if (wave == 5) {
             // Boss wave: Add the Boss1 to the world
+            levelMusic.pause();
+            bossMusic.playLoop();
             addObject(new Boss2(), getWidth() / 2, 10);
             enemiesInWave = 1;  // Wave 5 has only the boss (1 enemy)
         }
@@ -141,5 +148,29 @@ public class Level2 extends Game {
     private boolean areAllEnemiesDead() {
         // Check if there are no Enemy objects in the world
         return getObjects(Enemy.class).isEmpty();
+    }
+    
+    public void started() {
+        // Ensure the music resumes when the world starts
+        if(waveNumber < 5)
+        {
+            levelMusic.playLoop();
+        }
+        else
+        {
+            bossMusic.playLoop();
+        }
+    }
+    
+    public void stopped() {
+        // Pause the music when the world is stopped
+        if(waveNumber < 5)
+        {
+            levelMusic.pause();
+        }
+        else
+        {
+            bossMusic.pause();
+        }   
     }
 }
