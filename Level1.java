@@ -1,12 +1,11 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-/**
- * Level 1 of the game, with progressive waves.
- */
 public class Level1 extends Game {
 
     private PauseScreen pauseScreen;
     private MenuScreen menuScreen; // Add menuScreen
+    private GreenfootImage selectedShip;  // Store the selected ship image
+    private int whichCharacter;  // Store the character index
     private int waveNumber = 1;  // Starts at wave 1
     private int enemiesInWave = 2; // Number of enemies in the current wave
     private int enemiesSpawned = 0; // Tracks how many enemies have been spawned in the current wave
@@ -19,19 +18,29 @@ public class Level1 extends Game {
     private Label timerLabel; // Label to display the timer
     private boolean timerStopped = false; // Flag to track if the timer is stopped
     private boolean isBossDefeated = false; // Flag to track if the boss is defeated
+    GreenfootSound levelMusic; // Music for the level
+    GreenfootSound bossMusic; // Music for the boss
 
     /**
      * Constructor for Level1.
      * @param selectedImage The image for the player's character.
+     * @param menuScreen The menu screen object to access the menu and transition.
+     * @param whichCharacter The index of the selected character.
      */
     public Level1(GreenfootImage selectedImage, MenuScreen menuScreen, int whichCharacter) {
         super(600, 750, 1, selectedImage, whichCharacter);
-        this.menuScreen = menuScreen; // Initialize menuScreen
+        this.selectedShip = selectedImage;  // Store the selected ship image
+        this.menuScreen = menuScreen;  // Store the menu screen
+        this.whichCharacter = whichCharacter;  // Store the character index
+
         pauseScreen = new PauseScreen(this, menuScreen); // Initialize the pause screen
         spawnTimer = new SimpleTimer(); // Initialize the spawn timer
         spawnTimer.mark(); // Start the spawn timer
         levelTimer = new SimpleTimer(); // Initialize the level timer
         levelTimer.mark(); // Start the level timer
+        levelMusic = new GreenfootSound("Stage1.mp3");
+        levelMusic.playLoop();
+        bossMusic = new GreenfootSound("Stage1Boss.mp3");
     }
 
     @Override
@@ -70,9 +79,12 @@ public class Level1 extends Game {
             enemiesInWave = 8;  // Wave 4 will have 8 enemies in total
         } else if (wave == 5) {
             // Boss wave: Add the Boss1 to the world
+            levelMusic.pause();
+            bossMusic.playLoop();
             addObject(new Boss1(), getWidth() / 2, 10);
             enemiesInWave = 1;  // Wave 5 has only the boss (1 enemy)
         }
+
         waveDisplayed = true; // Set flag to true to display wave number
         resetWaveTimer(); // Reset the wave timer for displaying wave number
     }
@@ -104,6 +116,10 @@ public class Level1 extends Game {
                 // Move to the next wave if it's not the boss wave
                 waveNumber++;
                 setupWave(waveNumber); // Setup the next wave
+            }
+            else if (waveNumber == 5 && areAllEnemiesDead()){
+                // Transition to Level 2 after the boss is defeated
+                Greenfoot.setWorld(new Level2(selectedShip, menuScreen, whichCharacter)); 
             }
         }
 
@@ -179,5 +195,29 @@ public class Level1 extends Game {
     public void bossDefeated() {
         // This method is called when the boss is defeated
         isBossDefeated = true; // Set the boss as defeated
+    }
+    
+    public void started() {
+        // Ensure the music resumes when the world starts
+        if(waveNumber < 5)
+        {
+            levelMusic.playLoop();
+        }
+        else
+        {
+            bossMusic.playLoop();
+        }
+    }
+    
+    public void stopped() {
+        // Pause the music when the world is stopped
+        if(waveNumber < 5)
+        {
+            levelMusic.pause();
+        }
+        else
+        {
+            bossMusic.pause();
+        }   
     }
 }

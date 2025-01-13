@@ -37,6 +37,7 @@ public class TransparentBox extends Actor {
         // Detect collision with any Bullet subclass (e.g., EnemyBullet0, EnemyBullet1, etc.)
         if (isTouching(Bullet.class)){
             character.die(); // Trigger the character's death
+            return;
         }
         
         if(isTouching(LaserBeam.class))

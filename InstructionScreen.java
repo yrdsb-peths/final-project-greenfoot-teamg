@@ -9,9 +9,10 @@ public class InstructionScreen extends World
     private String[] instructions = {
         "Welcome to the game!",
         "Control your ship with WASD \n to avoid enemy attacks!",
-        "You can only take X hits \n before exploding.",
+        "You can only take ONE hit \n before exploding.",
         "Press and hold \"spacebar\" to \n fight back with your gun.",
         "Hold \"shift\" while moving \n to move slower.",
+        "press \"v\" to activate each \n character's powerup",
         "Different enemies and bullets \n have different attack patterns.",
         "Identify them by their ship \n design and bullet colour.",
         "Press \"escape\" at any time to \n pause and access the settings.",
@@ -70,7 +71,7 @@ public class InstructionScreen extends World
     public void addLabels() {
         addObject(new Label("ESC", 30), 40, 725);
         addObject(new Label("Back", 25), 100, 725);
-        addObject(new Label("Use left and right arrow keys \n to read through instructions", 35), 300, 60);
+        addObject(new Label("Use left and right arrow keys \n to read through instructions", 30), 300, 60);
 
         pageNum = new Label(1 + "/" + instructions.length, 40);
         addObject(pageNum, 300, 450);

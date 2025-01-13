@@ -1,7 +1,7 @@
 import greenfoot.*;
 
 public class PauseScreen extends World {
-    private static final int BUTTON_X = 250;
+    private static final int BUTTON_X = 300;
     private static final int BUTTON_Y = 300;
 
     private Game gameWorld;
@@ -10,7 +10,7 @@ public class PauseScreen extends World {
     private boolean fromSettings;
 
     public PauseScreen(Game gameWorld, MenuScreen menuScreen) {
-        super(500, 750, 1);
+        super(600, 750, 1);
 
         this.gameWorld = gameWorld;
         this.menuScreen = menuScreen;

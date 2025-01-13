@@ -7,13 +7,15 @@ public class CharacterSelection extends World {
     private int indexShips = 0; // Current character index
     private GreenfootImage[] characters; // Array of character images
     private CharacterDisplay characterDisplay; // Actor to display the current character
-    private GreenfootSound menuMusic; // Music for the menu
     private MenuScreen menuScreen;
     private Actor leftArrow;
     private Actor rightArrow;
     private static boolean checker = true;
     private static final int[] MENU_WIDTHS = {160, 200, 200};
     private static final int[] MENU_HEIGHTS = {320, 200, 200};
+    
+    // Power-up descriptions for each ship
+    private Label powerUpLabel;
 
     /**
      * Constructor for CharacterSelection.
@@ -32,9 +34,9 @@ public class CharacterSelection extends World {
 
         // Load character images
         characters = new GreenfootImage[] {
-                new GreenfootImage("Spaceship1.png"),
-                new GreenfootImage("Spaceship2.png"),
-                new GreenfootImage("Spaceship3.png")
+            new GreenfootImage("Spaceship1.png"),
+            new GreenfootImage("Spaceship2.png"),
+            new GreenfootImage("Spaceship3.png")
         };
 
         // Scale and rotate each character directly
@@ -48,10 +50,16 @@ public class CharacterSelection extends World {
         // Initialize the character display with the first character
         characterDisplay = new CharacterDisplay(characters[indexShips]);
         addObject(characterDisplay, getWidth() / 2, getHeight() / 2); // Position it at the center of the screen
+<<<<<<< HEAD
+
+        // Initialize the power-up label for the first character
+        updatePowerUpLabel();
 
         // Play the background music
         menuMusic = new GreenfootSound("Menu.mp3");
         menuMusic.playLoop();
+=======
+>>>>>>> e611444b37c201ab39045fddb0c02e8b7d5085c8
     }
 
     public void act() {
@@ -66,15 +74,13 @@ public class CharacterSelection extends World {
 
     public void arrow() {
         // Add arrow images beside the character image
-        leftArrow = new Actor() {
-        };
+        leftArrow = new Actor() {};
         GreenfootImage leftArrowImage = new GreenfootImage("newarrow.png");
         leftArrowImage.mirrorHorizontally(); // Reflect the image horizontally
         leftArrow.setImage(leftArrowImage);
         addObject(leftArrow, getWidth() / 2 - 200, 390);
 
-        rightArrow = new Actor() {
-        };
+        rightArrow = new Actor() {};
         rightArrow.setImage("newarrow.png");
         addObject(rightArrow, getWidth() / 2 + 200, 390);
     }
@@ -109,6 +115,7 @@ public class CharacterSelection extends World {
         if (indexShips < characters.length - 1) {
             indexShips++;
             updateCharacterImage();
+            updatePowerUpLabel(); // Update the power-up label for the new ship
         }
     }
 
@@ -119,6 +126,7 @@ public class CharacterSelection extends World {
         if (indexShips > 0) {
             indexShips--;
             updateCharacterImage();
+            updatePowerUpLabel(); // Update the power-up label for the new ship
         }
     }
 
@@ -126,7 +134,7 @@ public class CharacterSelection extends World {
      * Handle character selection and return to the game screen.
      */
     public void selectCharacter() {
-        menuMusic.stop();
+        menuScreen.menuMusic.stop();
         
         // Create a new image for the selected character
         GreenfootImage selectedShip = new GreenfootImage(characters[indexShips]);
@@ -150,6 +158,28 @@ public class CharacterSelection extends World {
         characterDisplay.setImage(characters[indexShips]);
     }
 
+    /**
+     * Update the power-up label based on the selected character.
+     */
+    private void updatePowerUpLabel() {
+        // Remove the old label if it exists
+        if (powerUpLabel != null) {
+            removeObject(powerUpLabel);
+        }
+
+        // Add a new label for the current character's power-up
+        if (indexShips == 0) {
+            powerUpLabel = new Label("Power-Up: Homing Bullet \n 30s  cooldown", 40);
+        } else if (indexShips == 1) {
+            powerUpLabel = new Label("Power-Up: Double Damage \n 30s cooldown", 40);
+        } else if (indexShips == 2) {
+            powerUpLabel = new Label("Power-Up: Force Field \n 30s cooldown", 40);
+        }
+
+        // Position the label below the selected ship
+        addObject(powerUpLabel, getWidth()/2, 530);
+    }
+
     public void resetScales() {
         // Reload the images fresh instead of rescaling
         characters = new GreenfootImage[] {
@@ -166,6 +196,14 @@ public class CharacterSelection extends World {
         // Update the display with the reset image
         updateCharacterImage();
     }
+    
+    public void started() {
+        // Ensure the music resumes when the world starts
+        menuScreen.menuMusic.playLoop();
+    }
+    
+    public void stopped() {
+        // Pause the music when the world is stopped
+        menuScreen.menuMusic.pause();
+    }
 }
-
-
