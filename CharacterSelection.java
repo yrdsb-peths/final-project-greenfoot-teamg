@@ -13,6 +13,14 @@ public class CharacterSelection extends World {
     private static boolean checker = true;
     private static final int[] MENU_WIDTHS = {160, 200, 200};
     private static final int[] MENU_HEIGHTS = {320, 200, 200};
+    Label abilityDesc;
+
+    String[] charDesc = {
+        "Homing bullets: bullets fire towards bosses",
+        "Double damage: bullets deal 2X the damage",
+        "Forcefield ability: clear all enemies off the screen"
+    };
+
 
     /**
      * Constructor for CharacterSelection.
@@ -25,6 +33,8 @@ public class CharacterSelection extends World {
         setBackground(background);
 
         this.menuScreen = menuScreen;
+
+        abilityDesc = new Label(charDesc[indexShips], 30);
 
         addLabels();
         arrow();
@@ -57,6 +67,8 @@ public class CharacterSelection extends World {
 
     public void addLabels() {
         addObject(new Label("Press Enter to Select character", 42), getWidth() / 2, 100);
+        addObject(new Label("Ability", 42), getWidth()/2, 525);
+        addObject(abilityDesc, getWidth() / 2, 575);
     }
 
     public void arrow() {
@@ -104,6 +116,7 @@ public class CharacterSelection extends World {
         if (indexShips < characters.length - 1) {
             indexShips++;
             updateCharacterImage();
+            updateCharDesc();
         }
     }
 
@@ -114,6 +127,7 @@ public class CharacterSelection extends World {
         if (indexShips > 0) {
             indexShips--;
             updateCharacterImage();
+            updateCharDesc();
         }
     }
 
@@ -143,6 +157,10 @@ public class CharacterSelection extends World {
      */
     private void updateCharacterImage() {
         characterDisplay.setImage(characters[indexShips]);
+    }
+
+    private void updateCharDesc() {
+        abilityDesc.setValue(charDesc[indexShips]);
     }
 
     public void resetScales() {
