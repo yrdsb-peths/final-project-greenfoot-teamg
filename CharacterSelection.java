@@ -50,7 +50,7 @@ public class CharacterSelection extends World {
         // Initialize the character display with the first character
         characterDisplay = new CharacterDisplay(characters[indexShips]);
         addObject(characterDisplay, getWidth() / 2, getHeight() / 2); // Position it at the center of the screen
-
+<<<<<<< HEAD
 
         // Initialize the power-up label for the first character
         updatePowerUpLabel();
@@ -58,6 +58,8 @@ public class CharacterSelection extends World {
         // Play the background music
         menuMusic = new GreenfootSound("Menu.mp3");
         menuMusic.playLoop();
+=======
+>>>>>>> e611444b37c201ab39045fddb0c02e8b7d5085c8
     }
 
     public void act() {
