@@ -19,6 +19,8 @@ public class Level1 extends Game {
     private Label timerLabel; // Label to display the timer
     private boolean timerStopped = false; // Flag to track if the timer is stopped
     private boolean isBossDefeated = false; // Flag to track if the boss is defeated
+    GreenfootSound levelMusic; // Music for the level
+    GreenfootSound bossMusic; // Music for the boss
 
     /**
      * Constructor for Level1.
@@ -32,6 +34,9 @@ public class Level1 extends Game {
         spawnTimer.mark(); // Start the spawn timer
         levelTimer = new SimpleTimer(); // Initialize the level timer
         levelTimer.mark(); // Start the level timer
+        levelMusic = new GreenfootSound("Stage1.mp3");
+        levelMusic.playLoop();
+        bossMusic = new GreenfootSound("Stage1Boss.mp3");
     }
 
     @Override
@@ -70,6 +75,8 @@ public class Level1 extends Game {
             enemiesInWave = 8;  // Wave 4 will have 8 enemies in total
         } else if (wave == 5) {
             // Boss wave: Add the Boss1 to the world
+            levelMusic.pause();
+            bossMusic.playLoop();
             addObject(new Boss1(), getWidth() / 2, 10);
             enemiesInWave = 1;  // Wave 5 has only the boss (1 enemy)
         }
@@ -179,5 +186,29 @@ public class Level1 extends Game {
     public void bossDefeated() {
         // This method is called when the boss is defeated
         isBossDefeated = true; // Set the boss as defeated
+    }
+    
+    public void started() {
+        // Ensure the music resumes when the world starts
+        if(waveNumber < 5)
+        {
+            levelMusic.playLoop();
+        }
+        else
+        {
+            bossMusic.playLoop();
+        }
+    }
+    
+    public void stopped() {
+        // Pause the music when the world is stopped
+        if(waveNumber < 5)
+        {
+            levelMusic.pause();
+        }
+        else
+        {
+            bossMusic.pause();
+        }   
     }
 }

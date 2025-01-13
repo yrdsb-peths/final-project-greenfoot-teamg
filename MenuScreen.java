@@ -8,7 +8,7 @@ public class MenuScreen extends World {
     private CharacterSelection characterSelection;
     private boolean checker;
     GreenfootSound menuMusic; // Music for the menu
-
+    
     public MenuScreen() {
         super(600, 750, 1);
         GreenfootImage background = new GreenfootImage("CharacterSelection.jpg");
