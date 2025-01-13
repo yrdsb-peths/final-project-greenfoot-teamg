@@ -14,15 +14,11 @@ public class Level2 extends Game {
     private int spawnDelay = 1000; // Delay in milliseconds between spawning each enemy
     private boolean waveDisplayed = false; // Flag to check if wave number is displayed
     private boolean levelDisplayed = true; // Flag to display the level intro message
-<<<<<<< HEAD
     private GreenfootImage selectedShip;  // Store the selected ship image
     private int whichCharacter;  // Store the character index
-
-=======
     GreenfootSound levelMusic; // Music for the level
     GreenfootSound bossMusic; // Music for the boss
     
->>>>>>> e611444b37c201ab39045fddb0c02e8b7d5085c8
     /**
      * Constructor for Level2.
      * @param selectedImage The image for the player's character.
@@ -77,13 +73,8 @@ public class Level2 extends Game {
             enemiesSpawned = 0; // Reset the spawn counter for the wave
             enemiesInWave = 8;  // Wave 4 will have 8 enemies in total
         } else if (wave == 5) {
-<<<<<<< HEAD
-            // Boss wave: Add the Boss2 to the world
-=======
-            // Boss wave: Add the Boss1 to the world
             levelMusic.pause();
             bossMusic.playLoop();
->>>>>>> e611444b37c201ab39045fddb0c02e8b7d5085c8
             addObject(new Boss2(), getWidth() / 2, 10);
             enemiesInWave = 1;  // Wave 5 has only the boss (1 enemy)
         }
