@@ -147,6 +147,7 @@ public class Character extends Actor implements Freezable{
         if (hitbox != null) {
             getWorld().removeObject(hitbox);
         }
+        getWorld().stopped();
         getWorld().removeObject(this);
 
         // Transition to a game-over screen or similar
