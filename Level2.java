@@ -1,8 +1,6 @@
 import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-/**
- * Level 2 of the game, with progressive waves.
- */
+
 public class Level2 extends Game {
 
     private PauseScreen pauseScreen;
@@ -11,17 +9,18 @@ public class Level2 extends Game {
     private int whichCharacter; // Store the character index
     private AudioManager audioManager;
 
+    private Label timerLabel;  // To display the timer
+
     /**
      * Constructor for Level2.
      * 
      * @param selectedImage The image for the player's character.
      */
-    public Level2(GreenfootImage selectedImage, MenuScreen menuScreen, int whichCharacter) {
-        super(600, 750, 1, selectedImage, whichCharacter);
-        this.selectedShip = selectedImage; // Store the selected ship image
-        this.menuScreen = menuScreen; // Store the menu screen
-        this.whichCharacter = whichCharacter; // Store the character index
-
+    public Level2(GreenfootImage selectedImage, MenuScreen menuScreen, int whichCharacter, SimpleTimer levelTimer) {
+        super(600, 750, 1, selectedImage, whichCharacter, levelTimer);
+        this.selectedShip = selectedImage;  // Store the selected ship image
+        this.menuScreen = menuScreen;  // Store the menu screen
+        this.whichCharacter = whichCharacter;  // Store the character index
         audioManager = AudioManager.getInstance();
 
         pauseScreen = new PauseScreen(this, menuScreen); // Initialize the pause screen
@@ -33,7 +32,7 @@ public class Level2 extends Game {
     @Override
     protected void setupLevel() {
         // Set the background for Level 2
-        setBackground("Stage2Background.jpg");
+        setBackground("Stage2Background.png");
 
         // Show the "Level 2" label for 3 seconds before starting the gameplay
         if (levelDisplayed) {
@@ -86,11 +85,15 @@ public class Level2 extends Game {
         // Handle pause and escape key
         Util.handleEscapeKey(this, pauseScreen);
 
+        // Display the timer in Level 2 (same as Level 1)
+        updateTimerDisplay();
+
         // Check if wave number should be displayed
         if (waveDisplayed) {
             addObject(new Label("Wave: " + waveNumber, 80), getWidth() / 2, getHeight() / 2); // Display wave number
                                                                                               // label
             if (getWaveTimeElapsed() > 3000) { // Check if 2 seconds have elapsed
+
                 removeObjects(getObjects(Label.class)); // Remove wave number label
                 waveDisplayed = false; // Reset flag
                 isWaveStart = true;
@@ -119,7 +122,7 @@ public class Level2 extends Game {
                 // Check if this was the boss wave and the boss is defeated
                 if (waveNumber == 5 && areAllEnemiesDead()) {
                     // Transition to Level 3 when the boss is defeated
-                    Greenfoot.setWorld(new Level3(selectedShip, menuScreen, whichCharacter));
+                    Greenfoot.setWorld(new Level3(selectedShip, menuScreen, whichCharacter, levelTimer));
                 } else {
                     if (waveNumber < 5) {
                         // Move to the next wave if it's not the last wave
@@ -129,6 +132,17 @@ public class Level2 extends Game {
                 }
             }
         }
+    }
+
+    private void updateTimerDisplay() {
+        // Remove the old timer label if it exists
+        if (timerLabel != null) {
+            removeObject(timerLabel);
+        }
+
+        // Create and add a new timer label with the updated time
+        timerLabel = new Label("Time: " + levelTimer.millisElapsed() / 1000, 30);
+        addObject(timerLabel, getWidth() - 100, 20); // Display timer in the top-right corner
     }
 
     private void spawnEnemies() {

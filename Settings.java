@@ -20,7 +20,6 @@ public class Settings extends World {
 
         setupVolumeControls();
         addLabels();
-        setupButtons();
     }
 
     private void setupVolumeControls() {
@@ -52,7 +51,7 @@ public class Settings extends World {
 
     private void addLabels() {
         volumeLabel = new Label("Volume: " + audioManager.getVolume() + "%", 30);
-        addObject(volumeLabel, 250, 300);
+        addObject(volumeLabel, 290, 300);
 
         // Navigation labels
         addObject(new Label("ESC", 30), 40, 700);
@@ -60,12 +59,6 @@ public class Settings extends World {
 
         // Settings title
         addObject(new Label("Settings", 50), 300, 100);
-    }
-
-    private void setupButtons() {
-        closingButton = new Button(this::goMenuScreen, "");
-        closingButton.changeButtonImage("Home.png", 70, 70);
-        addObject(closingButton, 550, 40);
     }
 
     public void goMenuScreen() {
@@ -87,6 +80,10 @@ public class Settings extends World {
 
     public void toggleSound() {
         audioManager.setMuted(!audioManager.isMuted());
+        if (audioManager.isMuted()) {
+            volumeSlider.setValue(0);
+            updateVolume(0);
+        }
         updateSoundButtonImage();
         updateGameSounds();
     }
@@ -100,6 +97,15 @@ public class Settings extends World {
 
     public void updateVolume(int newVolume) {
         audioManager.setVolume(newVolume);
+        // Automatically mute when volume reaches 0
+        if (newVolume == 0) {
+            audioManager.setMuted(true);
+            updateSoundButtonImage();
+        } else if (audioManager.isMuted() && newVolume > 0) {
+            // Automatically unmute when volume is increased from 0
+            audioManager.setMuted(false);
+            updateSoundButtonImage();
+        }
         if (!audioManager.isMuted()) {
             updateGameSounds();
         }

@@ -13,8 +13,8 @@ public class Level3 extends Game {
      * Constructor for Level3.
      * @param selectedImage The image for the player's character.
      */
-    public Level3(GreenfootImage selectedImage, MenuScreen menuScreen, int whichCharacter) {
-        super(600, 750, 1, selectedImage, whichCharacter);
+    public Level3(GreenfootImage selectedImage, MenuScreen menuScreen, int whichCharacter, SimpleTimer levelTimer) {
+        super(600, 750, 1, selectedImage, whichCharacter, levelTimer);
         this.menuScreen = menuScreen; // Initialize menuScreen
 
         audioManager = AudioManager.getInstance();
@@ -41,6 +41,17 @@ public class Level3 extends Game {
         }
     }
 
+    private void updateTimerDisplay() {
+        // Remove the old timer label if it exists
+        if (timerLabel != null) {
+            removeObject(timerLabel);
+        }
+
+        // Create and add a new timer label with the updated time
+        timerLabel = new Label("Time: " + levelTimer.millisElapsed() / 1000, 30);
+        addObject(timerLabel, getWidth() - 100, 20); // Display timer in the top-right corner
+    }
+    
     // Method to setup the current wave
     private void setupWave(int wave) {
         if (wave == 1) {
@@ -80,6 +91,7 @@ public class Level3 extends Game {
             setupLevel();
         }
         
+        updateTimerDisplay();
         // Handle pause and escape key
         Util.handleEscapeKey(this, pauseScreen);
 

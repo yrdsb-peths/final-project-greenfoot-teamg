@@ -38,6 +38,21 @@ public abstract class Game extends World {
         levelTimer = new SimpleTimer(); // Initialize the level timer
         levelTimer.mark(); // Start the level timer
     }
+    
+    public Game(int width, int height, int cellSize, GreenfootImage selectedImage, int whichCharacter, SimpleTimer levelTimer) {
+        super(width, height, cellSize);
+
+        // Create and add the player's character
+        player = new Character(selectedImage, whichCharacter);
+        addObject(player, getWidth() / 2, getHeight() - 50);
+
+        // Initialize the wave timer
+        waveTimer = new SimpleTimer();
+        spawnTimer = new SimpleTimer(); // Initialize the spawn timer
+        spawnTimer.mark(); // Start the spawn timer
+        this.levelTimer = levelTimer;
+    }
+    
 
     /**
      * Abstract method to be implemented by each level for unique setup.
