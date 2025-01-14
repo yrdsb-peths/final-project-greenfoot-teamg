@@ -22,6 +22,8 @@ public class Level1 extends Game {
         levelMusic = new GreenfootSound("Stage1.mp3");
         levelMusic.playLoop();
         bossMusic = new GreenfootSound("Stage1Boss.mp3");
+        levelTimer = new SimpleTimer(); // Initialize the level timer
+        levelTimer.mark(); // Start the level timer
     }
 
     @Override
@@ -122,7 +124,8 @@ public class Level1 extends Game {
                 }
                 else if (waveNumber == 5 && areAllEnemiesDead()){
                     // Transition to Level 2 after the boss is defeated
-                    Greenfoot.setWorld(new Level2(selectedShip, menuScreen, whichCharacter)); 
+                    bossMusic.pause();
+                    Greenfoot.setWorld(new Level2(selectedShip, menuScreen, whichCharacter, levelTimer)); 
                 }
             }
         }
@@ -130,11 +133,6 @@ public class Level1 extends Game {
         // Display the timer in the top right corner
         if (!levelEnded) {
             updateTimerDisplay();
-        }
-
-        // Check if boss is defeated and freeze the timer
-        if (waveNumber == 5 && isBossDefeated) {
-            stopTimer(); // Freeze the timer when the boss is defeated
         }
     }
 
@@ -178,6 +176,7 @@ public class Level1 extends Game {
     public void bossDefeated() {
         // This method is called when the boss is defeated
         isBossDefeated = true; // Set the boss as defeated
+        bossMusic.pause();
     }
     
     public void started() {
