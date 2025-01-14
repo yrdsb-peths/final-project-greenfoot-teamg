@@ -7,7 +7,7 @@ public abstract class Game extends World {
     protected Character player;
     public boolean isFreeze = false;
     protected SimpleTimer waveTimer; // Add waveTimer as a shared resource for all levels
-    int waveNumber = 1;  // Starts at wave 1
+    int waveNumber = 5;  // Starts at wave 1
     int enemiesInWave = 2; // Number of enemies in the current wave
     int enemiesSpawned = 0; // Tracks how many enemies have been spawned in the current wave
     SimpleTimer spawnTimer; // Timer for controlling enemy spawn timing
