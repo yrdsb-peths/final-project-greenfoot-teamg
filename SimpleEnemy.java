@@ -7,7 +7,7 @@ public class SimpleEnemy extends Enemy
     SimpleTimer timer = new SimpleTimer();
 
     public SimpleEnemy() {
-        GreenfootImage image = new GreenfootImage("EnemySpaceShip0.png");
+        GreenfootImage image = new GreenfootImage("EnemySpaceship0.png");
         image.scale(75, 75);
         image.rotate(90);
         this.setImage(image);

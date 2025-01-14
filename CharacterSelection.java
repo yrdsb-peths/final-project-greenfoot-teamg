@@ -10,7 +10,6 @@ public class CharacterSelection extends World {
     private MenuScreen menuScreen;
     private Actor leftArrow;
     private Actor rightArrow;
-    GreenfootSound menuMusic;
     private static boolean checker = true;
     private static final int[] MENU_WIDTHS = {160, 200, 200};
     private static final int[] MENU_HEIGHTS = {320, 200, 200};
@@ -54,9 +53,6 @@ public class CharacterSelection extends World {
         // Initialize the power-up label for the first character
         updatePowerUpLabel();
         // Play the background music
-        menuMusic = new GreenfootSound("Menu.mp3");
-        menuMusic.playLoop();
-
     }
 
     public void act() {
