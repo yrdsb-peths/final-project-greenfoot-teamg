@@ -15,9 +15,12 @@ public class Level3 extends Game {
     public Level3(GreenfootImage selectedImage, MenuScreen menuScreen, int whichCharacter, SimpleTimer levelTimer) {
         super(600, 750, 1, selectedImage, whichCharacter, levelTimer);
         this.menuScreen = menuScreen;
-        pauseScreen = new PauseScreen(this, menuScreen);
+
+        audioManager = AudioManager.getInstance();
+
+        pauseScreen = new PauseScreen(this, menuScreen); // Initialize the pause screen
+
         levelMusic = new GreenfootSound("Stage3.mp3");
-        levelMusic.playLoop();
         bossMusic = new GreenfootSound("Stage3Boss.mp3");
     }
 
@@ -62,7 +65,10 @@ public class Level3 extends Game {
     }
 
     public void act() {
-        if(levelDisplayed == true) {
+
+        updateMusic();
+        if(levelDisplayed == true)
+        {
             setupLevel();
         }
 
@@ -134,6 +140,19 @@ public class Level3 extends Game {
             levelMusic.pause();
         } else {
             bossMusic.pause();
+        }
+    }
+    public void updateMusic() {
+        int effectiveVolume = audioManager.getEffectiveVolume();
+        levelMusic.setVolume(effectiveVolume);
+        bossMusic.setVolume(effectiveVolume);
+
+        if (audioManager.isMuted()) {
+            levelMusic.pause();
+            bossMusic.pause();
+        } else if (!levelMusic.isPlaying()) {
+            levelMusic.playLoop();
+            bossMusic.playLoop();
         }
     }
 }
