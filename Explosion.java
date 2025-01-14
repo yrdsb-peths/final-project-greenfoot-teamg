@@ -1,7 +1,7 @@
 import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 
-public class Explosion extends Actor {
+public class Explosion extends Actor implements Freezable{
   private GreenfootImage[] explosionImage; //Holder for the images
   private int totalframe = 10; //Total images for the animation
   private int currentframe = 0; // Index for the explosionImage array
@@ -20,15 +20,10 @@ public class Explosion extends Actor {
    * This act method animates the object
    */
   public void act() {
-    animateimage();
-  }
-
-  /**
-   * This code checks if the explsion is touching an object of the Enemy, Bullet, or Boss class. 
-   * If it is, it will get all objects of the Enemy class and subtract 2 letters from each of them.
-   */
-  public void checkTouching() {
-    
+    if(((Game)getWorld()).isFreeze == false)
+    {
+        animateimage();
+    }
   }
 
   /**
@@ -53,9 +48,6 @@ public class Explosion extends Actor {
     animationTimer.mark();
     if (currentframe < explosionImage.length) {
         setImage(explosionImage[currentframe]);
-        if(currentframe == 0) { // Check for touching words only once
-            checkTouching();
-        }
         currentframe++;
     }
     else{ // Remove when animation is over
@@ -63,4 +55,13 @@ public class Explosion extends Actor {
     }
   }
 
+  public void freeze()
+  {
+      animationTimer.freeze();
+  }
+  
+  public void unfreeze()
+  {
+      animationTimer.unfreeze();
+  }
 }

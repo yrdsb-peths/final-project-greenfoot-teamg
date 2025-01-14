@@ -4,7 +4,8 @@ public class Enemy extends Actor
 {
     // Health variable
     protected int health = 1;
-
+    TransparentBox hitbox = new TransparentBox(this);
+    
     // This method decreases the health of the enemy
     public void decreaseHealth(int damage) {
         health -= damage;
@@ -15,6 +16,7 @@ public class Enemy extends Actor
 
     // Method for handling the enemy's death (removal from the world)
     private void die() {
+        getWorld().addObject(new Explosion(), getX(), getY());
         getWorld().removeObject(this);  // Remove the enemy from the world
     }
 
