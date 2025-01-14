@@ -27,7 +27,7 @@ public class Level1 extends Game {
     @Override
     protected void setupLevel() {
         // Set the background for Level 1
-        setBackground("Stage1Background.jpg");
+        setBackground("Stage1Background.png");
 
         // Show the "Level 1" label for 3 seconds before starting the gameplay
         if (levelDisplayed) {

@@ -30,7 +30,7 @@ public class Level2 extends Game {
     @Override
     protected void setupLevel() {
         // Set the background for Level 2
-        setBackground("Stage2Background.jpg");
+        setBackground("Stage2Background.png");
 
         // Show the "Level 2" label for 3 seconds before starting the gameplay
         if (levelDisplayed) {
