@@ -120,10 +120,10 @@ public class Level1 extends Game {
                     waveNumber++;
                     setupWave(waveNumber); // Setup the next wave
                 }
-            }
-            else if (waveNumber == 5 && areAllEnemiesDead()){
-                // Transition to Level 2 after the boss is defeated
-                Greenfoot.setWorld(new Level2(selectedShip, menuScreen, whichCharacter)); 
+                else if (waveNumber == 5 && areAllEnemiesDead()){
+                    // Transition to Level 2 after the boss is defeated
+                    Greenfoot.setWorld(new Level2(selectedShip, menuScreen, whichCharacter)); 
+                }
             }
         }
 
