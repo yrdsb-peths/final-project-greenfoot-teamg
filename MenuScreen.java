@@ -7,8 +7,9 @@ public class MenuScreen extends World {
     private Button instructionsButton;
     private CharacterSelection characterSelection;
     private boolean checker;
-    GreenfootSound menuMusic; // Music for the menu
-    
+    GreenfootSound menuMusic; // Music for the menu 
+    private AudioManager audioManager;
+
     public MenuScreen() {
         super(600, 750, 1);
         GreenfootImage background = new GreenfootImage("CharacterSelection.jpg");
@@ -16,7 +17,7 @@ public class MenuScreen extends World {
         setBackground(background);
 
         checker = true;
-        
+        audioManager = AudioManager.getInstance();
         setupButtons();
         addLabels();
 
@@ -29,6 +30,7 @@ public class MenuScreen extends World {
 
     public void act() {
         handleEnterKey();
+        updateMusic();
     }
 
     private void setupButtons() {
@@ -81,11 +83,22 @@ public class MenuScreen extends World {
     
     public void started() {
         // Ensure the music resumes when the world starts
-        menuMusic.playLoop();
+        updateMusic();
     }
     
     public void stopped() {
         // Pause the music when the world is stopped
         menuMusic.pause();
+    }
+
+    private void updateMusic() {
+        int effectiveVolume = audioManager.getEffectiveVolume();
+        menuMusic.setVolume(effectiveVolume);
+
+        if (audioManager.isMuted()) {
+            menuMusic.pause();
+        } else if (!menuMusic.isPlaying()) {
+            menuMusic.playLoop();
+        }
     }
 }

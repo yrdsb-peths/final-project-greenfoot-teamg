@@ -1,38 +1,48 @@
 import greenfoot.*;
 
 public class Settings extends World {
-    private Button ClosingButton;
+    private Button closingButton;
     private Button soundButton;
     private MenuScreen menuScreen;
     private PauseScreen pauseScreen;
-    private static int volume = 50;
     private Label volumeLabel;
     private VolumeSlider volumeSlider;
-    private static boolean isMuted = false;
+    private AudioManager audioManager;
 
     public Settings(MenuScreen menuScreen, PauseScreen pauseScreen) {
         super(600, 750, 1);
         this.menuScreen = menuScreen;
         this.pauseScreen = pauseScreen;
-        
-        // Add VolumeBar image 
+        this.audioManager = AudioManager.getInstance();
+
         GreenfootImage volumeBarImage = new GreenfootImage("VolumeBar.jpg");
         getBackground().drawImage(volumeBarImage, 120, 170);
-        
-        volumeSlider = new VolumeSlider(volume);
 
-        addObject(volumeSlider, 250, 350);
-
-        soundButton = new Button(this::toggleSound, "");
-        soundButton.changeButtonImage("Sound.jpg", 70, 70);
-        addObject(soundButton, 100, 350);
-
+        setupVolumeControls();
         addLabels();
         setupButtons();
     }
 
+    private void setupVolumeControls() {
+        volumeSlider = new VolumeSlider(audioManager.getVolume());
+        addObject(volumeSlider, 250, 350);
+
+        soundButton = new Button(this::toggleSound, "");
+        updateSoundButtonImage();
+        addObject(soundButton, 100, 350);
+    }
+
     public void act() {
-        volumeLabel.setValue("Volume: " + (isMuted ? "Muted" : volume + "%"));
+        updateVolumeDisplay();
+        handleEscapeNavigation();
+    }
+
+    private void updateVolumeDisplay() {
+        String volumeText = audioManager.isMuted() ? "Muted" : audioManager.getVolume() + "%";
+        volumeLabel.setValue("Volume: " + volumeText);
+    }
+
+    private void handleEscapeNavigation() {
         if (pauseScreen != null && pauseScreen.isFromSettings()) {
             Util.handleEscapeKey(this, pauseScreen);
         } else {
@@ -41,16 +51,21 @@ public class Settings extends World {
     }
 
     private void addLabels() {
-        volumeLabel = new Label("Volume: " + volume + "%", 30);
+        volumeLabel = new Label("Volume: " + audioManager.getVolume() + "%", 30);
         addObject(volumeLabel, 250, 300);
+
+        // Navigation labels
         addObject(new Label("ESC", 30), 40, 700);
         addObject(new Label("Back", 25), 100, 700);
+
+        // Settings title
+        addObject(new Label("Settings", 50), 300, 100);
     }
 
     private void setupButtons() {
-        ClosingButton = new Button(this::goMenuScreen, "");
-        ClosingButton.changeButtonImage("Home.png", 70, 70);
-        addObject(ClosingButton, 550, 40);
+        closingButton = new Button(this::goMenuScreen, "");
+        closingButton.changeButtonImage("Home.png", 70, 70);
+        addObject(closingButton, 550, 40);
     }
 
     public void goMenuScreen() {
@@ -65,31 +80,28 @@ public class Settings extends World {
         }
     }
 
+    private void updateSoundButtonImage() {
+        String imageName = audioManager.isMuted() ? "Muted.jpg" : "Sound.jpg";
+        soundButton.changeButtonImage(imageName, 70, 70);
+    }
+
     public void toggleSound() {
-        isMuted = !isMuted;
-        if (isMuted) {
-            volumeSlider.setValue(0);
-            soundButton.changeButtonImage("Muted.jpg", 70, 70);
-        } else {
-            volumeSlider.setValue(50);
-            soundButton.changeButtonImage("Sound.jpg", 70, 70);
+        audioManager.setMuted(!audioManager.isMuted());
+        updateSoundButtonImage();
+        updateGameSounds();
+    }
+
+    private void updateGameSounds() {
+        int effectiveVolume = audioManager.getEffectiveVolume();
+        if (menuScreen != null) {
+            menuScreen.started(); // Ensure menu music state matches current settings
         }
     }
 
-    public void toggleMute() {
-        isMuted = !isMuted;
-        if (isMuted) {
-            volumeSlider.setValue(0);
-        } else {
-            volumeSlider.setValue(volume);
+    public void updateVolume(int newVolume) {
+        audioManager.setVolume(newVolume);
+        if (!audioManager.isMuted()) {
+            updateGameSounds();
         }
-    }
-
-    public static int getVolume() {
-        return volume;
-    }
-
-    public static void setVolume(int newVolume) {
-        volume = Math.min(100, Math.max(0, newVolume));
     }
 }
