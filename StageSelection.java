@@ -36,6 +36,7 @@ public class StageSelection extends World
     
     public void act()
     {
+        Util.handleEscapeKey(this, characterSelection);
         handleUpDown();
         if(!handleRightLeft() && !handleEnter())
         {

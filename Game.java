@@ -112,7 +112,10 @@ public abstract class Game extends World {
         isFreeze = true;
         waveTimer.freeze();
         spawnTimer.freeze();
-        levelTimer.freeze();
+        if(levelTimer != null)
+        {
+            levelTimer.freeze();
+        }
         for (Freezable object : getObjects(Freezable.class)) { // Get all Freezable actors
             object.freeze();
         }
@@ -122,7 +125,10 @@ public abstract class Game extends World {
         isFreeze = false;
         waveTimer.unfreeze();
         spawnTimer.unfreeze();
-        levelTimer.unfreeze();
+        if(levelTimer != null)
+        {
+            levelTimer.unfreeze();
+        }
         for (Freezable object : getObjects(Freezable.class)) { // Get all Freezable actors
             object.unfreeze();
         }

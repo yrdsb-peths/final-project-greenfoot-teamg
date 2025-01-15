@@ -15,7 +15,7 @@ public class BossAlertAnimation extends Actor implements Freezable
     {
         if(((Game)getWorld()).isFreeze == false)
         {
-            if(existTimer.millisElapsed() > 2000)
+            if(existTimer.millisElapsed() > 3000)
             {
                 getWorld().removeObject(this);
             }

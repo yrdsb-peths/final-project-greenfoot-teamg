@@ -86,64 +86,67 @@ public class Level1 extends Game {
     }
 
     public void act() {
-        updateMusic(); // Call updateMusic to check and update music
-
-        if (levelDisplayed == true) {
-            setupLevel();
-        }
-
-        // Handle pause and escape key
-        Util.handleEscapeKey(this, pauseScreen);
-
-        // Check if wave number should be displayed
-        if (waveDisplayed) {
-            addObject(new Label("Wave: " + waveNumber, 80), getWidth() / 2, getHeight() / 2); // Display wave number
-                                                                                              // label
-            if (getWaveTimeElapsed() > 3000) { // Check if 2 seconds have elapsed
-                removeObjects(getObjects(Label.class)); // Remove wave number label
-                isWaveStart = true;
-                waveDisplayed = false; // Reset flag
-                if (waveNumber == 5) {
-                    bossMusic.playLoop();
-                    Boss boss = new Boss1();
-                    addObject(boss, getWidth() / 2, -100);
-                    addObject(boss.hitbox, boss.getX(), boss.getY());
-                    enemiesSpawned++;
-                }
-                else if(waveNumber <= 3)
-                {
-                    spawnEnemy(waveNumber-1);
+        if(isFreeze == false)
+        {
+            updateMusic(); // Call updateMusic to check and update music
+    
+            if (levelDisplayed == true) {
+                setupLevel();
+            }
+    
+            // Handle pause and escape key
+            Util.handleEscapeKey(this, pauseScreen);
+    
+            // Check if wave number should be displayed
+            if (waveDisplayed) {
+                addObject(new Label("Wave: " + waveNumber, 80), getWidth() / 2, getHeight() / 2); // Display wave number
+                                                                                                  // label
+                if (getWaveTimeElapsed() > 3000) { // Check if 2 seconds have elapsed
+                    removeObjects(getObjects(Label.class)); // Remove wave number label
+                    isWaveStart = true;
+                    waveDisplayed = false; // Reset flag
+                    if (waveNumber == 5) {
+                        bossMusic.playLoop();
+                        Boss boss = new Boss1();
+                        addObject(boss, getWidth() / 2, -100);
+                        addObject(boss.hitbox, boss.getX(), boss.getY());
+                        enemiesSpawned++;
+                    }
+                    else if(waveNumber <= 3)
+                    {
+                        spawnEnemy(waveNumber-1);
+                    }
                 }
             }
-        }
-
-        if (isWaveStart == true) {
-            // Check if it's time to spawn new enemies
-            if (enemiesSpawned < enemiesInWave && spawnTimer.millisElapsed() > spawnDelay) {
-                // Spawn the next enemy if wave is not complete
-                spawnEnemies();
-                spawnTimer.mark(); // Reset the timer after spawning an enemy
-            }
-
-            // Check if all enemies in the current wave have been removed from the world
-            if (enemiesSpawned >= enemiesInWave && areAllEnemiesDead()) {
-                // Wait for some time before transitioning to the next wave
-                if (waveNumber < 5) {
-                    // Move to the next wave if it's not the boss wave
-                    waveNumber++;
-                    setupWave(waveNumber); // Setup the next wave
+    
+            if (isWaveStart == true) {
+                // Check if it's time to spawn new enemies
+                if (enemiesSpawned < enemiesInWave && spawnTimer.millisElapsed() > spawnDelay) {
+                    // Spawn the next enemy if wave is not complete
+                    spawnEnemies();
+                    spawnTimer.mark(); // Reset the timer after spawning an enemy
                 }
-                else if (waveNumber == 5 && areAllEnemiesDead()){
-                    // Transition to Level 2 after the boss is defeated
-                    stopped();
-                    Greenfoot.setWorld(new Level2(selectedShip, menuScreen, whichCharacter, levelTimer)); 
+    
+                // Check if all enemies in the current wave have been removed from the world
+                if (enemiesSpawned >= enemiesInWave && areAllEnemiesDead()) {
+                    // Wait for some time before transitioning to the next wave
+                    if (waveNumber < 5) {
+                        // Move to the next wave if it's not the boss wave
+                        waveNumber++;
+                        setupWave(waveNumber); // Setup the next wave
+                    }
+                    else if (waveNumber == 5 && areAllEnemiesDead() && waveTimer.millisElapsed() > 5000){
+                        // Transition to Level 2 after the boss is defeated
+                        stopped();
+                        Greenfoot.setWorld(new Level2(selectedShip, menuScreen, whichCharacter, levelTimer)); 
+                    }
                 }
             }
-        }
-
-        // Display the timer in the top right corner
-        if (!levelEnded && levelTimer != null) {
-            updateTimerDisplay();
+    
+            // Display the timer in the top right corner
+            if (!levelEnded && levelTimer != null) {
+                updateTimerDisplay();
+            }
         }
     }
 
@@ -165,7 +168,12 @@ public class Level1 extends Game {
 
     private boolean areAllEnemiesDead() {
         // Check if there are no Enemy objects in the world
-        return getObjects(Enemy.class).isEmpty();
+        boolean isClear = getObjects(Enemy.class).isEmpty();
+        if(isClear == true)
+        {
+            
+        }
+        return isClear;
     }
 
     private void updateTimerDisplay() {

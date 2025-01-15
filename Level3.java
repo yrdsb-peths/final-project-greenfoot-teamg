@@ -50,12 +50,20 @@ public class Level3 extends Game {
 
     private void setupWave(int wave) {
         if (wave == 1) {
+            isWaveStart = false;
+            enemiesSpawned = 0; // Reset the spawn counter for the wave
             enemiesInWave = 18;
         } else if (wave == 2) {
+            isWaveStart = false;
+            enemiesSpawned = 0; // Reset the spawn counter for the wave
             enemiesInWave = 20;
         } else if (wave == 3) {
+            isWaveStart = false;
+            enemiesSpawned = 0; // Reset the spawn counter for the wave
             enemiesInWave = 22;
         } else if (wave == 4) {
+            isWaveStart = false;
+            enemiesSpawned = 0; // Reset the spawn counter for the wave
             enemiesInWave = 24;
         } else if (wave == 5) {
             levelMusic.pause();
@@ -68,52 +76,54 @@ public class Level3 extends Game {
     }
 
     public void act() {
-
-        updateMusic();
-        if(levelDisplayed == true)
+        if(isFreeze == false)
         {
-            setupLevel();
-        }
-
-        if(levelTimer != null)
-        {
-            updateTimerDisplay();
-        }
-        Util.handleEscapeKey(this, pauseScreen);
-
-        if (waveDisplayed) {
-            addObject(new Label("Wave: " + waveNumber, 80), getWidth() / 2, getHeight() / 2);
-            if (getWaveTimeElapsed() > 3000) {
-                removeObjects(getObjects(Label.class));
-                waveDisplayed = false;
-                isWaveStart = true;
-                if (waveNumber == 5) {
-                    bossMusic.playLoop();
-                    Boss boss = new Boss3();
-                    addObject(boss, getWidth() / 2, -100);
-                    addObject(boss.hitbox, boss.getX(), boss.getY());
-                    enemiesSpawned++;
-                }
-                else if(waveNumber <= 3)
-                {
-                    spawnEnemy(waveNumber-1);
+            updateMusic();
+            if(levelDisplayed == true)
+            {
+                setupLevel();
+            }
+    
+            if(levelTimer != null)
+            {
+                updateTimerDisplay();
+            }
+            Util.handleEscapeKey(this, pauseScreen);
+    
+            if (waveDisplayed) {
+                addObject(new Label("Wave: " + waveNumber, 80), getWidth() / 2, getHeight() / 2);
+                if (getWaveTimeElapsed() > 3000) {
+                    removeObjects(getObjects(Label.class));
+                    waveDisplayed = false;
+                    isWaveStart = true;
+                    if (waveNumber == 5) {
+                        bossMusic.playLoop();
+                        Boss boss = new Boss3();
+                        addObject(boss, getWidth() / 2, -100);
+                        addObject(boss.hitbox, boss.getX(), boss.getY());
+                        enemiesSpawned++;
+                    }
+                    else if(waveNumber <= 3)
+                    {
+                        spawnEnemy(waveNumber + 5);
+                    }
                 }
             }
-        }
-
-        if (isWaveStart) {
-            if (enemiesSpawned < enemiesInWave && spawnTimer.millisElapsed() > spawnDelay) {
-                spawnEnemies();
-                spawnTimer.mark();
-            }
-
-            if (enemiesSpawned >= enemiesInWave && areAllEnemiesDead()) {
-                if (waveNumber < 5) {
-                    waveNumber++;
-                    setupWave(waveNumber);
-                } else if (waveNumber == 5 && areAllEnemiesDead()) {
-                    // Transition to Victory screen
-                    Greenfoot.setWorld(new VictScreen(levelTimer, menuScreen)); 
+    
+            if (isWaveStart) {
+                if (enemiesSpawned < enemiesInWave && spawnTimer.millisElapsed() > spawnDelay) {
+                    spawnEnemies();
+                    spawnTimer.mark();
+                }
+    
+                if (enemiesSpawned >= enemiesInWave && areAllEnemiesDead()) {
+                    if (waveNumber < 5) {
+                        waveNumber++;
+                        setupWave(waveNumber);
+                    } else if (waveNumber == 5 && areAllEnemiesDead() && waveTimer.millisElapsed() > 5000) {
+                        // Transition to Victory screen
+                        Greenfoot.setWorld(new VictScreen(levelTimer, menuScreen)); 
+                    }
                 }
             }
         }
