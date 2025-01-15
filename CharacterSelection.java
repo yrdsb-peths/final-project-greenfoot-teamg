@@ -62,7 +62,7 @@ public class CharacterSelection extends World {
     }
 
     public void addLabels() {
-        addObject(new Label("Press Enter to Select character", 42), getWidth() / 2, 100);
+        addObject(new Label("Press Enter to Select character \n Use arrow keys to navigate", 42), getWidth() / 2, 100);
     }
 
     public void arrow() {
