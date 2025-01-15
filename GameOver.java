@@ -12,7 +12,7 @@ public class GameOver extends World {
     private MenuScreen menuScreen;
 
     // UI and game state variables
-    private String ending = "GameOver"; // Text displayed at game over
+    private String ending = "Game Over"; // Text displayed at game over
 
     private GreenfootSound GameOverMusic;
     private GreenfootSound YouLose;

@@ -119,7 +119,7 @@ public class Projectile extends Actor {
         if (world != null) {
             int x = getX();
             int y = getY();
-            return x > 0 && x < world.getWidth() && y > 0 && y < world.getHeight();
+            return x > 0 && x < world.getWidth() - 1 && y > 0 && y < world.getHeight();
         }
         return false;
     }

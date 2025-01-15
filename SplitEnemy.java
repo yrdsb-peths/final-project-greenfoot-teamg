@@ -30,8 +30,10 @@ public class SplitEnemy extends Enemy
             bullet.setRotation(getRotation() + 90);
             bullet.move(30);
 
-            // Rotate bullet to face player
-            bullet.turnTowards(game.player.getX(), game.player.getY());
+            // Rotate bullet to face 
+            if(game.player != null) {
+                bullet.turnTowards(game.player.getX(), game.player.getY());
+            }
             
             timer.mark();
         }
