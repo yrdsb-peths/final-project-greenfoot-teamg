@@ -15,6 +15,7 @@ public abstract class Boss extends Enemy implements Freezable
     int x = 300;
     int y = 100;
     int health;
+    int initialHealth;
     int attackNumber;
     
     public Boss(int health)
@@ -22,6 +23,7 @@ public abstract class Boss extends Enemy implements Freezable
         moveCooldown.mark();
         attackCooldown.mark();
         this.health = health;
+        initialHealth = health;
         turn(90);
     }
     
@@ -49,6 +51,10 @@ public abstract class Boss extends Enemy implements Freezable
     public void decreaseHealth(int damage)
     {
         health -= damage;  // Subtract the damage value from the health
+
+        double percentHP = health / (double) initialHealth;
+        getWorld().healthbar.changeSize(percentHP);
+
         if (health <= 0) {
             die();  // Call the die method when health reaches 0
         }

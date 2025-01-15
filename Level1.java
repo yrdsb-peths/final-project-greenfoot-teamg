@@ -91,6 +91,7 @@ public class Level1 extends Game {
                 waveDisplayed = false; // Reset flag
                 if(waveNumber == 5)
                 {
+
                     bossMusic.playLoop();
                     Boss boss = new Boss1();
                     addObject(boss, getWidth() / 2, -100);
@@ -142,6 +143,8 @@ public class Level1 extends Game {
         // Spawn enemies based on the current wave
         int enemyType = 0;
         if (waveNumber == 1) {
+            Healthbar healthbar = new Healthbar();
+            addObject(healthbar, 300, 30);
             // Wave 1: Add SimpleEnemies
             enemyType = Util.randomInt(0);
         } else if (waveNumber == 2) {
