@@ -69,7 +69,7 @@ public class InstructionScreen extends World
     public void addLabels() {
         addObject(new Label("ESC", 30), 40, 725);
         addObject(new Label("Back", 25), 100, 725);
-        addObject(new Label("Use left and right arrow keys \n or \"a\" and \"d\" \n to read through instructions", 30), 300, 60);
+        addObject(new Label("Use left and right arrow keys \n to read through instructions", 30), 300, 70);
 
         pageNum = new Label(1 + "/" + instructions.length, 40);
         addObject(pageNum, 300, 450);

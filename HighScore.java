@@ -68,17 +68,19 @@ private void addLabels() {
 
   // Sort the player info in descending order
   private List<NameScore> getSortTopScore() {
-    // Get the scores from GameOver.UserNames
-    List<NameScore> score = new ArrayList<>(VictScreen.UserNames);
-    Collections.sort(score);
-
-    // Limit the list to the MAX_SCORES
-    if (score.size() > MAX_SCORES) {
-        score = score.subList(0, MAX_SCORES);
+        // Get the scores from VictScreen.UserNames
+        List<NameScore> score = new ArrayList<>(VictScreen.UserNames);
+        
+        // Sort scores in ascending order (smallest time first)
+        Collections.sort(score);
+    
+        // Limit the list to the MAX_SCORES (top 5)
+        if (score.size() > MAX_SCORES) {
+            score = score.subList(0, MAX_SCORES);
+        }
+    
+        return score;
     }
-
-    return score;
-  }
 
    /**
      * Transitions to the menu screen and handles music cleanup.
