@@ -14,7 +14,6 @@ public class Settings extends World {
         this.menuScreen = menuScreen;
         this.pauseScreen = pauseScreen;
         this.audioManager = AudioManager.getInstance();
-
         GreenfootImage volumeBarImage = new GreenfootImage("VolumeBar.jpg");
         getBackground().drawImage(volumeBarImage, 120, 170);
 
