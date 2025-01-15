@@ -150,8 +150,7 @@ public class Character extends Actor implements Freezable{
         }
         getWorld().addObject(new Explosion(), getX(), getY());
         explosionSound.play();
-        Game game = (Game) getWorld();
-        game.resetWaveTimer();
+        ((Game)getWorld()).resetWaveTimer();
         getWorld().removeObject(this);
         
         // Transition to a game-over screen or similar
