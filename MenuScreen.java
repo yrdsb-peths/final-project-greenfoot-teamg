@@ -50,7 +50,7 @@ public class MenuScreen extends World {
     }
 
     private void addLabels() {
-        addObject(new Label("Title", 100), getWidth() / 2, 100);
+        addObject(new Label("Space Fighters: \n Bullet Hell", 70), getWidth() / 2, 100);
         addObject(new Label("Press Enter to Start", 50), getWidth() / 2, getHeight() / 2);
     }
 
