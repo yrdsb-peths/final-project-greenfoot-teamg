@@ -1,6 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-// Richochet bullet, bounces off the world boundaries once
+// Ricochet bullet, bounces off the world boundaries once
 
 public class EnemyBullet2 extends Bullet
 {
@@ -45,11 +45,12 @@ public class EnemyBullet2 extends Bullet
         }
     }
 
+    // bounces if on game edges
     public void checkBounce() {
         if(bounceTimer.millisElapsed() <= 5000) {
             Game game = (Game) getWorld(); // Game edges
             maxX = game.getWidth();
-            int rotation = getRotation();
+            int rotation = getRotation(); // bullet's rotation
     
             if(getX() <= minX + 1 || getX() >= maxX - 1) { // set angle if hits either sides
                 int ref = 180 - rotation;

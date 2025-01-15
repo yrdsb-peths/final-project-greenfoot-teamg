@@ -56,6 +56,13 @@ public abstract class Game extends World {
         addObject(player, getWidth() / 2, getHeight() - 50);
     }
     
+    // Makes health bar
+    public void makeHealthBar(Boss boss) {
+        Healthbar bar = new Healthbar();
+        boss.setHealthBar(bar);
+        addObject(bar, 300, 15);
+    }
+
     public void spawnEnemy(int enemyType)
     {
         Enemy enemy;

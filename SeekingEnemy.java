@@ -1,11 +1,13 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
+// Enemy that shoots seeking bullets
+
 public class SeekingEnemy extends Enemy
 {
     SimpleTimer timer = new SimpleTimer();
 
     public SeekingEnemy() {
-        GreenfootImage image = new GreenfootImage("EnemySpaceship1.png");
+        GreenfootImage image = new GreenfootImage("EnemySpaceShip1.png");
         image.scale(75, 75);
         image.rotate(90);
         this.setImage(image);

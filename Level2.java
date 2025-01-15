@@ -81,11 +81,44 @@ public class Level2 extends Game {
     public void act() {
         if(isFreeze == false)
         {
+            
             updateMusic();
             if (levelDisplayed == true) {
                 setupLevel();
             }
-    
+
+            // Handle pause and escape key
+            Util.handleEscapeKey(this, pauseScreen);
+
+            // Display the timer in Level 2 (same as Level 1)
+            updateTimerDisplay();
+
+            // Check if wave number should be displayed
+            if (waveDisplayed) {
+                addObject(new Label("Wave: " + waveNumber, 80), getWidth() / 2, getHeight() / 2); // Display wave number
+                                                                                                // label
+                if (getWaveTimeElapsed() > 3000) { // Check if 2 seconds have elapsed
+
+                    removeObjects(getObjects(Label.class)); // Remove wave number label
+                    waveDisplayed = false; // Reset flag
+                    isWaveStart = true;
+                    if (waveNumber == 5) {
+                        bossMusic.playLoop();
+                        Boss boss = new Boss2();
+                        addObject(boss, getWidth() / 2, -100);
+                        addObject(boss.hitbox, boss.getX(), boss.getY());
+                        // Boss health bar
+                        makeHealthBar(boss);
+                        
+                        enemiesSpawned++;
+                    }
+                    else if(waveNumber <= 3)
+                    {
+                        spawnEnemy(waveNumber-1);
+                    }
+                }
+            }
+
             // Handle pause and escape key
             Util.handleEscapeKey(this, pauseScreen);
     
