@@ -28,7 +28,7 @@ public class Level3 extends Game {
 
         // Show the "Level 1" label for 3 seconds before starting the gameplay
         if (levelDisplayed) {
-            addObject(new Label("Level 2", 50), getWidth() / 2, getHeight() / 2); // Display "Level 1"
+            addObject(new Label("Level 3", 50), getWidth() / 2, getHeight() / 2); // Display "Level 1"
             if (spawnTimer.millisElapsed() > 3000) { // Wait for 3 seconds
                 removeObjects(getObjects(Label.class)); // Remove the "Level 1" label
                 levelDisplayed = false; // Set flag to false to start the game
@@ -91,6 +91,7 @@ public class Level3 extends Game {
                     Boss boss = new Boss3();
                     addObject(boss, getWidth() / 2, -100);
                     addObject(boss.hitbox, boss.getX(), boss.getY());
+                    enemiesSpawned++;
                 }
                 else if(waveNumber <= 3)
                 {

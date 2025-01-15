@@ -174,6 +174,6 @@ public class Character extends Actor implements Freezable{
     public void unfreeze()
     {
         shootCooldown.unfreeze();
-        abilityCooldown.freeze();
+        abilityCooldown.unfreeze();
     }
 }

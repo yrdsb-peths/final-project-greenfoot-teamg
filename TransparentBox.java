@@ -1,11 +1,12 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.List;
 
 /**
  * Represents a smaller, invisible hitbox for the character.
  */
 public class TransparentBox extends Actor {
     private Actor actor; // Reference to the associated Character object
-
+    
     /**
      * Constructor to link the TransparentBox with the Character.
      */
@@ -52,9 +53,15 @@ public class TransparentBox extends Actor {
         
         if(isTouching(LaserBeam.class))
         {
-            LaserBeam laser = (LaserBeam) getOneIntersectingObject(LaserBeam.class);
-            int laserRotation = laser.getRotation();
-            boolean isSameSide = getY() >= laser.getY() && laserRotation <= 180 || getY() <= laser.getY() && laserRotation <= 360 && laserRotation >= 180;
+            boolean isSameSide = false;
+            for(LaserBeam laser: getIntersectingObjects(LaserBeam.class))
+            {
+                int laserRotation = laser.getRotation();
+                if(isSameSide == false)
+                {
+                    isSameSide = getY() >= laser.getY() && laserRotation <= 180 || getY() <= laser.getY() && laserRotation <= 360 && laserRotation >= 180;
+                }
+            }
             if(isSameSide)
             {
                 ((Character)actor).die();

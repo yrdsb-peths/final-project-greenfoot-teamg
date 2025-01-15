@@ -127,7 +127,7 @@ public class Boss3 extends Boss
         {
             if(attackSlower.millisElapsed() > 800)
             {
-               for(int i = 0; i < 3; i++)
+               for(int i = 0; i < 2; i++)
                {
                     Bullet bullet = new EnemyBullet3(getX(),getY());
                     int randomAngle = Util.randomInt(360);
@@ -174,7 +174,7 @@ public class Boss3 extends Boss
         {
             if(attackSlower.millisElapsed() > 800)
             {
-               for(int i = 0; i < 5; i++)
+               for(int i = 0; i < 3; i++)
                {   
                     int randInt = Util.randomInt(3);
                     Bullet bullet;
