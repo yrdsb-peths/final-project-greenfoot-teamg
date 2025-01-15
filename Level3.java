@@ -46,7 +46,7 @@ public class Level3 extends Game {
             removeObject(timerLabel);
         }
 
-        timerLabel = new Label("Time: " + levelTimer.millisElapsed() / 1000, 30);
+        timerLabel = new Label("Time: " + levelTimer.millisElapsed() / 1000  + "s", 30);
         addObject(timerLabel, getWidth() - 100, 20);
     }
 

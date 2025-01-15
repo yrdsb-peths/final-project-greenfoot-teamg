@@ -160,11 +160,11 @@ public class CharacterSelection extends World {
 
         // Add a new label for the current character's power-up
         if (indexShips == 0) {
-            powerUpLabel = new Label("Power-Up: Homing Bullet \n 30s  cooldown", 40);
+            powerUpLabel = new Label("Power-Up: Homing Bullet \n 30s cooldown \n 'v' to activate", 40);
         } else if (indexShips == 1) {
-            powerUpLabel = new Label("Power-Up: Double Damage \n 30s cooldown", 40);
+            powerUpLabel = new Label("Power-Up: Double Damage \n 30s cooldown \n 'v' to activate", 40);
         } else if (indexShips == 2) {
-            powerUpLabel = new Label("Power-Up: Force Field \n 30s cooldown", 40);
+            powerUpLabel = new Label("Power-Up: Force Field \n 30s cooldown \n 'v' to activate", 40);
         }
 
         // Position the label below the selected ship

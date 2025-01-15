@@ -189,7 +189,7 @@ public class Level1 extends Game {
         }
 
         // Create and add a new timer label with the updated time
-        timerLabel = new Label("Time: " + levelTimer.millisElapsed() / 1000, 30);
+        timerLabel = new Label("Time: " + levelTimer.millisElapsed() / 1000 + "s", 30);
         addObject(timerLabel, getWidth() - 100, 20); // Display timer in the top-right corner
     }
 
