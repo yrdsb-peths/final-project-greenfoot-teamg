@@ -69,7 +69,7 @@ private void addLabels() {
   // Sort the player info in descending order
   private List<NameScore> getSortTopScore() {
     // Get the scores from GameOver.UserNames
-    List<NameScore> score = new ArrayList<>(GameOver.UserNames);
+    List<NameScore> score = new ArrayList<>(VictScreen.UserNames);
     Collections.sort(score);
 
     // Limit the list to the MAX_SCORES
