@@ -61,7 +61,7 @@ public class EnemyBullet2 extends Bullet
     
     public void checkBounds() {
         Game game = (Game) getWorld();
-        if(bounceTimer.millisElapsed() > 5000)
+        if(bounceTimer.millisElapsed() > 5000) // If within bounce time, does not delete bullet if touching left/right border
         {
             if(getX() <= 0 || getY() <= 0 || getX() >= game.getWidth() - 1 || getY() >= game.getHeight() - 1) {
                 game.removeObject(this);

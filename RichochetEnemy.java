@@ -24,7 +24,7 @@ public class RichochetEnemy extends Enemy
             Bullet bullet = new EnemyBullet2();
             Game game = (Game) getWorld();
             game.addObject(bullet, getX(), getY());
-            bullet.turn(Util.randomInt(180));    
+            bullet.turn(Util.randomInt(180)); // Bullet comes out at a random angle in direction it faces
             timer.mark();   
         }
     }

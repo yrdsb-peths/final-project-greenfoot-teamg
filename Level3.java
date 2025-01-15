@@ -24,6 +24,7 @@ public class Level3 extends Game {
         levelMusic = new GreenfootSound("Stage3.mp3");
         levelMusic.playLoop();
         bossMusic = new GreenfootSound("Stage3Boss.mp3");
+        updateMusic();
     }
 
     @Override
@@ -45,7 +46,7 @@ public class Level3 extends Game {
             removeObject(timerLabel);
         }
 
-        timerLabel = new Label("Time: " + levelTimer.millisElapsed() / 1000, 30);
+        timerLabel = new Label("Time: " + levelTimer.millisElapsed() / 1000  + "s", 30);
         addObject(timerLabel, getWidth() - 100, 20);
     }
 
@@ -53,19 +54,19 @@ public class Level3 extends Game {
         if (wave == 1) {
             isWaveStart = false;
             enemiesSpawned = 0; // Reset the spawn counter for the wave
-            enemiesInWave = 18;
+            enemiesInWave = 10;
         } else if (wave == 2) {
             isWaveStart = false;
             enemiesSpawned = 0; // Reset the spawn counter for the wave
-            enemiesInWave = 20;
+            enemiesInWave = 12;
         } else if (wave == 3) {
             isWaveStart = false;
             enemiesSpawned = 0; // Reset the spawn counter for the wave
-            enemiesInWave = 22;
+            enemiesInWave = 14;
         } else if (wave == 4) {
             isWaveStart = false;
             enemiesSpawned = 0; // Reset the spawn counter for the wave
-            enemiesInWave = 24;
+            enemiesInWave = 16;
         } else if (wave == 5) {
             levelMusic.pause();
             warningSound.play();
@@ -128,6 +129,12 @@ public class Level3 extends Game {
                         Greenfoot.setWorld(new VictScreen(levelTimer, menuScreen)); 
                     }
                 }
+            }
+            
+            if(getObjects(Character.class).isEmpty() && waveTimer.millisElapsed() > 3000)
+            {
+                stopped();
+                Greenfoot.setWorld(new GameOver());
             }
         }
     }

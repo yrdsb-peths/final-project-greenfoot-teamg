@@ -35,7 +35,10 @@ public class DoubleEndEnemy extends Enemy
 
 
             bullet.setRotation(rotate + 90);
+            bullet.move(20);
+
             backBullet.setRotation(270 + rotate);
+            backBullet.move(20);
 
             rotate += 30;
             timer.mark();

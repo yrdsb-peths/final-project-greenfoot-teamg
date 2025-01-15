@@ -29,6 +29,7 @@ public class Level1 extends Game {
         levelMusic = new GreenfootSound("Stage1.mp3");
         bossMusic = new GreenfootSound("Stage1Boss.mp3");
         levelMusic.playLoop();
+        updateMusic();
         if(levelTimer != null)
         {
             levelTimer.mark(); // Start the level timer
@@ -150,6 +151,12 @@ public class Level1 extends Game {
             if (!levelEnded && levelTimer != null) {
                 updateTimerDisplay();
             }
+            
+            if(getObjects(Character.class).isEmpty() && waveTimer.millisElapsed() > 3000)
+            {
+                stopped();
+                Greenfoot.setWorld(new GameOver());
+            }
         }
     }
 
@@ -172,10 +179,6 @@ public class Level1 extends Game {
     private boolean areAllEnemiesDead() {
         // Check if there are no Enemy objects in the world
         boolean isClear = getObjects(Enemy.class).isEmpty();
-        if(isClear == true)
-        {
-            
-        }
         return isClear;
     }
 
@@ -186,7 +189,7 @@ public class Level1 extends Game {
         }
 
         // Create and add a new timer label with the updated time
-        timerLabel = new Label("Time: " + levelTimer.millisElapsed() / 1000, 30);
+        timerLabel = new Label("Time: " + levelTimer.millisElapsed() / 1000 + "s", 30);
         addObject(timerLabel, getWidth() - 100, 20); // Display timer in the top-right corner
     }
 

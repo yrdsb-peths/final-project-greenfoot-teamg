@@ -10,6 +10,7 @@ public class Character extends Actor implements Freezable{
     SimpleTimer abilityCooldown = new SimpleTimer();
     int whichCharacter;
     boolean isHoming, isDoubleDamage;
+    GreenfootSound explosionSound = new GreenfootSound("Explosion.mp3");
     
     /**
      * Constructor to set the character's initial image and create a hitbox.
@@ -147,11 +148,12 @@ public class Character extends Actor implements Freezable{
         if (hitbox != null) {
             getWorld().removeObject(hitbox);
         }
-        getWorld().stopped();
+        getWorld().addObject(new Explosion(), getX(), getY());
+        explosionSound.play();
+        ((Game)getWorld()).resetWaveTimer();
         getWorld().removeObject(this);
-
+        
         // Transition to a game-over screen or similar
-        Greenfoot.setWorld(new GameOver());
     }
     
     public boolean isOnScreen() {
