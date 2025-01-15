@@ -29,6 +29,7 @@ public class Level1 extends Game {
         levelMusic = new GreenfootSound("Stage1.mp3");
         bossMusic = new GreenfootSound("Stage1Boss.mp3");
         levelMusic.playLoop();
+        updateMusic();
         if(levelTimer != null)
         {
             levelTimer.mark(); // Start the level timer

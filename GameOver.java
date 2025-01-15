@@ -33,6 +33,7 @@ public class GameOver extends World {
         YouLose = new GreenfootSound("YouLose.mp3");
         GameOverMusic.playLoop();
         YouLose.play();
+        updateMusic();
     }
 
     public void act() {
@@ -98,5 +99,6 @@ public class GameOver extends World {
     private void updateMusic() {
         int effectiveVolume = audioManager.getEffectiveVolume();
         GameOverMusic.setVolume(effectiveVolume);
+        YouLose.setVolume(effectiveVolume);
     }
 }

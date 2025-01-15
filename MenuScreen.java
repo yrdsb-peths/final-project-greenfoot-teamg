@@ -26,6 +26,7 @@ public class MenuScreen extends World {
         
         // Initialize the background music
         menuMusic = new GreenfootSound("Menu.mp3");
+        updateMusic();
     }
 
     public void act() {
