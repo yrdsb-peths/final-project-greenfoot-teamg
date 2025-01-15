@@ -24,9 +24,10 @@ public class GameOver extends World {
     private boolean inputAccepted = true; // Flag to control input acceptance
     private int finalScore; // Player's final score
 
-    // Sound effects for game over screen
-    GreenfootSound GameOverMusic; // Background music
-    GreenfootSound YouLose; // Sound played when entering game over screen
+    private GreenfootSound GameOverMusic;
+    private GreenfootSound YouLose;
+
+    private AudioManager audioManager;
 
     public GameOver() {
         super(600, 750, 1);
@@ -34,17 +35,18 @@ public class GameOver extends World {
         menuScreen = new MenuScreen();
         setBackground(new GreenfootImage("Background.jpg"));
 
+        audioManager = AudioManager.getInstance();
+
         DisplayGameOver();
 
         // Initialize and play sound effects
         GameOverMusic = new GreenfootSound("GameOverMusic.mp3");
         YouLose = new GreenfootSound("YouLose.mp3");
-        GameOverMusic.playLoop();
-        YouLose.play();
     }
 
     public void act() {
         requestName();
+        updateMusic();
     }
 
     /**
@@ -86,6 +88,9 @@ public class GameOver extends World {
                 goMenuScreen();
 
                 inputAccepted = false;
+
+                // Stop the GameOver music after entering the name
+                stopped();
             } else if (key.equals("backspace")) {
                 // Handle backspace for name input
                 if (userName.length() > 0) {
@@ -141,5 +146,19 @@ public class GameOver extends World {
     public void stopped() {
         YouLose.pause();
         GameOverMusic.pause();
+    }
+
+    /**
+     * Updates the music based on the current volume settings from AudioManager.
+     */
+    private void updateMusic() {
+        int effectiveVolume = audioManager.getEffectiveVolume();
+        GameOverMusic.setVolume(effectiveVolume);
+
+        if (audioManager.isMuted()) {
+            GameOverMusic.pause();
+        } else if (!GameOverMusic.isPlaying()) {
+            GameOverMusic.playLoop();
+        }
     }
 }
