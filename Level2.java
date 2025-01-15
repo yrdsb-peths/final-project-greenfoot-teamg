@@ -180,6 +180,12 @@ public class Level2 extends Game {
                     }
                 }
             }
+            
+            if(getObjects(Character.class).isEmpty() && waveTimer.millisElapsed() > 3000)
+            {
+                stopped();
+                Greenfoot.setWorld(new GameOver());
+            }
         }           
     }
 

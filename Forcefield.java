@@ -80,11 +80,11 @@ public class Forcefield extends Actor
         {
             if(oldEnemyList == null)
             {
-                enemy.decreaseHealth(10);
+                enemy.decreaseHealth(3);
             }
             else if(!oldEnemyList.contains(enemy))
             {
-                enemy.decreaseHealth(10);
+                enemy.decreaseHealth(3);
             }
         }
         oldEnemyList = e;

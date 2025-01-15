@@ -150,6 +150,12 @@ public class Level1 extends Game {
             if (!levelEnded && levelTimer != null) {
                 updateTimerDisplay();
             }
+            
+            if(getObjects(Character.class).isEmpty() && waveTimer.millisElapsed() > 3000)
+            {
+                stopped();
+                Greenfoot.setWorld(new GameOver());
+            }
         }
     }
 
@@ -172,10 +178,6 @@ public class Level1 extends Game {
     private boolean areAllEnemiesDead() {
         // Check if there are no Enemy objects in the world
         boolean isClear = getObjects(Enemy.class).isEmpty();
-        if(isClear == true)
-        {
-            
-        }
         return isClear;
     }
 
