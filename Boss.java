@@ -58,7 +58,10 @@ public abstract class Boss extends Enemy implements Freezable
 
         // Change health bar
         double percentHP = health / (double) initialHealth;
-        healthBar.changeSize(percentHP);
+        if(healthBar.bar != null)
+        {
+            healthBar.changeSize(percentHP);
+        }
 
         if (health <= 0) {
             die();  // Call the die method when health reaches 0

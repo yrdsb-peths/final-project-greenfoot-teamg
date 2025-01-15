@@ -3,7 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Enemy extends Actor
 {
     // Health variable
-    protected int health = 1;
+    protected int health = 15;
     TransparentBox hitbox = new TransparentBox(this);
     GreenfootSound explosionSound = new GreenfootSound("Explosion.mp3");
     

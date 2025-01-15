@@ -11,7 +11,7 @@ public class Boss2 extends Boss
 {
     public Boss2()
     {
-        super(10);
+        super(150);
         GreenfootImage image = new GreenfootImage("BossSpaceShip1.png");
         image.scale(120,110);
         setImage(image);
