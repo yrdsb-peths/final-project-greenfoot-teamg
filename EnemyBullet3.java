@@ -22,8 +22,8 @@ public class EnemyBullet3 extends Bullet
     {
         if(((Game)getWorld()).isFreeze == false)
         {
-            checkBounds();
             moveBullet();
+            checkBounds();
         }
     }
 
