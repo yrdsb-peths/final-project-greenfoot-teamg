@@ -1,5 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
+// Enemy that shoots ricochet bullets
+
 public class RichochetEnemy extends Enemy
 {
     SimpleTimer timer = new SimpleTimer();

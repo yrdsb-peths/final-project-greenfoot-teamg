@@ -23,7 +23,6 @@ public abstract class Game extends World {
     PauseScreen pauseScreen;
     GreenfootSound levelMusic; // Music for the level
     GreenfootSound bossMusic; // Music for the boss
-    public Healthbar health;
 
     public Game(int width, int height, int cellSize, GreenfootImage selectedImage, int whichCharacter) {
         super(width, height, cellSize);
@@ -38,11 +37,6 @@ public abstract class Game extends World {
         spawnTimer.mark(); // Start the spawn timer
         levelTimer = new SimpleTimer(); // Initialize the level timer
         levelTimer.mark(); // Start the level timer
-    }
-
-    public void makeBar() {
-        health = new Healthbar();
-        addObject(health, 300, 80);
     }
 
     /**
@@ -60,6 +54,13 @@ public abstract class Game extends World {
         addObject(player, getWidth() / 2, getHeight() - 50);
     }
     
+    // Makes health bar
+    public void makeHealthBar(Boss boss) {
+        Healthbar bar = new Healthbar();
+        boss.setHealthBar(bar);
+        addObject(bar, 300, 15);
+    }
+
     public void spawnEnemy(int enemyType)
     {
         Enemy enemy;

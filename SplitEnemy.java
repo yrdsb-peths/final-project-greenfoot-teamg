@@ -1,5 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
+// Enemy that shoots split bullets
+
 public class SplitEnemy extends Enemy
 {
     SimpleTimer timer = new SimpleTimer();
@@ -28,6 +30,7 @@ public class SplitEnemy extends Enemy
             bullet.setRotation(getRotation() + 90);
             bullet.move(30);
 
+            // Rotate bullet to face player
             bullet.turnTowards(game.player.getX(), game.player.getY());
             
             timer.mark();

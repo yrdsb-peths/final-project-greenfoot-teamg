@@ -17,7 +17,8 @@ public abstract class Boss extends Enemy implements Freezable
     int health;
     int initialHealth;
     int attackNumber;
-    
+    Healthbar healthBar;
+
     public Boss(int health)
     {
         moveCooldown.mark();
@@ -29,7 +30,6 @@ public abstract class Boss extends Enemy implements Freezable
     
     public void act()
     {
-
         if(moveCooldown.millisElapsed() > 10000 && !isAttacking)
         {
             changePosition();
@@ -46,14 +46,20 @@ public abstract class Boss extends Enemy implements Freezable
             resumeAttack();
         }
     }
-    
+
+    // Sets health bar variable to the health bar
+    public void setHealthBar(Healthbar healthBar) {
+        this.healthBar = healthBar;
+    }
+
     // This method decreases the health of the boss
     public void decreaseHealth(int damage)
     {
         health -= damage;  // Subtract the damage value from the health
 
+        // Change health bar
         double percentHP = health / (double) initialHealth;
-        getWorld().healthbar.changeSize(percentHP);
+        healthBar.changeSize(percentHP);
 
         if (health <= 0) {
             die();  // Call the die method when health reaches 0
@@ -63,6 +69,7 @@ public abstract class Boss extends Enemy implements Freezable
     // Method for handling the boss' death (removal from the world)
     private void die()
     {
+        getWorld().removeObject(healthBar); // Remove health bar
         getWorld().removeObject(this);  // Remove the boss from the world
     }
     

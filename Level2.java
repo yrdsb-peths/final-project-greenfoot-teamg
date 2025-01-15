@@ -96,6 +96,8 @@ public class Level2 extends Game {
                     Boss boss = new Boss2();
                     addObject(boss, getWidth() / 2, -100);
                     addObject(boss.hitbox, boss.getX(), boss.getY());
+                    // Boss health bar
+                    makeHealthBar(boss);
                 }
                 else if(waveNumber <= 3)
                 {
