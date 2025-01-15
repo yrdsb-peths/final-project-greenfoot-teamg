@@ -22,7 +22,6 @@ public class EnemyBullet3 extends Bullet
     {
         if(((Game)getWorld()).isFreeze == false)
         {
-            checkBounds();
             moveBullet();
         }
     }
@@ -34,9 +33,20 @@ public class EnemyBullet3 extends Bullet
             if(calcDistance(inX, inY) > splitDis) {
                 splitBullets();
             }
+            else
+            {
+                checkBounds();
+            }
         }
     }
 
+    public void checkBounds() {
+        Game game = (Game) getWorld();
+        if(getX() <= 0 || getY() <= 0 || getX() >= game.getWidth() - 1 || getY() >= game.getHeight() - 1) {
+            game.removeObject(this);
+        }
+    }
+    
     // Current distance to initial
     public int calcDistance(int x, int y) {
         int dx = Math.abs(getX() - x);
