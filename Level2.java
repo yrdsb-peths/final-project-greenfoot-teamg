@@ -102,8 +102,11 @@ public class Level2 extends Game {
                     Boss boss = new Boss2();
                     addObject(boss, getWidth() / 2, -100);
                     addObject(boss.hitbox, boss.getX(), boss.getY());
-                } else if (waveNumber <= 3) {
-                    spawnEnemy(waveNumber - 1);
+                    enemiesSpawned++;
+                }
+                else if(waveNumber <= 3)
+                {
+                    spawnEnemy(waveNumber-1);
                 }
             }
         }
@@ -122,6 +125,7 @@ public class Level2 extends Game {
                 // Check if this was the boss wave and the boss is defeated
                 if (waveNumber == 5 && areAllEnemiesDead()) {
                     // Transition to Level 3 when the boss is defeated
+                    stopped();
                     Greenfoot.setWorld(new Level3(selectedShip, menuScreen, whichCharacter, levelTimer));
                 } else {
                     if (waveNumber < 5) {

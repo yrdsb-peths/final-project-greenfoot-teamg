@@ -126,9 +126,7 @@ public class CharacterSelection extends World {
     /**
      * Handle character selection and return to the game screen.
      */
-    public void selectCharacter() {
-        menuScreen.menuMusic.stop();
-        
+    public void selectCharacter() {        
         // Create a new image for the selected character
         GreenfootImage selectedShip = new GreenfootImage(characters[indexShips]);
         
@@ -141,7 +139,7 @@ public class CharacterSelection extends World {
             selectedShip.scale(75, 67);
         }
         
-        Greenfoot.setWorld(new Level1(selectedShip, menuScreen, indexShips));
+        Greenfoot.setWorld(new StageSelection(selectedShip, menuScreen, indexShips, this));
     }
 
     /**
