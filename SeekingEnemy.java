@@ -1,5 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
+// Enemy that shoots seeking bullets
+
 public class SeekingEnemy extends Enemy
 {
     SimpleTimer timer = new SimpleTimer();

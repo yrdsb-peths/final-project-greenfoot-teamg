@@ -42,6 +42,7 @@ public class EverythingEnemy extends Enemy
             cycle += 1;
             cycle %= 4;
 
+            // Split bullet
             if(bullet == null) {
                 game.addObject(split, getX(), getY());
                 split.turn(Util.randomInt(180));
