@@ -11,11 +11,16 @@ public class Settings extends World {
 
     public Settings(MenuScreen menuScreen, PauseScreen pauseScreen) {
         super(600, 750, 1);
+        GreenfootImage background = new GreenfootImage("blur.png");
+        background.scale(getWidth(), getHeight());
+        setBackground(background);
+
         this.menuScreen = menuScreen;
         this.pauseScreen = pauseScreen;
         this.audioManager = AudioManager.getInstance();
-        GreenfootImage volumeBarImage = new GreenfootImage("VolumeBar.jpg");
+        GreenfootImage volumeBarImage = new GreenfootImage("VolumeBar.png");
         getBackground().drawImage(volumeBarImage, 120, 170);
+        
 
         setupVolumeControls();
         addLabels();
@@ -73,7 +78,7 @@ public class Settings extends World {
     }
 
     private void updateSoundButtonImage() {
-        String imageName = audioManager.isMuted() ? "Muted.jpg" : "Sound.jpg";
+        String imageName = audioManager.isMuted() ? "Muted.png" : "Sound.png";
         soundButton.changeButtonImage(imageName, 70, 70);
     }
 
