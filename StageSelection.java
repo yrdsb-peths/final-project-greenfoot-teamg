@@ -25,12 +25,12 @@ public class StageSelection extends World
         this.characterSelection = characterSelection;
         levelLabel = new Label("Level: " + level, 50);
         waveLabel = new Label("Wave: " + wave, 50);
-        Label instructionsLabel = new Label("Press Enter To Select \n Level And Wave. \n Use arrow keys or \n WASD to change values.", 50);
-        Label warningLabel = new Label("*Games will not count towards \n leaderboard unless game \n is started at level 1 & wave 1", 30);
+        Label instructionsLabel = new Label("Press Enter To Select \n \n Use arrow keys to select \n Level and Wave", 40);
+        Label warningLabel = new Label("*Games will not count towards leaderboard \n unless game starts at level 1 & wave 1", 30);
         addObject(levelLabel, getWidth() / 2, getHeight() / 2);
         addObject(waveLabel, getWidth()/2, getHeight()/2 + 50);
         addObject(instructionsLabel, getWidth() / 2, getHeight() / 6);
-        addObject(warningLabel, getWidth()/2, 5 * getHeight()/6);
+        addObject(warningLabel, getWidth()/2, 5 * getHeight()/7);
         updateLabel();
     }
     
