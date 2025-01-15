@@ -4,9 +4,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 public class Healthbar extends Actor
 {
-    RedHealthbar bar;
+    RedHealthbar bar; // Changeable bar inside health bar
     Label label;
-    int barLength = 500;
+    int barLength = 500; // Size of health bar
     int barHeight = 50;
 
     public Healthbar() {
@@ -23,7 +23,7 @@ public class Healthbar extends Actor
 
     // Make the filler for the bar
     public void createBar() {
-        bar = new RedHealthbar(barLength, barHeight);
+        bar = new RedHealthbar(barLength, barHeight); // Filler has same size as health bar
         getWorld().addObject(bar, getX(), getY());
 
         label = new Label("BOSS HP:", 20); // Label for health bar description
@@ -34,7 +34,7 @@ public class Healthbar extends Actor
     public void changeSize(double percentage) {
         int newLength = (int) (bar.barLength * percentage);
 
-        // Scale cannot be less than 0
+        // Image cannot be equal to/less than 0 wide
         if(newLength <= 0) {
             bar.getImage().scale(1, barHeight);
             getWorld().removeObject(label);
