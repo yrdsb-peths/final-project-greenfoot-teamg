@@ -118,7 +118,7 @@ public class Level2 extends Game {
                     }
                     else if(waveNumber <= 3)
                     {
-                        spawnEnemy(waveNumber-1);
+                        spawnEnemy(waveNumber + 2);
                     }
                 }
             }
