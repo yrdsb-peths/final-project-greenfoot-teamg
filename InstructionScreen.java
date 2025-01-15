@@ -72,7 +72,7 @@ public class InstructionScreen extends World
         addObject(new Label("Use left and right arrow keys \n to read through instructions", 30), 300, 70);
 
         pageNum = new Label(1 + "/" + instructions.length, 40);
-        addObject(pageNum, 300, 450);
+        addObject(pageNum, 300, 475);
     }
 
     // Change page number when user uses arrow keys
