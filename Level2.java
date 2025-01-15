@@ -26,6 +26,7 @@ public class Level2 extends Game {
         pauseScreen = new PauseScreen(this, menuScreen); // Initialize the pause screen
 
         levelMusic = new GreenfootSound("Stage2.mp3");
+        levelMusic.playLoop();
         bossMusic = new GreenfootSound("Stage2Boss.mp3");
     }
 
@@ -91,7 +92,10 @@ public class Level2 extends Game {
             Util.handleEscapeKey(this, pauseScreen);
 
             // Display the timer in Level 2 (same as Level 1)
-            updateTimerDisplay();
+            if(levelTimer != null)
+            {
+                updateTimerDisplay();
+            }
 
             // Check if wave number should be displayed
             if (waveDisplayed) {
@@ -233,13 +237,5 @@ public class Level2 extends Game {
         int effectiveVolume = audioManager.getEffectiveVolume();
         levelMusic.setVolume(effectiveVolume);
         bossMusic.setVolume(effectiveVolume);
-
-        if (audioManager.isMuted()) {
-            levelMusic.pause();
-            bossMusic.pause();
-        } else if (!levelMusic.isPlaying()) {
-            levelMusic.playLoop();
-            bossMusic.playLoop();
-        }
     }
 }

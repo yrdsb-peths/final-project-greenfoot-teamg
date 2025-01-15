@@ -28,6 +28,7 @@ public class Level1 extends Game {
 
         levelMusic = new GreenfootSound("Stage1.mp3");
         bossMusic = new GreenfootSound("Stage1Boss.mp3");
+        levelMusic.playLoop();
         if(levelTimer != null)
         {
             levelTimer.mark(); // Start the level timer
@@ -226,13 +227,5 @@ public class Level1 extends Game {
 
         levelMusic.setVolume(effectiveVolume);
         bossMusic.setVolume(effectiveVolume);
-
-        if (audioManager.isMuted()) {
-            levelMusic.pause();
-            bossMusic.pause();
-        } else if (!levelMusic.isPlaying()) {
-            levelMusic.playLoop();
-            bossMusic.playLoop();
-        }
     }
 }

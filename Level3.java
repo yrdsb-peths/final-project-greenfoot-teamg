@@ -22,6 +22,7 @@ public class Level3 extends Game {
         pauseScreen = new PauseScreen(this, menuScreen); // Initialize the pause screen
 
         levelMusic = new GreenfootSound("Stage3.mp3");
+        levelMusic.playLoop();
         bossMusic = new GreenfootSound("Stage3Boss.mp3");
     }
 
@@ -167,13 +168,5 @@ public class Level3 extends Game {
         int effectiveVolume = audioManager.getEffectiveVolume();
         levelMusic.setVolume(effectiveVolume);
         bossMusic.setVolume(effectiveVolume);
-
-        if (audioManager.isMuted()) {
-            levelMusic.pause();
-            bossMusic.pause();
-        } else if (!levelMusic.isPlaying()) {
-            levelMusic.playLoop();
-            bossMusic.playLoop();
-        }
     }
 }

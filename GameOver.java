@@ -31,6 +31,8 @@ public class GameOver extends World {
         // Initialize and play sound effects
         GameOverMusic = new GreenfootSound("GameOverMusic.mp3");
         YouLose = new GreenfootSound("YouLose.mp3");
+        GameOverMusic.playLoop();
+        YouLose.play();
     }
 
     public void act() {
@@ -96,11 +98,5 @@ public class GameOver extends World {
     private void updateMusic() {
         int effectiveVolume = audioManager.getEffectiveVolume();
         GameOverMusic.setVolume(effectiveVolume);
-
-        if (audioManager.isMuted()) {
-            GameOverMusic.pause();
-        } else if (!GameOverMusic.isPlaying()) {
-            GameOverMusic.playLoop();
-        }
     }
 }

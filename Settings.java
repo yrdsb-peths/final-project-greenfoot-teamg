@@ -89,9 +89,6 @@ public class Settings extends World {
 
     private void updateGameSounds() {
         int effectiveVolume = audioManager.getEffectiveVolume();
-        if (menuScreen != null) {
-            menuScreen.started(); // Ensure menu music state matches current settings
-        }
     }
 
     public void updateVolume(int newVolume) {

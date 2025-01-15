@@ -8,6 +8,11 @@ public class Util {
     // Continuously check for "escape" key press to return to the menu screen
     if (Greenfoot.isKeyDown("escape") && checker != true) {
       checker = true;
+      if (currentScreen instanceof Game) {
+            ((Game) currentScreen).freezeGame();
+            ((Game) currentScreen).stopped();
+      }
+      
       Greenfoot.setWorld(targetScreen);
     } else if (!Greenfoot.isKeyDown("escape")) {
       checker = false;
@@ -21,6 +26,7 @@ public class Util {
         
         if (targetScreen instanceof Game) {
             ((Game) targetScreen).resumeGame();
+            ((Game) targetScreen).started();
         }
         
         Greenfoot.setWorld(targetScreen);

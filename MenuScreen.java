@@ -20,7 +20,7 @@ public class MenuScreen extends World {
         audioManager = AudioManager.getInstance();
         setupButtons();
         addLabels();
-
+        
         // Initialize characterSelection
         characterSelection = new CharacterSelection(this);
         
@@ -83,7 +83,7 @@ public class MenuScreen extends World {
     
     public void started() {
         // Ensure the music resumes when the world starts
-        updateMusic();
+        menuMusic.playLoop();
     }
     
     public void stopped() {
@@ -94,11 +94,5 @@ public class MenuScreen extends World {
     private void updateMusic() {
         int effectiveVolume = audioManager.getEffectiveVolume();
         menuMusic.setVolume(effectiveVolume);
-
-        if (audioManager.isMuted()) {
-            menuMusic.pause();
-        } else if (!menuMusic.isPlaying()) {
-            menuMusic.playLoop();
-        }
     }
 }
