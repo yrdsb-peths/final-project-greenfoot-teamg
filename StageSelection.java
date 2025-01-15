@@ -53,15 +53,22 @@ public class StageSelection extends World
                 Game game;
                 if(level == 1)
                 {
-                    game = new Level1(selectedImage, menuScreen, whichCharacter);
+                    if(wave == 1)
+                    {
+                        game = new Level1(selectedImage, menuScreen, whichCharacter, new SimpleTimer());
+                    }
+                    else
+                    {
+                        game = new Level1(selectedImage, menuScreen, whichCharacter, null);
+                    }
                 }
                 else if(level == 2)
                 {
-                    game = new Level2(selectedImage, menuScreen, whichCharacter);
+                    game = new Level2(selectedImage, menuScreen, whichCharacter, null);
                 }
                 else
                 {
-                    game = new Level3(selectedImage, menuScreen, whichCharacter);
+                    game = new Level3(selectedImage, menuScreen, whichCharacter, null);
                 }
                 game.waveNumber = wave;
                 Greenfoot.setWorld(game);

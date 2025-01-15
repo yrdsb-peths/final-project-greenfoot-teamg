@@ -5,6 +5,7 @@ public class Enemy extends Actor
     // Health variable
     protected int health = 1;
     TransparentBox hitbox = new TransparentBox(this);
+    GreenfootSound explosionSound = new GreenfootSound("Explosion.mp3");
     
     // This method decreases the health of the enemy
     public void decreaseHealth(int damage) {
@@ -17,6 +18,7 @@ public class Enemy extends Actor
     // Method for handling the enemy's death (removal from the world)
     private void die() {
         getWorld().addObject(new Explosion(), getX(), getY());
+        explosionSound.play();
         getWorld().removeObject(this);  // Remove the enemy from the world
     }
 
@@ -28,5 +30,9 @@ public class Enemy extends Actor
     // Overridden act method for basic movement
     public void act() {
         moveDown();  // Ensure every enemy moves down
+        if(getY() >= getWorld().getHeight() - 1)
+        {
+           getWorld().removeObject(this); 
+        }
     }
 }

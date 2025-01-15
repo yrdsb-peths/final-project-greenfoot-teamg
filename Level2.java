@@ -70,6 +70,8 @@ public class Level2 extends Game {
         } else if (wave == 5) {
             levelMusic.pause();
             isWaveStart = false;
+            warningSound.play();
+            addObject(new BossAlertAnimation(), getWidth()/2, getHeight()/6);
             enemiesInWave = 1; // Wave 5 has only the boss (1 enemy)
         }
         waveDisplayed = true; // Set flag to true to display wave number
@@ -86,7 +88,10 @@ public class Level2 extends Game {
         Util.handleEscapeKey(this, pauseScreen);
 
         // Display the timer in Level 2 (same as Level 1)
-        updateTimerDisplay();
+        if(levelTimer != null)
+        {
+            updateTimerDisplay();
+        }
 
         // Check if wave number should be displayed
         if (waveDisplayed) {

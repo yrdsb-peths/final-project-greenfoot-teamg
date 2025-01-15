@@ -16,8 +16,8 @@ public class Level1 extends Game {
      *                       transition.
      * @param whichCharacter The index of the selected character.
      */
-    public Level1(GreenfootImage selectedImage, MenuScreen menuScreen, int whichCharacter) {
-        super(600, 750, 1, selectedImage, whichCharacter);
+    public Level1(GreenfootImage selectedImage, MenuScreen menuScreen, int whichCharacter, SimpleTimer levelTimer) {
+        super(600, 750, 1, selectedImage, whichCharacter, levelTimer);
         this.selectedShip = selectedImage; // Store the selected ship image
         this.menuScreen = menuScreen; // Store the menu screen
         this.whichCharacter = whichCharacter; // Store the character index
@@ -28,8 +28,10 @@ public class Level1 extends Game {
 
         levelMusic = new GreenfootSound("Stage1.mp3");
         bossMusic = new GreenfootSound("Stage1Boss.mp3");
-        levelTimer = new SimpleTimer(); // Initialize the level timer
-        levelTimer.mark(); // Start the level timer
+        if(levelTimer != null)
+        {
+            levelTimer.mark(); // Start the level timer
+        }
     }
 
     @Override
@@ -73,6 +75,8 @@ public class Level1 extends Game {
         } else if (wave == 5) {
             // Boss wave: Add the Boss1 to the world
             levelMusic.pause();
+            warningSound.play();
+            addObject(new BossAlertAnimation(), getWidth()/2, getHeight()/6);
             isWaveStart = false;
             enemiesInWave = 1; // Wave 5 has only the boss (1 enemy)
         }
@@ -138,7 +142,7 @@ public class Level1 extends Game {
         }
 
         // Display the timer in the top right corner
-        if (!levelEnded) {
+        if (!levelEnded && levelTimer != null) {
             updateTimerDisplay();
         }
     }

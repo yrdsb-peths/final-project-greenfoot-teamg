@@ -9,7 +9,7 @@ public class DoubleEndEnemy extends Enemy
 
 
     public DoubleEndEnemy() {
-        GreenfootImage image = new GreenfootImage("EnemySpaceShip5.png");
+        GreenfootImage image = new GreenfootImage("EnemySpaceShip6.png");
         image.scale(75, 75);
         image.rotate(90);
         this.setImage(image);

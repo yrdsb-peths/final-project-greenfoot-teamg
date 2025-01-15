@@ -7,6 +7,7 @@ public class Level3 extends Game {
     private boolean bossDefeated = false;  // Track if the boss is defeated
     private GreenfootSound levelMusic;
     private GreenfootSound bossMusic;
+    private AudioManager audioManager;
 
     /**
      * Constructor for Level3.
@@ -58,6 +59,8 @@ public class Level3 extends Game {
             enemiesInWave = 24;
         } else if (wave == 5) {
             levelMusic.pause();
+            warningSound.play();
+            addObject(new BossAlertAnimation(), getWidth()/2, getHeight()/6);
             enemiesInWave = 1; // Only the boss in wave 5
         }
         waveDisplayed = true;
@@ -72,7 +75,10 @@ public class Level3 extends Game {
             setupLevel();
         }
 
-        updateTimerDisplay();
+        if(levelTimer != null)
+        {
+            updateTimerDisplay();
+        }
         Util.handleEscapeKey(this, pauseScreen);
 
         if (waveDisplayed) {

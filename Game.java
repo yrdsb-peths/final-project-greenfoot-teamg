@@ -7,7 +7,7 @@ public abstract class Game extends World {
     protected Character player;
     public boolean isFreeze = false;
     protected SimpleTimer waveTimer; // Add waveTimer as a shared resource for all levels
-    int waveNumber = 5;  // Starts at wave 1
+    int waveNumber = 1;  // Starts at wave 1
     int enemiesInWave = 2; // Number of enemies in the current wave
     int enemiesSpawned = 0; // Tracks how many enemies have been spawned in the current wave
     SimpleTimer spawnTimer; // Timer for controlling enemy spawn timing
@@ -23,21 +23,7 @@ public abstract class Game extends World {
     PauseScreen pauseScreen;
     GreenfootSound levelMusic; // Music for the level
     GreenfootSound bossMusic; // Music for the boss
-
-    public Game(int width, int height, int cellSize, GreenfootImage selectedImage, int whichCharacter) {
-        super(width, height, cellSize);
-
-        // Create and add the player's character
-        player = new Character(selectedImage, whichCharacter);
-        addObject(player, getWidth() / 2, getHeight() - 50);
-
-        // Initialize the wave timer
-        waveTimer = new SimpleTimer();
-        spawnTimer = new SimpleTimer(); // Initialize the spawn timer
-        spawnTimer.mark(); // Start the spawn timer
-        levelTimer = new SimpleTimer(); // Initialize the level timer
-        levelTimer.mark(); // Start the level timer
-    }
+    GreenfootSound warningSound; //warning sound for boss
     
     public Game(int width, int height, int cellSize, GreenfootImage selectedImage, int whichCharacter, SimpleTimer levelTimer) {
         super(width, height, cellSize);
@@ -51,6 +37,7 @@ public abstract class Game extends World {
         spawnTimer = new SimpleTimer(); // Initialize the spawn timer
         spawnTimer.mark(); // Start the spawn timer
         this.levelTimer = levelTimer;
+        warningSound = new GreenfootSound("beep_warning.mp3");
     }
     
 

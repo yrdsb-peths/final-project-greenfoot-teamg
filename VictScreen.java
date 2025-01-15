@@ -28,7 +28,7 @@ public class VictScreen extends World {
         super(600, 750, 1);
         this.finalScore = finalScore;
         this.menuScreen = menuScreen;
-
+        
         setBackground(new GreenfootImage("Background.jpg"));
 
         // Display victory screen elements
@@ -37,7 +37,17 @@ public class VictScreen extends World {
 
     public void act() {
         // Request for player name input after victory
-        requestName();
+        if(finalScore != null)
+        {
+            requestName();
+        }
+        else
+        {
+            if(Greenfoot.isKeyDown("enter"))
+            {
+                goMenuScreen();
+            }
+        }
     }
 
     /**
@@ -47,15 +57,17 @@ public class VictScreen extends World {
     private void displayVictoryScreen() {
         Label end = new Label(ending, 60);  // Display "You Win!" message
         addObject(end, 300, 70);
-
-        // Display the final score based on the elapsed time (in seconds)
-        String scoreMessage = "Final Time: " + finalScore.millisElapsed() / 1000 + "s";
-        Label scoreDisplay = new Label(scoreMessage, 35);  // Display final score
-        addObject(scoreDisplay, 300, 120);
-
-        // Add label prompting user for name input
-        Label name = new Label("Enter your name: ", 40);  
-        addObject(name, 300, 200);
+        if(finalScore != null)
+        {
+            // Display the final score based on the elapsed time (in seconds)
+            String scoreMessage = "Final Time: " + finalScore.millisElapsed() / 1000 + "s";
+            Label scoreDisplay = new Label(scoreMessage, 35);  // Display final score
+            addObject(scoreDisplay, 300, 120);
+    
+            // Add label prompting user for name input
+            Label name = new Label("Enter your name: ", 40);  
+            addObject(name, 300, 200);
+        }
 
         // Instruction for continuing after entering the name
         Label enter = new Label("Press Enter to Continue", 35);  
@@ -106,7 +118,7 @@ public class VictScreen extends World {
      */
     private void addHighScore(NameScore newScore) {
         UserNames.add(newScore);  // Add new score to the list
-        Collections.sort(UserNames);  // Sort the leaderboard in descending order
+        Collections.sort(UserNames);  // Sort the leaderboard in acsending order
 
         // Keep only the top scores (up to MAX_SCORES)
         if (UserNames.size() > MAX_SCORES) {

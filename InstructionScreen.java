@@ -16,7 +16,7 @@ public class InstructionScreen extends World
         "Different enemies and bullets \n have different attack patterns.",
         "Identify them by their ship \n design and bullet colour.",
         "Press \"escape\" at any time to \n pause and access the settings.",
-        "Try to get the highest \n score possible. Good luck!"
+        "Try to beat the game \n as fast as possible. \n Good luck!"
     };
     
     // Variables used in the class
@@ -53,25 +53,23 @@ public class InstructionScreen extends World
     // Instruction navigation with arrow keys
     public void arrowNav() {
         // Prevents accidentally changing screens too fast
-        if(cooldown.millisElapsed() > 150) {
+        if(cooldown.millisElapsed() > 300) {
 
-            if(Greenfoot.isKeyDown("Left")) {
+            if(Greenfoot.isKeyDown("Left") || Greenfoot.isKeyDown("a")) {
                 previousInstruction();
+                cooldown.mark();
             }
-            else {
-                if(Greenfoot.isKeyDown("Right")) {
-                    nextInstruction();
-                }
+            else if(Greenfoot.isKeyDown("Right") || Greenfoot.isKeyDown("d")){
+                nextInstruction();
+                cooldown.mark();
             }
-
-            cooldown.mark();
         }
     }
 
     public void addLabels() {
         addObject(new Label("ESC", 30), 40, 725);
         addObject(new Label("Back", 25), 100, 725);
-        addObject(new Label("Use left and right arrow keys \n to read through instructions", 30), 300, 60);
+        addObject(new Label("Use left and right arrow keys \n or \"a\" and \"d\" \n to read through instructions", 30), 300, 60);
 
         pageNum = new Label(1 + "/" + instructions.length, 40);
         addObject(pageNum, 300, 450);

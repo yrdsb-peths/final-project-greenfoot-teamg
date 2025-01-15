@@ -7,7 +7,7 @@ public class TripleSplitEnemy extends Enemy
     SimpleTimer timer = new SimpleTimer();
 
     public TripleSplitEnemy() {
-        GreenfootImage image = new GreenfootImage("EnemySpaceShip8.png");
+        GreenfootImage image = new GreenfootImage("EnemySpaceShip5.png");
         image.scale(75, 75);
         image.rotate(90);
         this.setImage(image);

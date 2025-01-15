@@ -8,7 +8,7 @@ public class EverythingEnemy extends Enemy
     int cycle = 0;
 
     public EverythingEnemy() {
-        GreenfootImage image = new GreenfootImage("EnemySpaceShip6.png");
+        GreenfootImage image = new GreenfootImage("EnemySpaceShip8.png");
         image.scale(75, 75);
         image.rotate(90);
         this.setImage(image);
