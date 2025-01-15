@@ -22,13 +22,17 @@ public class VictScreen extends World {
     private String userName = ""; // Stores user's input name
     private Label input; // Label to display user's input
     private boolean inputAccepted = true; // Flag to control input acceptance
-    private SimpleTimer finalScore; // Player's final time (as SimpleTimer object)
+    private int finalTime; // Player's final time
+    private SimpleTimer finalScore; //Players's final time as a  
 
-    public VictScreen(SimpleTimer finalScore, MenuScreen menuScreen) {
+    public VictScreen(SimpleTimer levelTimer, MenuScreen menuScreen) {
         super(600, 750, 1);
-        this.finalScore = finalScore;
+        finalScore = levelTimer;
         this.menuScreen = menuScreen;
-        
+        if(finalScore != null)
+        {
+            finalTime = finalScore.millisElapsed();
+        }
         setBackground(new GreenfootImage("Background.jpg"));
 
         // Display victory screen elements
@@ -60,7 +64,7 @@ public class VictScreen extends World {
         if(finalScore != null)
         {
             // Display the final score based on the elapsed time (in seconds)
-            String scoreMessage = "Final Time: " + finalScore.millisElapsed() / 1000 + "s";
+            String scoreMessage = "Final Time: " + finalTime / 1000 + "s";
             Label scoreDisplay = new Label(scoreMessage, 35);  // Display final score
             addObject(scoreDisplay, 300, 120);
     
@@ -90,7 +94,7 @@ public class VictScreen extends World {
         if (key != null) {
             if (key.equals("enter") && !userName.trim().isEmpty()) {
                 // Create new score entry with player name and final score
-                int scoreInSeconds = finalScore.millisElapsed() / 1000;  // Convert millis to seconds
+                int scoreInSeconds = finalTime / 1000;  // Convert millis to seconds
                 NameScore playerInfo = new NameScore(userName, scoreInSeconds);
                 addHighScore(playerInfo);
                 goMenuScreen();  // Transition to menu screen
