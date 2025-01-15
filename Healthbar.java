@@ -12,7 +12,6 @@ public class Healthbar extends Actor
     public Healthbar() {
         GreenfootImage image = new GreenfootImage("HealthBarBox.png");
         image.scale(barLength, barHeight);
-        image.setTransparency(90);
         setImage(image);   
     }
 

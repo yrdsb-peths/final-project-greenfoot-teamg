@@ -28,6 +28,7 @@ public class Level2 extends Game {
         levelMusic = new GreenfootSound("Stage2.mp3");
         levelMusic.playLoop();
         bossMusic = new GreenfootSound("Stage2Boss.mp3");
+        updateMusic();
     }
 
     @Override
@@ -52,22 +53,22 @@ public class Level2 extends Game {
             // Wave 1: Add only SimpleEnemies
             isWaveStart = false;
             enemiesSpawned = 0; // Reset the spawn counter for the wave
-            enemiesInWave = 10; // Wave 1 starts with 10 SimpleEnemies
+            enemiesInWave = 6; // Wave 1 starts with 6 enemies
         } else if (wave == 2) {
             // Wave 2: Add SimpleEnemies + SeekingEnemies
             isWaveStart = false;
             enemiesSpawned = 0; // Reset the spawn counter for the wave
-            enemiesInWave = 12; // Wave 2 will have 12 enemies in total
+            enemiesInWave = 8; // Wave 2 will have 8 enemies in total
         } else if (wave == 3) {
             // Wave 3: Add SimpleEnemies + SeekingEnemies + SplitEnemies
             isWaveStart = false;
             enemiesSpawned = 0; // Reset the spawn counter for the wave
-            enemiesInWave = 14; // Wave 3 will have 14 enemies in total
+            enemiesInWave = 10; // Wave 3 will have 10 enemies in total
         } else if (wave == 4) {
             // Wave 4: A combination of all previous enemies, plus more
             isWaveStart = false;
             enemiesSpawned = 0; // Reset the spawn counter for the wave
-            enemiesInWave = 16; // Wave 4 will have 16 enemies in total
+            enemiesInWave = 12; // Wave 4 will have 12 enemies in total
         } else if (wave == 5) {
             levelMusic.pause();
             isWaveStart = false;
