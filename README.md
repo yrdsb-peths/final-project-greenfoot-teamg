@@ -24,3 +24,4 @@
 
 # Known Issues
 - Greenfoot might not be able to read "EnemySpaceShip0", in the case this error occurs, copy the suggestion by Greenfoot and replace the image in the SimpleEnemy class.
+- There are some bugs with the pause screen, try to use it sparingly
