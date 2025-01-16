@@ -78,6 +78,9 @@ public class CharacterSelection extends World {
         addObject(rightArrow, getWidth() / 2 + 200, 390);
     }
 
+    /**
+     * check for key presses
+     */
     public void handleEnterKey() {
         if (Greenfoot.isKeyDown("enter") && !MenuScreen.enterChecker) {
             MenuScreen.enterChecker = true;

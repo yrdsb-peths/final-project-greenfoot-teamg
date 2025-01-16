@@ -34,6 +34,9 @@ public class VictScreen extends World {
         }
     }
 
+    /**
+     * displaying the victory screen and asking for name
+     */
     private void displayVictoryScreen() {
         Label end = new Label("You Win!", 60);
         addObject(end, 300, 70);
@@ -52,7 +55,10 @@ public class VictScreen extends World {
         input = new Label("", 40);
         addObject(input, 300, 250);
     }
-
+    
+    /**
+     * name request checks for name and give to high score to calculate leaderboard 
+     */
     public void requestName() {
         if (!inputAccepted)
             return;
@@ -98,6 +104,7 @@ public class VictScreen extends World {
             UserNames = new ArrayList<>(UserNames.subList(0, MIN_SCORES));
         }
     }
+    
 
     public void goMenuScreen() {
         Greenfoot.setWorld(menuScreen);  // Transition to the menu screen
