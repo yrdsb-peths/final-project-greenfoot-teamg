@@ -1,7 +1,7 @@
 import greenfoot.*;
 
 public class MenuScreen extends World {
-    public static boolean enterChecker = false;
+    public static boolean enterChecker = true;
     private Button settingButton;
     private Button leaderboardButton;
     private Button instructionsButton;
@@ -10,6 +10,9 @@ public class MenuScreen extends World {
     GreenfootSound menuMusic; // Music for the menu 
     private AudioManager audioManager;
 
+    /**
+     * Constructor for the menu screen, sets up every variable.
+     */
     public MenuScreen() {
         super(600, 750, 1);
         GreenfootImage background = new GreenfootImage("CharacterSelection.jpg");
@@ -29,11 +32,17 @@ public class MenuScreen extends World {
         updateMusic();
     }
 
+    /**
+     * Updates the music volume and checks if enter is pressed
+     */
     public void act() {
         handleEnterKey();
         updateMusic();
     }
 
+    /**
+     * Adds the butons at the top right of the screen.
+     */
     private void setupButtons() {
         // Setting button
         settingButton = new Button(this::goSettingScreen, "");
@@ -49,12 +58,20 @@ public class MenuScreen extends World {
         instructionsButton.changeButtonImage("questionMark.png", 95, 95);
         addObject(instructionsButton, 550, 190);
     }
-
+    
+    /**
+     * Adds the labels of the menu screen
+     */
     private void addLabels() {
         addObject(new Label("Space Fighters: \n Bullet Hell", 70), getWidth() / 2, 100);
         addObject(new Label("Press Enter to Start", 50), getWidth() / 2, getHeight() / 2);
+        addObject(new Label("(New Players click on question mark before starting)", 30), getWidth() / 2, getHeight() / 2 + 50);
+
     }
 
+    /**
+     * If enter is pressed, world will switch to CharacterSelection.
+     */
     private void handleEnterKey() {
         if(Greenfoot.isKeyDown("enter") && enterChecker == false) {
             enterChecker = true;
@@ -66,32 +83,53 @@ public class MenuScreen extends World {
         }
     }
 
+    /**
+     * World switches to InstructionsScreen
+     */
     private void goInstructionsScreen() {
         Greenfoot.setWorld(new InstructionScreen(this));
     }
 
+    /**
+     * World switches to SettingScreen
+     */
     private void goSettingScreen() {
         Greenfoot.setWorld(new Settings(this, null)); // Pass the MenuScreen instance and null for PauseScreen
     }
 
+    /**
+     * World switches to CharacterSelection
+     */
     private void gocharacterselection() {
         Greenfoot.setWorld(characterSelection);
     }
 
+    /**
+     * World switches to HighScoresScreen
+     */
     private void goHighScoresScreen() {
         Greenfoot.setWorld(new HighScore(this));
     }
     
+    /**
+     * If start button is pressed, play music.
+     */
     public void started() {
         // Ensure the music resumes when the world starts
         menuMusic.playLoop();
     }
     
+    /**
+     * If pause button is pressed, stop music.
+     */
     public void stopped() {
         // Pause the music when the world is stopped
         menuMusic.pause();
     }
 
+    /**
+     * Changes the volume of the music.
+     */
     private void updateMusic() {
         int effectiveVolume = audioManager.getEffectiveVolume();
         menuMusic.setVolume(effectiveVolume);

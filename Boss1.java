@@ -6,6 +6,9 @@ public class Boss1 extends Boss
     SimpleTimer curveCooldown = new SimpleTimer();
     SimpleTimer test1 = new SimpleTimer();
     
+    /**
+     * Constructor for the boss, sets up all the variables
+     */
     public Boss1()
     {
         super(150);  // Initial health
@@ -15,6 +18,9 @@ public class Boss1 extends Boss
         curveCooldown.mark();
     }
     
+    /**
+     * Calls the super class act if game is not frozen, and if cooldown is over, shoots a random curve bullet
+     */
     public void act()
     {
         if(((Game)getWorld()).isFreeze == false)
@@ -28,19 +34,27 @@ public class Boss1 extends Boss
         }
     }
     
-
+    /**
+     * Calls the super class method freeze() & freezes curveCooldown
+     */
     public void freeze()
     {
         super.freeze();
         curveCooldown.freeze();
     }
     
+    /**
+     * Calls the super class method unfreeze() & unfreezes curveCooldown
+     */
     public void unfreeze()
     {
         super.unfreeze();
         curveCooldown.unfreeze();
     }
     
+    /**
+     * 1/10 chance to shoot a random curve bullet
+     */
     public void randomCurveBall()
     {
         if(Util.randomInt(9) == 0){
@@ -48,11 +62,17 @@ public class Boss1 extends Boss
         }
     }
     
+    /**
+     * Creates a curve bullet and adds it on top of the boss
+     */
     public void shootCurveBall(){
         Bullet bullet = new EnemyBullet4();
         getWorld().addObject(bullet, getX(), getY());
     }
     
+    /**
+     * Shoots a bunch of curve bullets downwards
+     */
     public void attack1(){
         if(attackSlower.millisElapsed() > 50)
         {
@@ -65,6 +85,9 @@ public class Boss1 extends Boss
         }
     }
     
+    /**
+     * Shoots a bunch of normal bullets in random directions
+     */
     public void attack2(){
         if(attackSlower.millisElapsed() > 100)
         {
@@ -82,6 +105,9 @@ public class Boss1 extends Boss
         }
     }
     
+    /**
+     * Shoots a bunch of seeking bullets, after a set amount of time, these bullets will explode into curve bullets.
+     */
     public void attack3(){
         // Shoot a bunch of normal bullets, at the end turn into curve bullets and circle around
         if(attackSlower.millisElapsed() > 100)

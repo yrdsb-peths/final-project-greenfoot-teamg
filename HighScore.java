@@ -5,6 +5,9 @@ public class HighScore extends World {
     private MenuScreen menuScreen;
     private static final int MAX_SCORES = 5; // Maximum number of scores that are accepted
 
+    /**
+     * Constructor for the HighScore class. Sets up all the variables.
+     */
     public HighScore(MenuScreen menuScreen) {
         super(600, 750, 1);
         GreenfootImage background = new GreenfootImage("CharacterSelection.jpg");
@@ -18,16 +21,25 @@ public class HighScore extends World {
         addLabels();
     }
 
+    /**
+     * Checks if escape is pressed. If it is, it will switch worlds to the menu screen
+     */
     public void act() {
         // Update volume
         Util.handleEscapeKey(this, menuScreen);
     }
 
+    /**
+     * Adds the esc and back labels
+     */
     private void addLabels() {
         addObject(new Label("ESC", 30), 40, 725);
         addObject(new Label("Back", 25), 100, 725);
     }
 
+    /**
+     * Displays the high scores onto the screen
+     */
     public void displayHighScores() {
         // y-intercept
         int yint = 150;
@@ -66,7 +78,9 @@ public class HighScore extends World {
         }
     }
 
-    // Get the sorted top scores from VictScreen.UserNames
+    /**
+     * Get the sorted top scores from VictScreen.UserNames
+     */
     private List<NameScore> getSortTopScore() {
         // Get the scores from VictScreen.UserNames
         List<NameScore> score = new ArrayList<>(VictScreen.UserNames);

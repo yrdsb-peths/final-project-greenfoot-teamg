@@ -15,6 +15,9 @@ public class VictScreen extends World {
     private GreenfootSound victoryMusic;
     private AudioManager audioManager;
 
+    /**
+     * Constructor for victory screen, sets up all the variables.
+     */
     public VictScreen(SimpleTimer levelTimer, MenuScreen menuScreen) {
         super(600, 750, 1);
         finalScore = levelTimer;
@@ -30,6 +33,9 @@ public class VictScreen extends World {
         updateMusic();
     }
 
+    /**
+     * check if final score exists, otherwise checks if enter is pressed then goes to menu screen.
+     */
     public void act() {
         if (finalScore != null) {
             requestName();
@@ -113,15 +119,24 @@ public class VictScreen extends World {
     }
     
 
+    /**
+     * Switches to menu screen
+     */
     public void goMenuScreen() {
         Greenfoot.setWorld(menuScreen);  // Transition to the menu screen
     }
     
+    /**
+     * If pause is pressed, stop all music.
+     */
     public void stopped()
     {
         victoryMusic.pause();
     }
     
+    /**
+     * If start is pressed, continue playing all music.
+     */
     public void started()
     {
         victoryMusic.playLoop();

@@ -13,6 +13,9 @@ public class StageSelection extends World
     Label levelLabel;
     Label waveLabel;
     
+    /**
+     * Constructor for the stage selection class, sets up all the varibles
+     */
     public StageSelection(GreenfootImage selectedImage, MenuScreen menuScreen, int whichCharacter, CharacterSelection characterSelection)
     {    
         super(600, 750, 1); 
@@ -31,9 +34,14 @@ public class StageSelection extends World
         addObject(waveLabel, getWidth()/2, getHeight()/2 + 50);
         addObject(instructionsLabel, getWidth() / 2, getHeight() / 6);
         addObject(warningLabel, getWidth()/2, 5 * getHeight()/7);
+        addObject(new Label("ESC", 30), 40, 725);
+        addObject(new Label("Back", 25), 100, 725);
         updateLabel();
     }
     
+    /**
+     * Constantly checks if escape, up, down, right, or left is pressed
+     */
     public void act()
     {
         Util.handleEscapeKey(this, characterSelection);
@@ -44,6 +52,9 @@ public class StageSelection extends World
         }
     }
     
+    /**
+     * If enter is pressed, switches to game world and chooses level
+     */
     public boolean handleEnter()
     {
         if(Greenfoot.isKeyDown("enter"))
@@ -82,6 +93,9 @@ public class StageSelection extends World
         return false;
     }
     
+    /**
+     * If right or left is pressed, changes level or wave up and down
+     */
     public boolean handleRightLeft()
     {
         if(Greenfoot.isKeyDown("a") || Greenfoot.isKeyDown("left"))
@@ -137,6 +151,9 @@ public class StageSelection extends World
         return false;
     }
     
+    /**
+     * If up is pressed, selects level, if down is pressed, selects wave.
+     */
     public void handleUpDown()
     {
         if(Greenfoot.isKeyDown("w") || Greenfoot.isKeyDown("up"))
@@ -151,6 +168,9 @@ public class StageSelection extends World
         }
     }
     
+    /**
+     * Updates the labels
+     */
     public void updateLabel()
     {
         if(isSelectLevel)

@@ -28,11 +28,17 @@ public class BossAlertAnimation extends Actor implements Freezable
         }
     }
     
+    /**
+     * Freezes existTimer
+     */
     public void freeze()
     {
         existTimer.freeze();
     }
     
+    /**
+     * Unfreezes existTimer
+     */
     public void unfreeze()
     {
         existTimer.unfreeze();

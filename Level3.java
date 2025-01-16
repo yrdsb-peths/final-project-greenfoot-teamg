@@ -4,10 +4,6 @@ public class Level3 extends Game {
 
     private PauseScreen pauseScreen;
     private MenuScreen menuScreen;
-    private boolean bossDefeated = false;  // Track if the boss is defeated
-    private GreenfootSound levelMusic;
-    private GreenfootSound bossMusic;
-    private AudioManager audioManager;
 
     /**
      * Constructor for Level3.
@@ -17,8 +13,6 @@ public class Level3 extends Game {
         super(600, 750, 1, selectedImage, whichCharacter, levelTimer);
         this.menuScreen = menuScreen;
 
-        audioManager = AudioManager.getInstance();
-
         pauseScreen = new PauseScreen(this, menuScreen); // Initialize the pause screen
 
         levelMusic = new GreenfootSound("Stage3.mp3");
@@ -27,6 +21,9 @@ public class Level3 extends Game {
         updateMusic();
     }
 
+    /**
+     * Displays the level label
+     */
     @Override
     protected void setupLevel() {
         setBackground("Stage3Background.png");
@@ -41,6 +38,9 @@ public class Level3 extends Game {
         }
     }
 
+    /**
+     * updates the timer label
+     */
     private void updateTimerDisplay() {
         if (timerLabel != null) {
             removeObject(timerLabel);
@@ -49,7 +49,10 @@ public class Level3 extends Game {
         timerLabel = new Label("Time: " + levelTimer.millisElapsed() / 1000  + "s", 30);
         addObject(timerLabel, getWidth() - 100, 20);
     }
-
+    
+    /**
+     * Method to setup the current wave
+     */
     private void setupWave(int wave) {
         if (wave == 1) {
             isWaveStart = false;
@@ -77,6 +80,9 @@ public class Level3 extends Game {
         resetWaveTimer();
     }
 
+    /**
+     * Master code that controls the entire game
+     */
     public void act() {
         if(isFreeze == false)
         {
@@ -140,7 +146,9 @@ public class Level3 extends Game {
         }
     }
 
-
+    /**
+     * Spawns enemies depending on the wave
+     */
     private void spawnEnemies() {
         int enemyType = 0;
         if (waveNumber == 1) {
@@ -151,30 +159,5 @@ public class Level3 extends Game {
             enemyType = Util.randomInt(8);
         }
         spawnEnemy(enemyType);
-    }
-
-    private boolean areAllEnemiesDead() {
-        return getObjects(Enemy.class).isEmpty();
-    }
-
-    public void started() {
-        if (waveNumber < 5) {
-            levelMusic.playLoop();
-        } else {
-            bossMusic.playLoop();
-        }
-    }
-
-    public void stopped() {
-        if (waveNumber < 5) {
-            levelMusic.pause();
-        } else {
-            bossMusic.pause();
-        }
-    }
-    public void updateMusic() {
-        int effectiveVolume = audioManager.getEffectiveVolume();
-        levelMusic.setVolume(effectiveVolume);
-        bossMusic.setVolume(effectiveVolume);
     }
 }

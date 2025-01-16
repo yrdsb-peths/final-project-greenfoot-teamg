@@ -8,6 +8,9 @@ public class EnemyBullet2 extends Bullet
     int maxX;
     int minX = 0;
 
+    /**
+     * Constructor for the richochet bullet
+     */
     public EnemyBullet2() {
         GreenfootImage image = new GreenfootImage("EnemyBullet2.png");
         image.scale(10, 10);
@@ -15,7 +18,10 @@ public class EnemyBullet2 extends Bullet
         moveTimer.mark();
         bounceTimer.mark();
     }
-
+    
+    /**
+     * moves bullet and checks if object is out of bounds if game is not frozen
+     */
     public void act()
     {
         if(((Game)getWorld()).isFreeze == false)
@@ -25,18 +31,27 @@ public class EnemyBullet2 extends Bullet
         }
     }
     
+    /**
+     * calls the super class method freeze() and freezes bounceTimer
+     */
     public void freeze()
     {
         super.freeze();
         bounceTimer.freeze();
     }
     
+    /**
+     * calls the super class method unfreeze() and unfreezes bounceTimer
+     */
     public void unfreeze()
     {
         super.unfreeze();
         bounceTimer.unfreeze();
     }
     
+    /**
+     * Moves the bullet
+     */
     public void moveBullet() {
         if(moveTimer.millisElapsed() > 20) {
             checkBounce();
@@ -45,7 +60,9 @@ public class EnemyBullet2 extends Bullet
         }
     }
 
-    // bounces if on game edges
+    /**
+     * bounces if on game edges
+     */
     public void checkBounce() {
         if(bounceTimer.millisElapsed() <= 5000) {
             Game game = (Game) getWorld(); // Game edges
@@ -59,6 +76,9 @@ public class EnemyBullet2 extends Bullet
         }
     }
     
+    /**
+     * Checks if ball is out of bounds
+     */
     public void checkBounds() {
         Game game = (Game) getWorld();
         if(bounceTimer.millisElapsed() > 5000) // If within bounce time, does not delete bullet if touching left/right border

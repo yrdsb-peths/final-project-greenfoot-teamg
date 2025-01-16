@@ -6,7 +6,9 @@
  */
 public interface Freezable  
 {
+    //Abstract method
     public void freeze();
     
+    //Abstract method
     public void unfreeze();
 }

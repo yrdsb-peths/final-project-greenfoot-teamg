@@ -9,6 +9,9 @@ public class Settings extends World {
     private VolumeSlider volumeSlider;
     private AudioManager audioManager;
 
+    /**
+     * Constructor for the class, sets up all the variables
+     */
     public Settings(MenuScreen menuScreen, PauseScreen pauseScreen) {
         super(600, 750, 1);
         GreenfootImage background = new GreenfootImage("blur.png");
@@ -26,6 +29,9 @@ public class Settings extends World {
         addLabels();
     }
 
+    /**
+     * Creates the volume slider and the mute button
+     */
     private void setupVolumeControls() {
         volumeSlider = new VolumeSlider(audioManager.getVolume());
         addObject(volumeSlider, 250, 350);
@@ -35,16 +41,25 @@ public class Settings extends World {
         addObject(soundButton, 100, 350);
     }
 
+    /**
+     * constantly checks if escape is pressed and changes the volume label
+     */
     public void act() {
         updateVolumeDisplay();
         handleEscapeNavigation();
     }
 
+    /**
+     * changes the volume label
+     */
     private void updateVolumeDisplay() {
         String volumeText = audioManager.isMuted() ? "Muted" : audioManager.getVolume() + "%";
         volumeLabel.setValue("Volume: " + volumeText);
     }
 
+    /**
+     * if escape is pressed, world switches to previous world.
+     */
     private void handleEscapeNavigation() {
         if (pauseScreen != null && pauseScreen.isFromSettings()) {
             Util.handleEscapeKey(this, pauseScreen);
@@ -53,6 +68,9 @@ public class Settings extends World {
         }
     }
 
+    /**
+     * Adds the labels
+     */
     private void addLabels() {
         volumeLabel = new Label("Volume: " + audioManager.getVolume() + "%", 30);
         addObject(volumeLabel, 290, 300);
@@ -65,23 +83,17 @@ public class Settings extends World {
         addObject(new Label("Settings", 50), 300, 100);
     }
 
-    public void goMenuScreen() {
-        Greenfoot.setWorld(menuScreen);
-    }
-
-    public void goPauseScreen() {
-        if (pauseScreen != null) {
-            Greenfoot.setWorld(pauseScreen);
-        } else {
-            Greenfoot.setWorld(menuScreen);
-        }
-    }
-
+    /**
+     * Changes the sound button image
+     */
     private void updateSoundButtonImage() {
         String imageName = audioManager.isMuted() ? "Muted.png" : "Sound.png";
         soundButton.changeButtonImage(imageName, 70, 70);
     }
 
+    /**
+     * Swaps the volume from muted to unmuted
+     */
     public void toggleSound() {
         audioManager.setMuted(!audioManager.isMuted());
         if (audioManager.isMuted()) {
@@ -92,10 +104,16 @@ public class Settings extends World {
         updateGameSounds();
     }
 
+    /**
+     * Changes the volume in audio manager
+     */
     private void updateGameSounds() {
         int effectiveVolume = audioManager.getEffectiveVolume();
     }
 
+    /**
+     * updates the volume in the game
+     */
     public void updateVolume(int newVolume) {
         audioManager.setVolume(newVolume);
         // Automatically mute when volume reaches 0

@@ -9,6 +9,9 @@ public class EnemyBullet1 extends Bullet
     double reqAngle = Math.PI / 6; // Minimum angle to target, smaller angle is more accurate
     int turnAmount = 2; // Amount the bullet can turn each time
 
+    /**
+     * Constructor for the seeking bullet, sets up all the variables.
+     */
     public EnemyBullet1() {
         GreenfootImage image = new GreenfootImage("EnemyBullet1.png");
         image.scale(10, 10);
@@ -16,11 +19,17 @@ public class EnemyBullet1 extends Bullet
         moveTimer.mark();
     }
 
+    /**
+     * Calls the super class act
+     */
     public void act()
     {
         super.act();
     }
 
+    /**
+     * If  player is far enough, bullet will home into them, otherwise move forward.
+     */
     public void moveBullet() {
         Game game = (Game) getWorld();
 

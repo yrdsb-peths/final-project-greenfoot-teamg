@@ -18,6 +18,7 @@ public class Enemy extends Actor
     // Method for handling the enemy's death (removal from the world)
     public void die() {
         getWorld().addObject(new Explosion(), getX(), getY());
+        explosionSound.setVolume(AudioManager.getInstance().getEffectiveVolume());
         explosionSound.play();
         getWorld().removeObject(this);  // Remove the enemy from the world
     }

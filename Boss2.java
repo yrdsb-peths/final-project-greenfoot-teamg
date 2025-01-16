@@ -9,6 +9,9 @@ import java.util.List;
  */
 public class Boss2 extends Boss
 {
+    /**
+     * Constructor that initializes all the variabels
+     */
     public Boss2()
     {
         super(200);
@@ -17,6 +20,9 @@ public class Boss2 extends Boss
         setImage(image);
     }
     
+    /**
+     * Calls the super class act is game is not frozen
+     */
     public void act()
     {
         if(((Game)getWorld()).isFreeze == false)
@@ -32,6 +38,9 @@ public class Boss2 extends Boss
         }
     }
     
+    /**
+     * Shoots a bunch of returning bullets, at the end shoots a giant laser
+     */
     public void attack1(){
         if(attackTimer.millisElapsed() <= 7000)
         {
@@ -84,6 +93,9 @@ public class Boss2 extends Boss
         }
     }
     
+    /**
+     * Sends lasers in 4 directions, these lasers rotate.
+     */
     public void attack2(){
         if(!isSetup)
         {
@@ -120,6 +132,9 @@ public class Boss2 extends Boss
         }
     }
     
+    /**
+     * Sets up the second attack, creates 4 lasers that have a random turning direction.
+     */
     public void attack2Setup()
     {
         int random = Util.randomInt(1);
@@ -132,13 +147,16 @@ public class Boss2 extends Boss
             }
             else
             {
-                LaserBeam laser = new LaserBeam(-1, i*90, -1, 10);
+                LaserBeam laser = new LaserBeam(1, i*90, 361, 10);
                 getWorld().addObject(laser, getX(), getY());
             }
         }
         isSetup = true;
     }
     
+    /**
+     * Boss starts moving all over the place while firing return bullets.
+     */
     public void attack3(){
         if(!isSetup)
         {

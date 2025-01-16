@@ -19,6 +19,9 @@ public class GameOver extends World {
 
     private AudioManager audioManager;
 
+    /**
+     * Constructor for the game over class. Sets up all the variables
+     */
     public GameOver() {
         super(600, 750, 1);
         menuScreen = new MenuScreen();
@@ -36,6 +39,9 @@ public class GameOver extends World {
         updateMusic();
     }
 
+    /**
+     * Checks if enter is pressed and changes volume
+     */
     public void act() {
         runEnter();
         updateMusic();
@@ -68,7 +74,9 @@ public class GameOver extends World {
         }
     }
 
-
+    /**
+     * Switches world back to menu screen
+     */
     public void goMenuScreen() {
         menuScreen.started();
         GameOverMusic.stop();

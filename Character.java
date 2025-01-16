@@ -140,15 +140,13 @@ public class Character extends Actor implements Freezable{
      * Handle character death by removing the character, the hitbox, and transitioning to a game-over screen.
      */
     public void die() {
-        // Create an explosion effect
-        //Explosion explosion = new Explosion();
-        //getWorld().addObject(explosion, getX(), getY());
-
         // Remove the hitbox and character
         if (hitbox != null) {
             getWorld().removeObject(hitbox);
         }
         getWorld().addObject(new Explosion(), getX(), getY());
+        // Create an explosion effect
+        explosionSound.setVolume(AudioManager.getInstance().getEffectiveVolume());
         explosionSound.play();
         ((Game)getWorld()).resetWaveTimer();
         getWorld().removeObject(this);

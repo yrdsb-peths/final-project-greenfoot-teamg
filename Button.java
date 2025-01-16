@@ -65,6 +65,9 @@ public class Button extends Actor {
         updateButtonImage(); // Refresh the button image with the new text
     }
     
+    /**
+     * Changes the button image
+     */
     public void changeButtonImage(String imageName, int width, int height) {
         // Create and scale the base image
         GreenfootImage newButtonImage = new GreenfootImage(imageName);
@@ -91,7 +94,9 @@ public class Button extends Actor {
         setImage(newButtonImage);
     }
     
-    // Keep the original method for backward compatibility
+    /**
+     *  Keep the original method for backward compatibility
+     */
     public void changeButtonImage(String imageName) {
         changeButtonImage(imageName, 200, 50); // Default sizes
     }

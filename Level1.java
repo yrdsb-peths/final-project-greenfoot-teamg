@@ -5,7 +5,6 @@ public class Level1 extends Game {
     private MenuScreen menuScreen; // Add menuScreen
     private GreenfootImage selectedShip; // Store the selected ship image
     private int whichCharacter; // Store the character index
-    private AudioManager audioManager;
     private boolean escapePressed = false;
 
     /**
@@ -36,6 +35,9 @@ public class Level1 extends Game {
         }
     }
 
+    /**
+     * Displays the level label
+     */
     @Override
     protected void setupLevel() {
         // Set the background for Level 1
@@ -52,7 +54,9 @@ public class Level1 extends Game {
         }
     }
 
-    // Method to setup the current wave
+    /**
+     * Method to setup the current wave
+     */
     private void setupWave(int wave) {
         if (wave == 1) {
             // Wave 1: Add only SimpleEnemies
@@ -87,6 +91,9 @@ public class Level1 extends Game {
         resetWaveTimer(); // Reset the wave timer for displaying wave number
     }
 
+    /**
+     * Master code that controls the entire game
+     */
     public void act() {
         if(isFreeze == false)
         {
@@ -103,7 +110,7 @@ public class Level1 extends Game {
             if (waveDisplayed) {
                 addObject(new Label("Wave: " + waveNumber, 80), getWidth() / 2, getHeight() / 2); // Display wave number
                                                                                                   // label
-                if (getWaveTimeElapsed() > 3000) { // Check if 2 seconds have elapsed
+                if (getWaveTimeElapsed() > 3000) { // Check if 3 seconds have elapsed
                     removeObjects(getObjects(Label.class)); // Remove wave number label
                     isWaveStart = true;
                     waveDisplayed = false; // Reset flag
@@ -160,6 +167,9 @@ public class Level1 extends Game {
         }
     }
 
+    /**
+     * Spawns enemies depending on the wave
+     */
     private void spawnEnemies() {
         // Spawn enemies based on the current wave
         int enemyType = 0;
@@ -175,13 +185,10 @@ public class Level1 extends Game {
         }
         spawnEnemy(enemyType);
     }
-
-    private boolean areAllEnemiesDead() {
-        // Check if there are no Enemy objects in the world
-        boolean isClear = getObjects(Enemy.class).isEmpty();
-        return isClear;
-    }
-
+    
+    /**
+     * Updates the timer label
+     */
     private void updateTimerDisplay() {
         // Remove the old timer label if it exists
         if (timerLabel != null) {
@@ -191,44 +198,5 @@ public class Level1 extends Game {
         // Create and add a new timer label with the updated time
         timerLabel = new Label("Time: " + levelTimer.millisElapsed() / 1000 + "s", 30);
         addObject(timerLabel, getWidth() - 100, 20); // Display timer in the top-right corner
-    }
-
-    private void stopTimer() {
-        // Freeze the timer by setting the timerStopped flag to true
-        timerStopped = true;
-    }
-
-    public void bossDefeated() {
-        // This method is called when the boss is defeated
-        isBossDefeated = true; // Set the boss as defeated
-        bossMusic.pause();
-    }
-
-    public void started() {
-        // Ensure the music resumes when the world starts
-        if (waveNumber < 5) {
-            levelMusic.playLoop();
-        } else {
-            bossMusic.playLoop();
-        }
-    }
-
-    public void stopped() {
-        // Pause the music when the world is stopped
-        if (waveNumber < 5) {
-            levelMusic.pause();
-        } else {
-            bossMusic.pause();
-        }
-    }
-
-    /**
-     * Updates the music based on the current volume settings from AudioManager.
-     */
-    private void updateMusic() {
-        int effectiveVolume = audioManager.getEffectiveVolume();
-
-        levelMusic.setVolume(effectiveVolume);
-        bossMusic.setVolume(effectiveVolume);
     }
 }
