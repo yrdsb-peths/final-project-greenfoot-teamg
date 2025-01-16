@@ -47,8 +47,14 @@ public class Boss3 extends Boss
      */
     public void freeze()
     {
-        super.act();
+        moveCooldown.freeze();
+        attackCooldown.freeze();
         bounceCooldown.freeze();
+        if(isTimeStop == false)
+        {
+            attackTimer.freeze();
+            attackSlower.freeze();
+        }
     }
     
     /**

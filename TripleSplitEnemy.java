@@ -6,6 +6,9 @@ public class TripleSplitEnemy extends Enemy
 {
     SimpleTimer timer = new SimpleTimer();
 
+    /**
+     * Constructor fo the triple split enemy
+     */
     public TripleSplitEnemy() {
         GreenfootImage image = new GreenfootImage("EnemySpaceShip5.png");
         image.scale(75, 75);
@@ -14,13 +17,18 @@ public class TripleSplitEnemy extends Enemy
         timer.mark();
     }
 
+    /**
+     * Calls the super class act and creates the bullets.
+     */
     public void act()
     {
         super.act();  // Ensure the enemy moves down
         makeBullet();
     }
 
-    
+    /**
+     * Shoots 3 split bullets 3 times in 3 different directions.
+     */
     public void makeBullet() {
         if(timer.millisElapsed() > 3000) {
             Game game = (Game) getWorld();

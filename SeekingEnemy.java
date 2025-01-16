@@ -6,6 +6,9 @@ public class SeekingEnemy extends Enemy
 {
     SimpleTimer timer = new SimpleTimer();
 
+    /**
+     * Constructor for the seeking enemy, sets up all the variables.
+     */
     public SeekingEnemy() {
         GreenfootImage image = new GreenfootImage("EnemySpaceShip1.png");
         image.scale(75, 75);
@@ -14,12 +17,18 @@ public class SeekingEnemy extends Enemy
         timer.mark();
     }
 
+    /**
+     * Calls the super class act and creates a bullet.
+     */
     public void act()
     {
         super.act();  // Ensure the enemy moves down
         makeBullet();
     }
 
+    /**
+     * Creates a seeking bullet and shoots it.
+     */
     public void makeBullet() {
         if(timer.millisElapsed() > 1000) {
             Bullet bullet = new EnemyBullet1();

@@ -43,17 +43,6 @@ public class VolumeSlider extends Actor {
    }
 
    /**
-    * Called when the slider is added to a world.
-    * Sets the initial position based on current volume.
-    * 
-    * @param world The world this slider is added to
-    */
-   @Override
-   protected void addedToWorld(World world) {
-       setInitialPosition(audioManager.getVolume());
-   }
-
-   /**
     * Calculates and sets the initial position of the slider.
     * 
     * @param initialVolume The volume to base position on (0-100)

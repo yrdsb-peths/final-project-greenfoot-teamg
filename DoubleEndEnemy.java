@@ -7,7 +7,9 @@ public class DoubleEndEnemy extends Enemy
     SimpleTimer timer = new SimpleTimer();
     int rotate = 0;
 
-
+    /**
+     * Constructor for the double end enemy, sets up all the variables
+     */
     public DoubleEndEnemy() {
         GreenfootImage image = new GreenfootImage("EnemySpaceShip6.png");
         image.scale(75, 75);
@@ -16,12 +18,18 @@ public class DoubleEndEnemy extends Enemy
         timer.mark();
     }
 
+    /**
+     * Calls the super class act and creates the bullets.
+     */
     public void act()
     {
         super.act();  // Ensure the enemy moves down
         makeBullet();
     }
 
+    /**
+     * Shoots a seeking bullet out one end and a split bullet out the other end in a circle.
+     */
     public void makeBullet() {
         if(timer.millisElapsed() > 500) {
             Game game = (Game) getWorld();

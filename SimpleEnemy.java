@@ -6,6 +6,9 @@ public class SimpleEnemy extends Enemy
 {
     SimpleTimer timer = new SimpleTimer();
 
+    /**
+     * Constructor for the simple enemy, sets up all the variables.
+     */
     public SimpleEnemy() {
         GreenfootImage image = new GreenfootImage("EnemySpaceShip0.png");
         image.scale(75, 75);
@@ -14,12 +17,18 @@ public class SimpleEnemy extends Enemy
         timer.mark();
     }
 
+    /**
+     * Calls the super class act and creates a bullet.
+     */
     public void act()
     {
         super.act();  // Ensure the enemy moves down
         makeBullet();
     }
 
+    /**
+     * Repeatedly shoots normal bullets in front of the ship.
+     */
     public void makeBullet() {
         if(timer.millisElapsed() > 700) {
             EnemyBullet0 bullet = new EnemyBullet0();
