@@ -57,7 +57,7 @@ public class HighScore extends World {
         // Create and display headers for Rank, Name, and Score.
         Label headerRank = new Label("Rank", Header_FontSize);
         Label headerName = new Label("Name", Header_FontSize);
-        Label headerScore = new Label("Score", Header_FontSize);
+        Label headerScore = new Label("Time", Header_FontSize);
 
         addObject(headerRank, 150, yint); // Position the Rank header.
         addObject(headerName, 300, yint); // Position the Name header.
