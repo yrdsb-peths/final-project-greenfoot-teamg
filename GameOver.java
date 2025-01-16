@@ -12,13 +12,16 @@ public class GameOver extends World {
     private MenuScreen menuScreen;
 
     // UI and game state variables
-    private String ending = "GameOver"; // Text displayed at game over
+    private String ending = "Game Over"; // Text displayed at game over
 
     private GreenfootSound GameOverMusic;
     private GreenfootSound YouLose;
 
     private AudioManager audioManager;
 
+    /**
+     * Constructor for the game over class. Sets up all the variables
+     */
     public GameOver() {
         super(600, 750, 1);
         menuScreen = new MenuScreen();
@@ -33,8 +36,12 @@ public class GameOver extends World {
         YouLose = new GreenfootSound("YouLose.mp3");
         GameOverMusic.playLoop();
         YouLose.play();
+        updateMusic();
     }
 
+    /**
+     * Checks if enter is pressed and changes volume
+     */
     public void act() {
         runEnter();
         updateMusic();
@@ -67,7 +74,9 @@ public class GameOver extends World {
         }
     }
 
-
+    /**
+     * Switches world back to menu screen
+     */
     public void goMenuScreen() {
         menuScreen.started();
         GameOverMusic.stop();
@@ -98,5 +107,6 @@ public class GameOver extends World {
     private void updateMusic() {
         int effectiveVolume = audioManager.getEffectiveVolume();
         GameOverMusic.setVolume(effectiveVolume);
+        YouLose.setVolume(effectiveVolume);
     }
 }

@@ -55,11 +55,17 @@ public class Explosion extends Actor implements Freezable{
     }
   }
 
+  /**
+   * Freezes the animation timer.
+   */
   public void freeze()
   {
       animationTimer.freeze();
   }
   
+  /**
+   * Unfreezes the animation timer
+   */
   public void unfreeze()
   {
       animationTimer.unfreeze();

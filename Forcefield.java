@@ -59,6 +59,9 @@ public class Forcefield extends Actor
         }
     }
     
+    /**
+     * Checks if it is touching bullets, enemies, or bosses.
+     */
     public void checkTouching()
     {
         removeBullets();
@@ -66,6 +69,9 @@ public class Forcefield extends Actor
         checkBoss();
     }
     
+    /**
+     * Remove all bullets touching forcefield
+     */
     public void removeBullets()
     {
         List<Bullet> bulletList = getIntersectingObjects(Bullet.class);
@@ -73,6 +79,9 @@ public class Forcefield extends Actor
             getWorld().removeObject(bullet);
     }
     
+    /**
+     * If touching enemy, remove 3 hp
+     */
     public void checkEnemy()
     {
         List<Enemy> e = getIntersectingObjects(Enemy.class);
@@ -80,16 +89,19 @@ public class Forcefield extends Actor
         {
             if(oldEnemyList == null)
             {
-                enemy.decreaseHealth(10);
+                enemy.decreaseHealth(3);
             }
             else if(!oldEnemyList.contains(enemy))
             {
-                enemy.decreaseHealth(10);
+                enemy.decreaseHealth(3);
             }
         }
         oldEnemyList = e;
     }
     
+    /**
+     * If touching boss, remove 10 hp
+     */
     public void checkBoss()
     {
         if(isTouching(Boss.class) && hitBoss == false)
@@ -97,13 +109,5 @@ public class Forcefield extends Actor
             ((Boss)getOneIntersectingObject(Boss.class)).decreaseHealth(10);
             hitBoss = true;
         }
-    }
-    
-    /**
-     * Gets a list of every enemy or boss that the forcefield is touching and damages them.
-     */
-    public void damageEnemy()
-    {
-        
     }
 }

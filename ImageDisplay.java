@@ -1,4 +1,4 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+    import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
  * Write a description of class ImageDisplay here.
@@ -8,6 +8,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class ImageDisplay extends Actor
 {
+    /**
+     * Creates an actor with a given image.
+     */
     public ImageDisplay(GreenfootImage image) {
         setImage(image);
     }

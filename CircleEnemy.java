@@ -4,6 +4,9 @@ public class CircleEnemy extends Enemy {
     SimpleTimer timer = new SimpleTimer();
     int rotate = 0;
 
+    /**
+     * Constructor for the circle enemy.
+     */
     public CircleEnemy() {
         GreenfootImage image = new GreenfootImage("EnemySpaceShip3.png");
         image.scale(75, 75);
@@ -12,11 +15,17 @@ public class CircleEnemy extends Enemy {
         timer.mark();
     }
 
+    /**
+     * Class the super class act and creates the bullets.
+     */
     public void act() {
         super.act();  // Ensure the enemy moves down
         makeBullet();  // Fires bullets specific to CircleEnemy
     }
 
+    /**
+     * Shoots bullets in a circle
+     */
     public void makeBullet() {
         if (timer.millisElapsed() > 100) {
             EnemyBullet0 bullet = new EnemyBullet0();

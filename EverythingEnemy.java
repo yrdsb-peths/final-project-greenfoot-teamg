@@ -7,6 +7,9 @@ public class EverythingEnemy extends Enemy
     SimpleTimer timer = new SimpleTimer();
     int cycle = 0;
 
+    /**
+     * Constructor for the everything enemy
+     */
     public EverythingEnemy() {
         GreenfootImage image = new GreenfootImage("EnemySpaceShip8.png");
         image.scale(75, 75);
@@ -15,12 +18,18 @@ public class EverythingEnemy extends Enemy
         timer.mark();
     }
 
+    /**
+     * Calls the super class act and creates the bullets.
+     */
     public void act()
     {
         super.act();  // Ensure the enemy moves down
         makeBullet();
     }
 
+    /**
+     * Shoots every bullet type in the game that is not boss specific 
+     */
     public void makeBullet() {
         if(timer.millisElapsed() > 500) {
             Game game = (Game) getWorld();

@@ -8,13 +8,14 @@ public class InstructionScreen extends World
     // Array of instruction strings
     private String[] instructions = {
         "Welcome to the game!",
-        "Control your ship with WASD \n to avoid enemy attacks!",
+        "Control your ship \n with W|A|S|D or arrow keys \n to avoid enemy attacks!",
         "You can only take ONE hit \n before exploding.",
         "Press and hold \"spacebar\" to \n fight back with your gun.",
         "Hold \"shift\" while moving \n to move slower.",
         "press \"v\" to activate each \n character's powerup",
         "Different enemies and bullets \n have different attack patterns.",
         "Identify them by their ship \n design and bullet colour.",
+        "Your hurtbox is smaller than \n you think, don't be afraid \n to weave between bullets.",
         "Press \"escape\" at any time to \n pause and access the settings.",
         "Try to beat the game \n as fast as possible. \n Good luck!"
     };
@@ -25,6 +26,9 @@ public class InstructionScreen extends World
     private int buttonXPosition = 300;
     private Label pageNum;
 
+    /**
+     * Constructor for the instructions screen, sets up all the variables.
+     */
     public InstructionScreen(MenuScreen menuScreen)
     {    
         // Create a new world with 500x700 cells with a cell size of 1x1 pixels
@@ -50,7 +54,9 @@ public class InstructionScreen extends World
         cooldown.mark();
     }
 
-    // Instruction navigation with arrow keys
+    /**
+     * Instruction navigation with arrow keys
+     */
     public void arrowNav() {
         // Prevents accidentally changing screens too fast
         if(cooldown.millisElapsed() > 300) {
@@ -66,26 +72,37 @@ public class InstructionScreen extends World
         }
     }
 
+    /**
+     * Adds the labels
+     */
     public void addLabels() {
+        // navigation instructions
         addObject(new Label("ESC", 30), 40, 725);
         addObject(new Label("Back", 25), 100, 725);
         addObject(new Label("Use left and right arrow keys \n to read through instructions", 30), 300, 70);
 
-        pageNum = new Label(1 + "/" + instructions.length, 40);
+        pageNum = new Label(1 + "/" + instructions.length, 40); // page number
         addObject(pageNum, 300, 475);
     }
 
-    // Change page number when user uses arrow keys
+    /**
+     * Change page number when user uses arrow keys
+     */
     public void updatePageNum() {
         pageNum.setValue(index + 1 + "/" + instructions.length);
     }
 
+    /**
+     * Constantly checks if escape, left, or right is pressed.
+     */
     public void act() {
         Util.handleEscapeKey(this, menuScreen);
         arrowNav();
     }
 
-    // Method to display the next instruction
+    /**
+     * Method to display the next instruction
+     */
     public void nextInstruction() {
         if (index < instructions.length - 1) {
             index++;
@@ -94,7 +111,9 @@ public class InstructionScreen extends World
         }
     }
 
-    // Method to display the previous instruction
+    /**
+     * Method to display the previous instruction
+     */
     public void previousInstruction() {
         if (index > 0) {
             index--;

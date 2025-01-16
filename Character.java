@@ -10,6 +10,7 @@ public class Character extends Actor implements Freezable{
     SimpleTimer abilityCooldown = new SimpleTimer();
     int whichCharacter;
     boolean isHoming, isDoubleDamage;
+    GreenfootSound explosionSound = new GreenfootSound("Explosion.mp3");
     
     /**
      * Constructor to set the character's initial image and create a hitbox.
@@ -85,28 +86,28 @@ public class Character extends Actor implements Freezable{
         }
 
         // WASD movement
-        if (Greenfoot.isKeyDown("w")) {
+        if (Greenfoot.isKeyDown("w") || Greenfoot.isKeyDown("up")) {
             setLocation(getX(), getY() - currentSpeed); // Move up
             if(getY() < 10)
             {
                 setLocation(getX(), 10);
             }
         }
-        if (Greenfoot.isKeyDown("s")) {
+        if (Greenfoot.isKeyDown("s") || Greenfoot.isKeyDown("down")) {
             setLocation(getX(), getY() + currentSpeed); // Move down
             if(getY() > getWorld().getHeight()-10)
             {
                 setLocation(getX(), getWorld().getHeight() - 10);
             }
         }
-        if (Greenfoot.isKeyDown("a")) {
+        if (Greenfoot.isKeyDown("a") || Greenfoot.isKeyDown("left")) {
             setLocation(getX() - currentSpeed, getY()); // Move left
             if(getX() < 10)
             {
                 setLocation(10, getY());
             }
         }
-        if (Greenfoot.isKeyDown("d")) {
+        if (Greenfoot.isKeyDown("d") || Greenfoot.isKeyDown("right")) {
             setLocation(getX() + currentSpeed, getY()); // Move right
             if(getX() > getWorld().getWidth()-10)
             {
@@ -139,19 +140,18 @@ public class Character extends Actor implements Freezable{
      * Handle character death by removing the character, the hitbox, and transitioning to a game-over screen.
      */
     public void die() {
-        // Create an explosion effect
-        //Explosion explosion = new Explosion();
-        //getWorld().addObject(explosion, getX(), getY());
-
         // Remove the hitbox and character
         if (hitbox != null) {
             getWorld().removeObject(hitbox);
         }
-        getWorld().stopped();
+        getWorld().addObject(new Explosion(), getX(), getY());
+        // Create an explosion effect
+        explosionSound.setVolume(AudioManager.getInstance().getEffectiveVolume());
+        explosionSound.play();
+        ((Game)getWorld()).resetWaveTimer();
         getWorld().removeObject(this);
-
+        
         // Transition to a game-over screen or similar
-        Greenfoot.setWorld(new GameOver());
     }
     
     public boolean isOnScreen() {

@@ -52,19 +52,30 @@ public class CharacterSelection extends World {
         addObject(characterDisplay, getWidth() / 2, getHeight() / 2); // Position it at the center of the screen
         // Initialize the power-up label for the first character
         updatePowerUpLabel();
-        // Play the background music
+        
     }
 
+    /**
+     * If the current world is this world, it will constantly check if the user presses any specific keys
+     */
     public void act() {
         Util.handleEscapeKey(this, menuScreen);
         handleNavigateKey(); // Call the method to handle navigation
         handleEnterKey(); // Call the method to handle enter key
     }
 
+    /**
+     * Adds the labels onto the screen
+     */
     public void addLabels() {
-        addObject(new Label("Press Enter to Select character \n Use arrow keys to navigate", 42), getWidth() / 2, 100);
+        addObject(new Label("Press Enter to Select character \n Use arrow keys or W|A|S|D \n to navigate", 42), getWidth() / 2, 100);
+        addObject(new Label("ESC", 30), 40, 725);
+        addObject(new Label("Back", 25), 100, 725);
     }
 
+    /**
+     * Creates and adds the arrows onto the screen.
+     */
     public void arrow() {
         // Add arrow images beside the character image
         leftArrow = new Actor() {};
@@ -78,7 +89,11 @@ public class CharacterSelection extends World {
         addObject(rightArrow, getWidth() / 2 + 200, 390);
     }
 
+    /**
+     * check for enter key presses, will move onto stage selection if enter is pressed.
+     */
     public void handleEnterKey() {
+        //checks for enter key presses
         if (Greenfoot.isKeyDown("enter") && !MenuScreen.enterChecker) {
             MenuScreen.enterChecker = true;
             selectCharacter();
@@ -87,6 +102,9 @@ public class CharacterSelection extends World {
         }
     }
 
+    /**
+     * Checks for left or right keys. If pressed, it will change the current character.
+     */
     public void handleNavigateKey() {
         // Continuously check for "left", "a", "right", "d", and "escape" key presses
         if ((Greenfoot.isKeyDown("left") || Greenfoot.isKeyDown("a")) && !checker) {
@@ -124,7 +142,7 @@ public class CharacterSelection extends World {
     }
 
     /**
-     * Handle character selection and return to the game screen.
+     * Handle character selection and move to stage selection.
      */
     public void selectCharacter() {        
         // Create a new image for the selected character
@@ -138,7 +156,7 @@ public class CharacterSelection extends World {
         } else if (indexShips == 2) {
             selectedShip.scale(75, 67);
         }
-        
+        //Switches world to stage selection
         Greenfoot.setWorld(new StageSelection(selectedShip, menuScreen, indexShips, this));
     }
 
@@ -160,17 +178,20 @@ public class CharacterSelection extends World {
 
         // Add a new label for the current character's power-up
         if (indexShips == 0) {
-            powerUpLabel = new Label("Power-Up: Homing Bullet \n 30s  cooldown", 40);
+            powerUpLabel = new Label("Ability: Homing Bullet \n 30s cooldown \n 'v' to activate", 40);
         } else if (indexShips == 1) {
-            powerUpLabel = new Label("Power-Up: Double Damage \n 30s cooldown", 40);
+            powerUpLabel = new Label("Ability: Double Damage \n 30s cooldown \n 'v' to activate", 40);
         } else if (indexShips == 2) {
-            powerUpLabel = new Label("Power-Up: Force Field \n 30s cooldown", 40);
+            powerUpLabel = new Label("Ability: Force Field \n 30s cooldown \n 'v' to activate", 40);
         }
 
         // Position the label below the selected ship
         addObject(powerUpLabel, getWidth()/2, 530);
     }
 
+    /**
+     * reset the scales of the images in the array containing the character images
+     */
     public void resetScales() {
         // Reload the images fresh instead of rescaling
         characters = new GreenfootImage[] {
@@ -188,11 +209,17 @@ public class CharacterSelection extends World {
         updateCharacterImage();
     }
     
+    /**
+     * If run is pressed, will play music.
+     */
     public void started() {
         // Ensure the music resumes when the world starts
         menuScreen.menuMusic.playLoop();
     }
     
+    /**
+     * If stop is pressed, will stop the music.
+     */
     public void stopped() {
         // Pause the music when the world is stopped
         menuScreen.menuMusic.pause();

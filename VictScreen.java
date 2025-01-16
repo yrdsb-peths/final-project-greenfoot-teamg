@@ -12,7 +12,12 @@ public class VictScreen extends World {
     private SimpleTimer finalScore;
     private Label input;
     private boolean inputAccepted = true;  // Flag to control input acceptance
+    private GreenfootSound victoryMusic;
+    private AudioManager audioManager;
 
+    /**
+     * Constructor for victory screen, sets up all the variables.
+     */
     public VictScreen(SimpleTimer levelTimer, MenuScreen menuScreen) {
         super(600, 750, 1);
         finalScore = levelTimer;
@@ -22,18 +27,29 @@ public class VictScreen extends World {
         }
         setBackground(new GreenfootImage("Background.jpg"));
         displayVictoryScreen();
+        audioManager = AudioManager.getInstance();
+        victoryMusic = new GreenfootSound("victorySong.mp3");
+        victoryMusic.playLoop();
+        updateMusic();
     }
 
+    /**
+     * check if final score exists, otherwise checks if enter is pressed then goes to menu screen.
+     */
     public void act() {
         if (finalScore != null) {
             requestName();
         } else {
             if (Greenfoot.isKeyDown("enter")) {
+                stopped();
                 goMenuScreen();
             }
         }
     }
 
+    /**
+     * displaying the victory screen and asking for name
+     */
     private void displayVictoryScreen() {
         Label end = new Label("You Win!", 60);
         addObject(end, 300, 70);
@@ -52,7 +68,10 @@ public class VictScreen extends World {
         input = new Label("", 40);
         addObject(input, 300, 250);
     }
-
+    
+    /**
+     * name request checks for name and give to high score to calculate leaderboard 
+     */
     public void requestName() {
         if (!inputAccepted)
             return;
@@ -89,17 +108,42 @@ public class VictScreen extends World {
      */
     private void addHighScore(NameScore newScore) {
         UserNames.add(newScore);  // Add new score to the list
-        
-        // Sort the list by score in ascending order (least time first)
-        Collections.sort(UserNames, (a, b) -> Integer.compare(a.getScores(), b.getScores()));
 
         // Limit the list to only the top `MIN_SCORES` entries
         if (UserNames.size() > MIN_SCORES) {
             UserNames = new ArrayList<>(UserNames.subList(0, MIN_SCORES));
         }
     }
+    
 
+    /**
+     * Switches to menu screen
+     */
     public void goMenuScreen() {
         Greenfoot.setWorld(menuScreen);  // Transition to the menu screen
+    }
+    
+    /**
+     * If pause is pressed, stop all music.
+     */
+    public void stopped()
+    {
+        victoryMusic.pause();
+    }
+    
+    /**
+     * If start is pressed, continue playing all music.
+     */
+    public void started()
+    {
+        victoryMusic.playLoop();
+    }
+    
+    /**
+     * Updates the music based on the current volume settings from AudioManager.
+     */
+    private void updateMusic() {
+        int effectiveVolume = audioManager.getEffectiveVolume();
+        victoryMusic.setVolume(effectiveVolume);
     }
 }

@@ -6,6 +6,9 @@ public class SplitEnemy extends Enemy
 {
     SimpleTimer timer = new SimpleTimer();
 
+    /**
+     * Constructor for the split enemy, sets up all the variables
+     */
     public SplitEnemy() {
         GreenfootImage image = new GreenfootImage("EnemySpaceShip2.png");
         image.scale(75, 75);
@@ -14,13 +17,18 @@ public class SplitEnemy extends Enemy
         timer.mark();
     }
 
+    /**
+     * Calls the super class act and crates a bullet.
+     */
     public void act()
     {
         super.act();  // Ensure the enemy moves down
         makeBullet();
     }
 
-    
+    /**
+     * Shoots a bullet that splits into 5 smaller bullets at the player
+     */
     public void makeBullet() {
         if(timer.millisElapsed() > 1500) {
             EnemyBullet3 bullet = new EnemyBullet3(getX(), getY());
@@ -31,7 +39,10 @@ public class SplitEnemy extends Enemy
             bullet.move(30);
 
             // Rotate bullet to face player
-            bullet.turnTowards(game.player.getX(), game.player.getY());
+            if(game.player.getWorld() != null)
+            {
+                bullet.turnTowards(game.player.getX(), game.player.getY());
+            }
             
             timer.mark();
         }

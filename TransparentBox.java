@@ -5,10 +5,10 @@ import java.util.List;
  * Represents a smaller, invisible hitbox for the character.
  */
 public class TransparentBox extends Actor {
-    private Actor actor; // Reference to the associated Character object
+    private Actor actor; // Reference to the associated Actor object
     
     /**
-     * Constructor to link the TransparentBox with the Character.
+     * Constructor to link the TransparentBox with the Actor.
      */
     public TransparentBox(Actor actor) {
         this.actor = actor;
@@ -25,13 +25,18 @@ public class TransparentBox extends Actor {
         setImage(image);
     }
 
+    /**
+     * If the actor is no longer in the world, the transparent box will remove itself, 
+     * also follows the actor's position and checks for collision if
+     * the actor is of the class Character.
+     */
     public void act() {
         if (actor.getWorld() == null) {
             getWorld().removeObject(this); // Automatically remove the box if the character is gone
             return;
         }
 
-        // Follow the character's position
+        // Follow the actor's position
         setLocation(actor.getX(), actor.getY());
 
         // Check for collisions with bullets
@@ -42,10 +47,10 @@ public class TransparentBox extends Actor {
     }
 
     /**
-     * Handle collision with bullets and trigger character death.
+     * Handle collision with bullets, lasers, and enemies and trigger character death.
      */
     private void checkForBulletCollision() {
-        // Detect collision with any Bullet subclass (e.g., EnemyBullet0, EnemyBullet1, etc.)
+        // Detect collision with any Bullet and Enemy subclass (e.g., EnemyBullet0, SimpleEnemy, etc.)
         if (isTouching(Bullet.class) || isTouching(TransparentBox.class)){
             ((Character)actor).die(); // Trigger the character's death
             return;

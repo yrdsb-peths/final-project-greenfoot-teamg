@@ -6,6 +6,9 @@ public class TimeStopAnimation extends Actor
     Boss3 boss;
     boolean isResume;
     
+    /**
+     * Constructor for the animation, sets up all the variables
+     */
     public TimeStopAnimation(Boss3 boss, boolean isResume)
     {
         GreenfootImage image = new GreenfootImage("TranslucentBox.png");
@@ -16,6 +19,9 @@ public class TimeStopAnimation extends Actor
         this.isResume = isResume;
     }
     
+    /**
+     * Flahses the screen, freezes time, then flashes the screen again to unfreeze time.
+     */
     public void act()
     {
         if(timer.millisElapsed() > 200)

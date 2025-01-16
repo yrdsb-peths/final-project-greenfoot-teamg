@@ -8,7 +8,7 @@ public abstract class Game extends World {
     public boolean isFreeze = false;
     protected SimpleTimer waveTimer; // Add waveTimer as a shared resource for all levels
     int waveNumber = 1;  // Starts at wave 1
-    int enemiesInWave = 2; // Number of enemies in the current wave
+    int enemiesInWave = 1; // Number of enemies in the current wave
     int enemiesSpawned = 0; // Tracks how many enemies have been spawned in the current wave
     SimpleTimer spawnTimer; // Timer for controlling enemy spawn timing
     int spawnDelay = 1000; // Delay in milliseconds between spawning each enemy
@@ -17,14 +17,17 @@ public abstract class Game extends World {
     SimpleTimer levelTimer; // Timer for the level
     boolean levelEnded = false; // Flag to check if the level has ended
     Label timerLabel; // Label to display the timer
-    boolean timerStopped = false; // Flag to track if the timer is stopped
     boolean isBossDefeated = false; // Flag to track if the boss is defeated
     boolean isWaveStart = false;
     PauseScreen pauseScreen;
     GreenfootSound levelMusic; // Music for the level
     GreenfootSound bossMusic; // Music for the boss
     GreenfootSound warningSound; //warning sound for boss
+    AudioManager audioManager;
     
+    /**
+     * Initializes a Game object. Sets up all the variables used in the game.
+     */
     public Game(int width, int height, int cellSize, GreenfootImage selectedImage, int whichCharacter, SimpleTimer levelTimer) {
         super(width, height, cellSize);
 
@@ -36,8 +39,9 @@ public abstract class Game extends World {
         waveTimer = new SimpleTimer();
         spawnTimer = new SimpleTimer(); // Initialize the spawn timer
         spawnTimer.mark(); // Start the spawn timer
-        this.levelTimer = levelTimer;
-        warningSound = new GreenfootSound("beep_warning.mp3");
+        this.levelTimer = levelTimer; // saves the timer
+        warningSound = new GreenfootSound("beep_warning.mp3"); // initializes the warning sound before a boss comes
+        audioManager = AudioManager.getInstance(); // get the instance of the audio manager
     }
     
 
@@ -56,13 +60,19 @@ public abstract class Game extends World {
         addObject(player, getWidth() / 2, getHeight() - 50);
     }
     
-    // Makes health bar
+    
+    /**
+     *  Makes health bar
+     */
     public void makeHealthBar(Boss boss) {
         Healthbar bar = new Healthbar();
         boss.setHealthBar(bar);
         addObject(bar, 300, 15);
     }
 
+    /**
+     * Takes in a integer parameter and spawns a different enemy depending on the parameter value
+     */
     public void spawnEnemy(int enemyType)
     {
         Enemy enemy;
@@ -115,6 +125,9 @@ public abstract class Game extends World {
         enemiesSpawned++; // Increase the spawn counter for the wave
     }
 
+    /**
+     * Freezes all SimpleTimer classes
+     */
     public void freezeGame() {
         isFreeze = true;
         waveTimer.freeze();
@@ -128,6 +141,9 @@ public abstract class Game extends World {
         }
     }
 
+    /**
+     * Unfreezes all SimpleTimer classes
+     */
     public void resumeGame() {
         isFreeze = false;
         waveTimer.unfreeze();
@@ -154,5 +170,44 @@ public abstract class Game extends World {
      */
     public int getWaveTimeElapsed() {
         return waveTimer.millisElapsed();
+    }
+    
+    /**
+     * returns true if no enemies are on screen
+     */
+    public boolean areAllEnemiesDead() {
+        // Check if there are no Enemy objects in the world
+        boolean isClear = getObjects(Enemy.class).isEmpty();
+        return isClear;
+    }
+    
+    /**
+     * Updates the music based on the current volume settings from AudioManager.
+     */
+    public void updateMusic() {
+        int effectiveVolume = audioManager.getEffectiveVolume();
+
+        levelMusic.setVolume(effectiveVolume);
+        bossMusic.setVolume(effectiveVolume);
+        warningSound.setVolume(effectiveVolume);
+    }
+    
+    /**
+     * If starte is pressed, play music.
+     */
+    public void started() {
+        if (waveNumber < 5) {
+            levelMusic.playLoop();
+        } else {
+            bossMusic.playLoop();
+        }
+    }
+
+    /**
+     * If pause if pressed, stop all music.
+     */
+    public void stopped() {
+        levelMusic.pause();
+        bossMusic.pause();
     }
 }

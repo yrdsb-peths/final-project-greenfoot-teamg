@@ -5,6 +5,9 @@ public class EnemyBullet5 extends Bullet
     Boss boss;
     boolean isReturning = false;
     
+    /**
+     * Constructor for the return bullet
+     */
     public EnemyBullet5(Boss boss) {
         GreenfootImage image = new GreenfootImage("EnemyBullet0.png");
         image.scale(10, 10);
@@ -14,6 +17,9 @@ public class EnemyBullet5 extends Bullet
     }
 
 
+    /**
+     * If game is not frozen, move the bullet and check bounds if bullet is returning, automatically turn towards the boss
+     */
     public void act()
     {
         if(((Game)getWorld()).isFreeze == false)
@@ -34,6 +40,9 @@ public class EnemyBullet5 extends Bullet
         }
     }
 
+    /**
+     * checks if bullet is touching the boundries
+     */
     public void checkBounds() {
         Game game = (Game) getWorld();
         if(getX() <= 0 || getY() <= 0 || getX() >= game.getWidth() - 1 || getY() >= game.getHeight() - 1) {
@@ -44,7 +53,9 @@ public class EnemyBullet5 extends Bullet
         }
     }
     
-    // Linear movement
+    /**
+     * Moves the bullet in a straight line.
+     */
     public void moveBullet() {
         if(moveTimer.millisElapsed() > 20) {
             move(10);

@@ -18,6 +18,9 @@ public abstract class Boss extends Enemy implements Freezable
     int attackNumber;
     Healthbar healthBar;
 
+    /**
+     * Constructor of the boss, sets up all the variables
+     */
     public Boss(int health)
     {
         moveCooldown.mark();
@@ -27,6 +30,9 @@ public abstract class Boss extends Enemy implements Freezable
         turn(90);
     }
     
+    /**
+     * If respective cooldown is over, moves the boss, or attacks.
+     */
     public void act()
     {
         if(moveCooldown.millisElapsed() > 10000 && !isAttacking)
@@ -78,6 +84,9 @@ public abstract class Boss extends Enemy implements Freezable
         getWorld().removeObject(this);  // Remove the boss from the world
     }
     
+    /**
+     * Freezes all the SimpleTimer objects
+     */
     public void freeze()
     {
         moveCooldown.freeze();
@@ -86,6 +95,9 @@ public abstract class Boss extends Enemy implements Freezable
         attackSlower.freeze();
     }
     
+    /**
+     * Unfreezes all the SimpleTimer objects
+     */
     public void unfreeze()
     {
         moveCooldown.unfreeze();
@@ -94,6 +106,9 @@ public abstract class Boss extends Enemy implements Freezable
         attackSlower.unfreeze();
     }
     
+    /**
+     * Calls the current attack
+     */
     public void resumeAttack()
     {
         if(attackNumber == 1)
@@ -110,6 +125,9 @@ public abstract class Boss extends Enemy implements Freezable
         }
     }
     
+    /**
+     * Chooses a random attack
+     */
     public void randomAttack()
     {
         int chooseAttack = Util.randomInt(2);
@@ -130,6 +148,9 @@ public abstract class Boss extends Enemy implements Freezable
         }
     }
     
+    /**
+     * Changes location of boss
+     */
     public void changePosition(){
         if(!isBypassBoundries)
         {
@@ -144,6 +165,9 @@ public abstract class Boss extends Enemy implements Freezable
         moveCooldown.mark();
     }
     
+    /**
+     * Moves to the set location
+     */
     public void moveToSpot(){
         if(!isAttacking || forceMove){
             int xDist = x - getX();
@@ -159,6 +183,9 @@ public abstract class Boss extends Enemy implements Freezable
         }
     }
     
+    /**
+     * Ends the attack
+     */
     public void endAttack()
     {
         isAttacking = false;
@@ -172,9 +199,12 @@ public abstract class Boss extends Enemy implements Freezable
         }
     }
     
+    //Abstract method 
     public abstract void attack1();
 
+    //Abstract method
     public abstract void attack2();
     
+    //Abstract method
     public abstract void attack3();
 }

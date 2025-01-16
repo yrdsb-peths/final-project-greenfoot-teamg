@@ -4,6 +4,9 @@ public class BigEnemy extends Enemy {
     SimpleTimer timer = new SimpleTimer();
     boolean ricochet = true;
 
+    /**
+     * Constructor for the big enemy, sets up all the variables
+     */
     public BigEnemy() {
         GreenfootImage image = new GreenfootImage("EnemySpaceShip7.png");
         image.scale(75, 75);
@@ -12,11 +15,17 @@ public class BigEnemy extends Enemy {
         timer.mark();
     }
 
+    /**
+     * Calls the super class act and creates the bullets.
+     */
     public void act() {
         super.act();  // Ensure the enemy moves down
         makeBullet();  // Fires bullets specific to BigEnemy
     }
 
+    /**
+     * Every 1000 seconds, shoots two seeking bullets. Every 2000 seconds, shoots two richochet bullets
+     */
     public void makeBullet() {
         if (timer.millisElapsed() > 1000) {
             Game game = (Game) getWorld();

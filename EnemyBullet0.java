@@ -4,6 +4,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 public class EnemyBullet0 extends Bullet
 {    
+    /**
+     * Constructor for actor, sets up all the variables.
+     */
     public EnemyBullet0() {
         GreenfootImage image = new GreenfootImage("EnemyBullet0.png");
         image.scale(10, 10);
@@ -11,12 +14,17 @@ public class EnemyBullet0 extends Bullet
         moveTimer.mark();
     }
 
+    /**
+     * Calls the super class act
+     */
     public void act()
     {
         super.act();
     }
 
-    // Linear movement
+    /**
+     * Moves the bullet forawrd
+     */
     public void moveBullet() {
         if(moveTimer.millisElapsed() > 20) {
             move(10);

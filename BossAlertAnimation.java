@@ -4,6 +4,9 @@ public class BossAlertAnimation extends Actor implements Freezable
 {
     SimpleTimer existTimer = new SimpleTimer();
     
+    /**
+     * displays the warning on screen before boss spawns
+     */
     public BossAlertAnimation()
     {
         GreenfootImage image = new GreenfootImage("BossIncoming.png");
@@ -11,6 +14,9 @@ public class BossAlertAnimation extends Actor implements Freezable
         existTimer.mark();
     }
     
+    /**
+     * if game isnt frozen remove the image 
+     */
     public void act()
     {
         if(((Game)getWorld()).isFreeze == false)
@@ -22,11 +28,17 @@ public class BossAlertAnimation extends Actor implements Freezable
         }
     }
     
+    /**
+     * Freezes existTimer
+     */
     public void freeze()
     {
         existTimer.freeze();
     }
     
+    /**
+     * Unfreezes existTimer
+     */
     public void unfreeze()
     {
         existTimer.unfreeze();

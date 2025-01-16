@@ -21,15 +21,18 @@ public class Level2 extends Game {
         this.selectedShip = selectedImage;  // Store the selected ship image
         this.menuScreen = menuScreen;  // Store the menu screen
         this.whichCharacter = whichCharacter;  // Store the character index
-        audioManager = AudioManager.getInstance();
 
         pauseScreen = new PauseScreen(this, menuScreen); // Initialize the pause screen
 
         levelMusic = new GreenfootSound("Stage2.mp3");
         levelMusic.playLoop();
         bossMusic = new GreenfootSound("Stage2Boss.mp3");
+        updateMusic();
     }
 
+    /**
+     * Displays the level label
+     */
     @Override
     protected void setupLevel() {
         // Set the background for Level 2
@@ -46,28 +49,30 @@ public class Level2 extends Game {
         }
     }
 
-    // Method to setup the current wave
+    /**
+     * Method to setup the current wave
+     */
     private void setupWave(int wave) {
         if (wave == 1) {
             // Wave 1: Add only SimpleEnemies
             isWaveStart = false;
             enemiesSpawned = 0; // Reset the spawn counter for the wave
-            enemiesInWave = 10; // Wave 1 starts with 10 SimpleEnemies
+            enemiesInWave = 5; // Wave 1 starts with 6 enemies
         } else if (wave == 2) {
             // Wave 2: Add SimpleEnemies + SeekingEnemies
             isWaveStart = false;
             enemiesSpawned = 0; // Reset the spawn counter for the wave
-            enemiesInWave = 12; // Wave 2 will have 12 enemies in total
+            enemiesInWave = 6; // Wave 2 will have 8 enemies in total
         } else if (wave == 3) {
             // Wave 3: Add SimpleEnemies + SeekingEnemies + SplitEnemies
             isWaveStart = false;
             enemiesSpawned = 0; // Reset the spawn counter for the wave
-            enemiesInWave = 14; // Wave 3 will have 14 enemies in total
+            enemiesInWave = 7; // Wave 3 will have 10 enemies in total
         } else if (wave == 4) {
             // Wave 4: A combination of all previous enemies, plus more
             isWaveStart = false;
             enemiesSpawned = 0; // Reset the spawn counter for the wave
-            enemiesInWave = 16; // Wave 4 will have 16 enemies in total
+            enemiesInWave = 8; // Wave 4 will have 12 enemies in total
         } else if (wave == 5) {
             levelMusic.pause();
             isWaveStart = false;
@@ -79,10 +84,12 @@ public class Level2 extends Game {
         resetWaveTimer(); // Reset the wave timer for displaying wave number
     }
 
+    /**
+     * Master code that controls the entire game
+     */
     public void act() {
         if(isFreeze == false)
         {
-            
             updateMusic();
             if (levelDisplayed == true) {
                 setupLevel();
@@ -137,8 +144,7 @@ public class Level2 extends Game {
             if (waveDisplayed) {
                 addObject(new Label("Wave: " + waveNumber, 80), getWidth() / 2, getHeight() / 2); // Display wave number
                                                                                                   // label
-                if (getWaveTimeElapsed() > 3000) { // Check if 2 seconds have elapsed
-    
+                if (getWaveTimeElapsed() > 3000) { // Check if 3 seconds have elapsed
                     removeObjects(getObjects(Label.class)); // Remove wave number label
                     waveDisplayed = false; // Reset flag
                     isWaveStart = true;
@@ -181,9 +187,18 @@ public class Level2 extends Game {
                     }
                 }
             }
+            
+            if(getObjects(Character.class).isEmpty() && waveTimer.millisElapsed() > 3000)
+            {
+                stopped();
+                Greenfoot.setWorld(new GameOver());
+            }
         }           
     }
 
+    /**
+     * Updates the timer label
+     */
     private void updateTimerDisplay() {
         // Remove the old timer label if it exists
         if (timerLabel != null) {
@@ -191,10 +206,13 @@ public class Level2 extends Game {
         }
 
         // Create and add a new timer label with the updated time
-        timerLabel = new Label("Time: " + levelTimer.millisElapsed() / 1000, 30);
+        timerLabel = new Label("Time: " + levelTimer.millisElapsed() / 1000 + "s", 30);
         addObject(timerLabel, getWidth() - 100, 20); // Display timer in the top-right corner
     }
 
+    /**
+     * Spawns enemies depending on the wave
+     */
     private void spawnEnemies() {
         // Spawn enemies based on the current wave
         int enemyType = 0;
@@ -209,34 +227,5 @@ public class Level2 extends Game {
             enemyType = Util.randomInt(5);
         }
         spawnEnemy(enemyType);
-    }
-
-    private boolean areAllEnemiesDead() {
-        // Check if there are no Enemy objects in the world
-        return getObjects(Enemy.class).isEmpty();
-    }
-
-    public void started() {
-        // Ensure the music resumes when the world starts
-        if (waveNumber < 5) {
-            levelMusic.playLoop();
-        } else {
-            bossMusic.playLoop();
-        }
-    }
-
-    public void stopped() {
-        // Pause the music when the world is stopped
-        if (waveNumber < 5) {
-            levelMusic.pause();
-        } else {
-            bossMusic.pause();
-        }
-    }
-
-    public void updateMusic() {
-        int effectiveVolume = audioManager.getEffectiveVolume();
-        levelMusic.setVolume(effectiveVolume);
-        bossMusic.setVolume(effectiveVolume);
     }
 }

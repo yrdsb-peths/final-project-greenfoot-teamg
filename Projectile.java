@@ -5,10 +5,10 @@ public class Projectile extends Actor {
     private int speed = 15; // Speed of the projectile
     boolean isHoming, isDoubleDamage;
     
-    /**
-     * This method is called every frame to handle the projectile's behavior.
-     */
     
+    /**
+     * Constructor for the projectile, sets up all the variables.
+     */
     public Projectile(boolean isHoming, boolean isDoubleDamage)
     {
         GreenfootImage image;
@@ -33,6 +33,9 @@ public class Projectile extends Actor {
         turn(-90);
     }
     
+    /**
+     * This method is called every frame to handle the projectile's behavior.
+     */
     public void act() {
         if (getWorld() == null) {
             return; // Ensure that the projectile is still in the world before doing anything
@@ -119,7 +122,7 @@ public class Projectile extends Actor {
         if (world != null) {
             int x = getX();
             int y = getY();
-            return x > 0 && x < world.getWidth() && y > 0 && y < world.getHeight();
+            return x > 0 && x < world.getWidth() - 1 && y > 0 && y < world.getHeight();
         }
         return false;
     }

@@ -51,21 +51,24 @@ public class SimpleTimer
     }
     
     /**
-     * Returns the amount of milliseconds that have elapsed since mark()
-     * was last called.  This timer runs irrespective of Greenfoot's
-     * act() cycle, so if you call it many times during the same Greenfoot frame,
-     * you may well get different answers.
+     * Returns the time of the system added with the freeze mark, subtracted with the last marked time.
      */
     public int millisElapsed()
     {
         return (int) (System.currentTimeMillis() + freezeMark - lastMark);
     }
     
+    /**
+     * If called, gets the time elapsed before frozen
+     */
     public void freeze()
     {
         freezeMark = millisElapsed();
     }
     
+    /**
+     * Sets the lastMark to the time of the system
+     */
     public void unfreeze()
     {
         lastMark = System.currentTimeMillis();

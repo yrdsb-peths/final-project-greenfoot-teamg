@@ -4,10 +4,6 @@ public class Level3 extends Game {
 
     private PauseScreen pauseScreen;
     private MenuScreen menuScreen;
-    private boolean bossDefeated = false;  // Track if the boss is defeated
-    private GreenfootSound levelMusic;
-    private GreenfootSound bossMusic;
-    private AudioManager audioManager;
 
     /**
      * Constructor for Level3.
@@ -17,15 +13,17 @@ public class Level3 extends Game {
         super(600, 750, 1, selectedImage, whichCharacter, levelTimer);
         this.menuScreen = menuScreen;
 
-        audioManager = AudioManager.getInstance();
-
         pauseScreen = new PauseScreen(this, menuScreen); // Initialize the pause screen
 
         levelMusic = new GreenfootSound("Stage3.mp3");
         levelMusic.playLoop();
         bossMusic = new GreenfootSound("Stage3Boss.mp3");
+        updateMusic();
     }
 
+    /**
+     * Displays the level label
+     */
     @Override
     protected void setupLevel() {
         setBackground("Stage3Background.png");
@@ -40,32 +38,38 @@ public class Level3 extends Game {
         }
     }
 
+    /**
+     * updates the timer label
+     */
     private void updateTimerDisplay() {
         if (timerLabel != null) {
             removeObject(timerLabel);
         }
 
-        timerLabel = new Label("Time: " + levelTimer.millisElapsed() / 1000, 30);
+        timerLabel = new Label("Time: " + levelTimer.millisElapsed() / 1000  + "s", 30);
         addObject(timerLabel, getWidth() - 100, 20);
     }
-
+    
+    /**
+     * Method to setup the current wave
+     */
     private void setupWave(int wave) {
         if (wave == 1) {
             isWaveStart = false;
             enemiesSpawned = 0; // Reset the spawn counter for the wave
-            enemiesInWave = 18;
+            enemiesInWave = 9;
         } else if (wave == 2) {
             isWaveStart = false;
             enemiesSpawned = 0; // Reset the spawn counter for the wave
-            enemiesInWave = 20;
+            enemiesInWave = 10;
         } else if (wave == 3) {
             isWaveStart = false;
             enemiesSpawned = 0; // Reset the spawn counter for the wave
-            enemiesInWave = 22;
+            enemiesInWave = 11;
         } else if (wave == 4) {
             isWaveStart = false;
             enemiesSpawned = 0; // Reset the spawn counter for the wave
-            enemiesInWave = 24;
+            enemiesInWave = 12;
         } else if (wave == 5) {
             levelMusic.pause();
             warningSound.play();
@@ -76,6 +80,9 @@ public class Level3 extends Game {
         resetWaveTimer();
     }
 
+    /**
+     * Master code that controls the entire game
+     */
     public void act() {
         if(isFreeze == false)
         {
@@ -125,14 +132,23 @@ public class Level3 extends Game {
                         setupWave(waveNumber);
                     } else if (waveNumber == 5 && areAllEnemiesDead() && waveTimer.millisElapsed() > 5000) {
                         // Transition to Victory screen
+                        stopped();
                         Greenfoot.setWorld(new VictScreen(levelTimer, menuScreen)); 
                     }
                 }
             }
+            
+            if(getObjects(Character.class).isEmpty() && waveTimer.millisElapsed() > 3000)
+            {
+                stopped();
+                Greenfoot.setWorld(new GameOver());
+            }
         }
     }
 
-
+    /**
+     * Spawns enemies depending on the wave
+     */
     private void spawnEnemies() {
         int enemyType = 0;
         if (waveNumber == 1) {
@@ -143,30 +159,5 @@ public class Level3 extends Game {
             enemyType = Util.randomInt(8);
         }
         spawnEnemy(enemyType);
-    }
-
-    private boolean areAllEnemiesDead() {
-        return getObjects(Enemy.class).isEmpty();
-    }
-
-    public void started() {
-        if (waveNumber < 5) {
-            levelMusic.playLoop();
-        } else {
-            bossMusic.playLoop();
-        }
-    }
-
-    public void stopped() {
-        if (waveNumber < 5) {
-            levelMusic.pause();
-        } else {
-            bossMusic.pause();
-        }
-    }
-    public void updateMusic() {
-        int effectiveVolume = audioManager.getEffectiveVolume();
-        levelMusic.setVolume(effectiveVolume);
-        bossMusic.setVolume(effectiveVolume);
     }
 }
