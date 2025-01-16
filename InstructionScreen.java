@@ -8,7 +8,7 @@ public class InstructionScreen extends World
     // Array of instruction strings
     private String[] instructions = {
         "Welcome to the game!",
-        "Control your ship with WASD \n to avoid enemy attacks!",
+        "Control your ship \n with W|A|S|D or arrow keys \n to avoid enemy attacks!",
         "You can only take ONE hit \n before exploding.",
         "Press and hold \"spacebar\" to \n fight back with your gun.",
         "Hold \"shift\" while moving \n to move slower.",

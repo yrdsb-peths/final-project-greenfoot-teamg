@@ -86,28 +86,28 @@ public class Character extends Actor implements Freezable{
         }
 
         // WASD movement
-        if (Greenfoot.isKeyDown("w")) {
+        if (Greenfoot.isKeyDown("w") || Greenfoot.isKeyDown("up")) {
             setLocation(getX(), getY() - currentSpeed); // Move up
             if(getY() < 10)
             {
                 setLocation(getX(), 10);
             }
         }
-        if (Greenfoot.isKeyDown("s")) {
+        if (Greenfoot.isKeyDown("s") || Greenfoot.isKeyDown("down")) {
             setLocation(getX(), getY() + currentSpeed); // Move down
             if(getY() > getWorld().getHeight()-10)
             {
                 setLocation(getX(), getWorld().getHeight() - 10);
             }
         }
-        if (Greenfoot.isKeyDown("a")) {
+        if (Greenfoot.isKeyDown("a") || Greenfoot.isKeyDown("left")) {
             setLocation(getX() - currentSpeed, getY()); // Move left
             if(getX() < 10)
             {
                 setLocation(10, getY());
             }
         }
-        if (Greenfoot.isKeyDown("d")) {
+        if (Greenfoot.isKeyDown("d") || Greenfoot.isKeyDown("right")) {
             setLocation(getX() + currentSpeed, getY()); // Move right
             if(getX() > getWorld().getWidth()-10)
             {

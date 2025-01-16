@@ -68,7 +68,7 @@ public class CharacterSelection extends World {
      * Adds the labels onto the screen
      */
     public void addLabels() {
-        addObject(new Label("Press Enter to Select character \n Use arrow keys to navigate", 42), getWidth() / 2, 100);
+        addObject(new Label("Press Enter to Select character \n Use arrow keys or W|A|S|D \n to navigate", 42), getWidth() / 2, 100);
         addObject(new Label("ESC", 30), 40, 725);
         addObject(new Label("Back", 25), 100, 725);
     }
