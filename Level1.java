@@ -58,22 +58,22 @@ public class Level1 extends Game {
             // Wave 1: Add only SimpleEnemies
             isWaveStart = false;
             enemiesSpawned = 0; // Reset the spawn counter for the wave
-            enemiesInWave = 2; // Wave 1 starts with 2 SimpleEnemies
+            enemiesInWave = 1; // Wave 1 starts with 2 SimpleEnemies
         } else if (wave == 2) {
             // Wave 2: Add SimpleEnemies + SeekingEnemies
             isWaveStart = false;
             enemiesSpawned = 0; // Reset the spawn counter for the wave
-            enemiesInWave = 4; // Wave 2 will have 4 enemies in total
+            enemiesInWave = 2; // Wave 2 will have 4 enemies in total
         } else if (wave == 3) {
             // Wave 3: Add SimpleEnemies + SeekingEnemies + SplitEnemies
             isWaveStart = false;
             enemiesSpawned = 0; // Reset the spawn counter for the wave
-            enemiesInWave = 6; // Wave 3 will have 6 enemies in total
+            enemiesInWave = 3; // Wave 3 will have 6 enemies in total
         } else if (wave == 4) {
             // Wave 4: A combination of all previous enemies.
             isWaveStart = false;
             enemiesSpawned = 0; // Reset the spawn counter for the wave
-            enemiesInWave = 8; // Wave 4 will have 8 enemies in total
+            enemiesInWave = 4; // Wave 4 will have 8 enemies in total
         } else if (wave == 5) {
             // Boss wave: Add the Boss1 to the world
             levelMusic.pause();

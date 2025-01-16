@@ -54,19 +54,19 @@ public class Level3 extends Game {
         if (wave == 1) {
             isWaveStart = false;
             enemiesSpawned = 0; // Reset the spawn counter for the wave
-            enemiesInWave = 10;
+            enemiesInWave = 9;
         } else if (wave == 2) {
             isWaveStart = false;
             enemiesSpawned = 0; // Reset the spawn counter for the wave
-            enemiesInWave = 12;
+            enemiesInWave = 10;
         } else if (wave == 3) {
             isWaveStart = false;
             enemiesSpawned = 0; // Reset the spawn counter for the wave
-            enemiesInWave = 14;
+            enemiesInWave = 11;
         } else if (wave == 4) {
             isWaveStart = false;
             enemiesSpawned = 0; // Reset the spawn counter for the wave
-            enemiesInWave = 16;
+            enemiesInWave = 12;
         } else if (wave == 5) {
             levelMusic.pause();
             warningSound.play();
@@ -126,6 +126,7 @@ public class Level3 extends Game {
                         setupWave(waveNumber);
                     } else if (waveNumber == 5 && areAllEnemiesDead() && waveTimer.millisElapsed() > 5000) {
                         // Transition to Victory screen
+                        stopped();
                         Greenfoot.setWorld(new VictScreen(levelTimer, menuScreen)); 
                     }
                 }

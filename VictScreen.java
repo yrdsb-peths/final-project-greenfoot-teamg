@@ -12,6 +12,8 @@ public class VictScreen extends World {
     private SimpleTimer finalScore;
     private Label input;
     private boolean inputAccepted = true;  // Flag to control input acceptance
+    private GreenfootSound victoryMusic;
+    private AudioManager audioManager;
 
     public VictScreen(SimpleTimer levelTimer, MenuScreen menuScreen) {
         super(600, 750, 1);
@@ -22,6 +24,10 @@ public class VictScreen extends World {
         }
         setBackground(new GreenfootImage("Background.jpg"));
         displayVictoryScreen();
+        audioManager = AudioManager.getInstance();
+        victoryMusic = new GreenfootSound("victorySong.mp3");
+        victoryMusic.playLoop();
+        updateMusic();
     }
 
     public void act() {
@@ -29,6 +35,7 @@ public class VictScreen extends World {
             requestName();
         } else {
             if (Greenfoot.isKeyDown("enter")) {
+                stopped();
                 goMenuScreen();
             }
         }
@@ -108,5 +115,23 @@ public class VictScreen extends World {
 
     public void goMenuScreen() {
         Greenfoot.setWorld(menuScreen);  // Transition to the menu screen
+    }
+    
+    public void stopped()
+    {
+        victoryMusic.pause();
+    }
+    
+    public void started()
+    {
+        victoryMusic.playLoop();
+    }
+    
+    /**
+     * Updates the music based on the current volume settings from AudioManager.
+     */
+    private void updateMusic() {
+        int effectiveVolume = audioManager.getEffectiveVolume();
+        victoryMusic.setVolume(effectiveVolume);
     }
 }
