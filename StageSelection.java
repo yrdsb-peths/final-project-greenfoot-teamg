@@ -80,7 +80,7 @@ public class StageSelection extends World
                 }
                 else
                 {
-                    game = new Level3(selectedImage, menuScreen, whichCharacter, new SimpleTimer());
+                    game = new Level3(selectedImage, menuScreen, whichCharacter, null);
                 }
                 game.waveNumber = wave;
                 Greenfoot.setWorld(game);
