@@ -180,7 +180,7 @@ public class CharacterSelection extends World {
         if (indexShips == 0) {
             powerUpLabel = new Label("Ability: Homing Bullet \n 30s cooldown \n 'v' to activate", 40);
         } else if (indexShips == 1) {
-            powerUpLabel = new Label("Ability: Double Damage \n 30s cooldown \n 'v' to activate", 40);
+            powerUpLabel = new Label("Ability: Triple Damage \n 30s cooldown \n 'v' to activate", 40);
         } else if (indexShips == 2) {
             powerUpLabel = new Label("Ability: Force Field \n 30s cooldown \n 'v' to activate", 40);
         }

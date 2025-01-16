@@ -117,9 +117,9 @@ public class Level1 extends Game {
                     if (waveNumber == 5) {
                         bossMusic.playLoop();
                         Boss boss = new Boss1();
-                        addObject(boss, getWidth() / 2, -100);
                         // Boss health bar
                         makeHealthBar(boss);
+                        addObject(boss, getWidth() / 2, -100);
                         addObject(boss.hitbox, boss.getX(), boss.getY());
 
                         enemiesSpawned++;
