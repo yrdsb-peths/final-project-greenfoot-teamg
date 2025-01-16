@@ -88,8 +88,8 @@ public class HighScore extends World {
         // Copy the scores from VictScreen.UserNames to a new list.
         List<NameScore> score = new ArrayList<>(VictScreen.UserNames);
 
-        // Sort the list based on scores in descending order.
-        score.sort((a, b) -> Integer.compare(b.getScores(), a.getScores()));
+        // Sort the list based on scores in ascending order.
+        score.sort((a, b) -> Integer.compare(a.getScores(), b.getScores()));
 
         // Limit the list to the top `MAX_SCORES` entries.
         if (score.size() > MAX_SCORES) {

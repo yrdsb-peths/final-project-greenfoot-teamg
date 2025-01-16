@@ -108,9 +108,6 @@ public class VictScreen extends World {
      */
     private void addHighScore(NameScore newScore) {
         UserNames.add(newScore);  // Add new score to the list
-        
-        // Sort the list by score in ascending order (least time first)
-        Collections.sort(UserNames, (a, b) -> Integer.compare(a.getScores(), b.getScores()));
 
         // Limit the list to only the top `MIN_SCORES` entries
         if (UserNames.size() > MIN_SCORES) {
