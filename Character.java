@@ -9,7 +9,7 @@ public class Character extends Actor implements Freezable{
     SimpleTimer shootCooldown = new SimpleTimer();
     SimpleTimer abilityCooldown = new SimpleTimer();
     int whichCharacter;
-    boolean isHoming, isDoubleDamage;
+    boolean isHoming, isTripleDamage;
     GreenfootSound explosionSound = new GreenfootSound("Explosion.mp3");
     
     /**
@@ -53,7 +53,7 @@ public class Character extends Actor implements Freezable{
         if(abilityCooldown.millisElapsed() > 10000)
         {
             isHoming = false;
-            isDoubleDamage = false;
+            isTripleDamage = false;
         }
     }
     
@@ -65,7 +65,7 @@ public class Character extends Actor implements Freezable{
         }
         else if(whichCharacter == 1)
         {
-            isDoubleDamage = true;
+            isTripleDamage = true;
         }
         else if(whichCharacter == 2)
         {
@@ -132,7 +132,7 @@ public class Character extends Actor implements Freezable{
      */
     private void shoot() {
         // Create a new projectile and add it to the world
-        Projectile projectile = new Projectile(isHoming, isDoubleDamage);
+        Projectile projectile = new Projectile(isHoming, isTripleDamage);
         getWorld().addObject(projectile, getX(), getY() - getImage().getHeight() / 2);
     }
 

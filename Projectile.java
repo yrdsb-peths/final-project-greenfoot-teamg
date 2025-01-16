@@ -3,13 +3,13 @@ import java.util.List;
 
 public class Projectile extends Actor {
     private int speed = 15; // Speed of the projectile
-    boolean isHoming, isDoubleDamage;
+    boolean isHoming, isTripleDamage;
     
     
     /**
      * Constructor for the projectile, sets up all the variables.
      */
-    public Projectile(boolean isHoming, boolean isDoubleDamage)
+    public Projectile(boolean isHoming, boolean isTripleDamage)
     {
         GreenfootImage image;
         if(isHoming)
@@ -17,7 +17,7 @@ public class Projectile extends Actor {
             image = new GreenfootImage("LaserShot3.png");
             image.scale(40,15);
         }
-        else if(isDoubleDamage)
+        else if(isTripleDamage)
         {
             image = new GreenfootImage("LaserShot4.png");
             image.scale(40,15);
@@ -29,7 +29,7 @@ public class Projectile extends Actor {
         }
         setImage(image);
         this.isHoming = isHoming;
-        this.isDoubleDamage = isDoubleDamage;
+        this.isTripleDamage = isTripleDamage;
         turn(-90);
     }
     
@@ -87,28 +87,13 @@ public class Projectile extends Actor {
         Actor hit = getOneIntersectingObject(Enemy.class);
         if (hit != null) {
             // If the projectile hits an enemy, deal damage or remove the projectile
-            if(isDoubleDamage)
+            if(isTripleDamage)
             {
-                 ((Enemy) hit).decreaseHealth(2);
+                 ((Enemy) hit).decreaseHealth(3);
             }
             else
             {
-                 ((Enemy) hit).decreaseHealth(1);  
-            }
-            getWorld().removeObject(this); // Remove the projectile after hitting the enemy
-            return;
-        }
-        
-        hit = getOneIntersectingObject(Boss.class);
-        if (hit != null) {
-            // If the projectile hits an enemy, deal damage or remove the projectile
-            if(isDoubleDamage)
-            {
-                 ((Boss) hit).decreaseHealth(2);
-            }
-            else
-            {
-                 ((Boss) hit).decreaseHealth(1);  
+                 ((Enemy) hit).decreaseHealth(1); 
             }
             getWorld().removeObject(this); // Remove the projectile after hitting the enemy
         }

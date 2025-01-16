@@ -89,11 +89,11 @@ public class Forcefield extends Actor
         {
             if(oldEnemyList == null)
             {
-                enemy.decreaseHealth(3);
+                enemy.decreaseHealth(1);
             }
             else if(!oldEnemyList.contains(enemy))
             {
-                enemy.decreaseHealth(3);
+                enemy.decreaseHealth(1);
             }
         }
         oldEnemyList = e;
@@ -106,7 +106,7 @@ public class Forcefield extends Actor
     {
         if(isTouching(Boss.class) && hitBoss == false)
         {
-            ((Boss)getOneIntersectingObject(Boss.class)).decreaseHealth(10);
+            ((Boss)getOneIntersectingObject(Boss.class)).decreaseHealth(20);
             hitBoss = true;
         }
     }
