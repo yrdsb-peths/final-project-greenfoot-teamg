@@ -162,7 +162,7 @@ public class Boss3 extends Boss
             {
                if(((Game)getWorld()).player.getWorld() != null)
                {
-                   for(int i = 0; i < 2; i++)
+                   for(int i = 0; i < 1; i++)
                    {
                         Bullet bullet = new EnemyBullet3(getX(),getY());
                         int randomAngle = Util.randomInt(360);
@@ -173,6 +173,10 @@ public class Boss3 extends Boss
                             getWorld().addObject(bullet, x, y);
                             bullet.turnTowards(((Game)getWorld()).player.getX(), ((Game)getWorld()).player.getY());
                             bullet.freeze();
+                        }
+                        else
+                        {
+                            i--;
                         }
                    } 
                    attackSlower.mark();
@@ -242,7 +246,7 @@ public class Boss3 extends Boss
                         int x = Util.randomInt(getWorld().getWidth());
                         int distX = Math.abs(((Game)getWorld()).player.getX() - x);
                         int distY = Math.abs(((Game)getWorld()).player.getY() - y);
-                        if(Math.sqrt(Math.pow(distX, 2) + Math.pow(distY, 2)) > 100)
+                        if(Math.sqrt(Math.pow(distX, 2) + Math.pow(distY, 2)) > 150)
                         {
                             getWorld().addObject(bullet, x, y);
                             bullet.turnTowards(((Game)getWorld()).player.getX(), ((Game)getWorld()).player.getY());
