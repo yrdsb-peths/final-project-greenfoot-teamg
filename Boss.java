@@ -64,7 +64,7 @@ public abstract class Boss extends Enemy implements Freezable
 
         // Change health bar
         double percentHP = health / (double) initialHealth;
-        if(healthBar.bar != null)
+        if(healthBar != null && healthBar.bar != null)
         {
             healthBar.changeSize(percentHP);
         }
