@@ -19,8 +19,8 @@ public class BigEnemy extends Enemy {
      * Calls the super class act and creates the bullets.
      */
     public void act() {
-        super.act();  // Ensure the enemy moves down
         makeBullet();  // Fires bullets specific to BigEnemy
+        super.act();  // Ensure the enemy moves down
     }
 
     /**

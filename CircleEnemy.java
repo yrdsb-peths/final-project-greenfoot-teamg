@@ -19,8 +19,8 @@ public class CircleEnemy extends Enemy {
      * Class the super class act and creates the bullets.
      */
     public void act() {
-        super.act();  // Ensure the enemy moves down
         makeBullet();  // Fires bullets specific to CircleEnemy
+        super.act();  // Ensure the enemy moves down
     }
 
     /**

@@ -23,8 +23,8 @@ public class EverythingEnemy extends Enemy
      */
     public void act()
     {
-        super.act();  // Ensure the enemy moves down
         makeBullet();
+        super.act();  // Ensure the enemy moves down
     }
 
     /**
