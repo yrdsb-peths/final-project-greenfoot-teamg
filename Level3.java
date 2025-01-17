@@ -57,19 +57,19 @@ public class Level3 extends Game {
         if (wave == 1) {
             isWaveStart = false;
             enemiesSpawned = 0; // Reset the spawn counter for the wave
-            enemiesInWave = 9;
+            enemiesInWave = 7;
         } else if (wave == 2) {
             isWaveStart = false;
             enemiesSpawned = 0; // Reset the spawn counter for the wave
-            enemiesInWave = 10;
+            enemiesInWave = 8;
         } else if (wave == 3) {
             isWaveStart = false;
             enemiesSpawned = 0; // Reset the spawn counter for the wave
-            enemiesInWave = 11;
+            enemiesInWave = 9;
         } else if (wave == 4) {
             isWaveStart = false;
             enemiesSpawned = 0; // Reset the spawn counter for the wave
-            enemiesInWave = 12;
+            enemiesInWave = 10;
         } else if (wave == 5) {
             levelMusic.pause();
             warningSound.play();

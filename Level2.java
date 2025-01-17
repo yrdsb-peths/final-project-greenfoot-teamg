@@ -57,22 +57,22 @@ public class Level2 extends Game {
             // Wave 1: Add only SimpleEnemies
             isWaveStart = false;
             enemiesSpawned = 0; // Reset the spawn counter for the wave
-            enemiesInWave = 5; // Wave 1 starts with 6 enemies
+            enemiesInWave = 4; // Wave 1 starts with 6 enemies
         } else if (wave == 2) {
             // Wave 2: Add SimpleEnemies + SeekingEnemies
             isWaveStart = false;
             enemiesSpawned = 0; // Reset the spawn counter for the wave
-            enemiesInWave = 6; // Wave 2 will have 8 enemies in total
+            enemiesInWave = 5; // Wave 2 will have 8 enemies in total
         } else if (wave == 3) {
             // Wave 3: Add SimpleEnemies + SeekingEnemies + SplitEnemies
             isWaveStart = false;
             enemiesSpawned = 0; // Reset the spawn counter for the wave
-            enemiesInWave = 7; // Wave 3 will have 10 enemies in total
+            enemiesInWave = 6; // Wave 3 will have 10 enemies in total
         } else if (wave == 4) {
             // Wave 4: A combination of all previous enemies, plus more
             isWaveStart = false;
             enemiesSpawned = 0; // Reset the spawn counter for the wave
-            enemiesInWave = 8; // Wave 4 will have 12 enemies in total
+            enemiesInWave = 7; // Wave 4 will have 12 enemies in total
         } else if (wave == 5) {
             levelMusic.pause();
             isWaveStart = false;
